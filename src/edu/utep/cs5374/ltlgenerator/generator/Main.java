@@ -1,13 +1,7 @@
 package edu.utep.cs5374.ltlgenerator.generator;
 
 import java.util.Scanner;
-
-
-
-
 import edu.utep.cs5374.ltlgenerator.cp.*;
-
-
 
 public class Main {
 	public static void main(String[] args) {
@@ -16,7 +10,6 @@ public class Main {
 		String L="", P="", Q="", R=""; //to keep pattern before ANDL, ANDR
 
 		Scanner sc = new Scanner(System.in);
-
 
 		System.out.println(
 				"1 # AtleastOneC "+"\n"+ 
@@ -31,7 +24,6 @@ public class Main {
 				"10 # EventualC"+"\n"+
 				"11 # EventualH"+"\n"+
 		        "12 # EventualE");
-
 
 		System.out.println("Enter the number of propositions:");
 		n=sc.nextInt();
@@ -83,6 +75,11 @@ public class Main {
 		{
 			L = EventualC.compute(n);
 			System.out.println("EventualC pattern is " + L);
+		}
+		else if(l==11)
+		{
+			// Not implemented yet
+			System.out.println("EventualH pattern is not implemented yet");
 		}
 		else if(l==12)
 		{
