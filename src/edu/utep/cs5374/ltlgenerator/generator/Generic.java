@@ -39,6 +39,8 @@ public class Generic {
 		
 		System.out.println("Enter the type of proposition for L");
 		l=sc.nextInt();
+		System.out.println("Enter the type of proposition for P");
+		p=sc.nextInt();
 		
 		if(l==1)
 		{
