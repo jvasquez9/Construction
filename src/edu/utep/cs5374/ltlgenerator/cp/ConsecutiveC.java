@@ -7,47 +7,33 @@ public class ConsecutiveC implements CompositePropositionParent {
 	private static final String CLOSE_Parenth = ")";
 	private static final String NEXT = "X";
 
+	
+	public String ltlRecursion(int numP, int counter, StringBuilder str){
+		if(numP == counter)
+		{
+			str.append("p");
+			// appending (counter - 1) as we are considering p0 instead of p1
+			return str.append(counter-1).toString(); 
+		}
+		else {
+			str.append("p");
+			// appending (counter - 1) as we are considering p0 instead of p1
+			str.append(counter-1);
+			str.append(AND);
+			str.append(NEXT);
+			str.append(OPEN_Parenth);
+			counter++;
+			ltlRecursion(numP, counter, str);
+			str.append(CLOSE_Parenth);
+			return str.toString();
+		}
+	}
+	
 	@Override
 	public String compute(int numProposition)
 	{
-		int openParenthCount = 0;
-		
-		StringBuilder strLTLFormula = new StringBuilder(OPEN_Parenth);
-		openParenthCount++;
-		
-		if (numProposition <= 0)
-		{
-			return "";
-		}
-		
-		for(int i = 0; i < numProposition; i++)
-		{
-			if(i == 0){
-				strLTLFormula.append("p" + i + AND + NEXT );
-			}
-			
-			else
-			{
-				if(numProposition - i > 1)
-				{
-					strLTLFormula.append(OPEN_Parenth + "p" + i + AND + NEXT );
-					openParenthCount++;
-				}
-				else
-				{
-					strLTLFormula.append("p" + i );
-				}
-			}			
-		}
-		
-		// Closing all the open parenthesis
-		while(openParenthCount > 0)
-		{
-			strLTLFormula.append(CLOSE_Parenth);
-			openParenthCount--;
-		}
-		
-		return strLTLFormula.toString();
+		int recursionCount = 1;
+		return ltlRecursion(numProposition, recursionCount, new StringBuilder(""));
 	}
 
 }
