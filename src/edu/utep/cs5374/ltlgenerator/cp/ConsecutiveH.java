@@ -51,10 +51,28 @@ public class ConsecutiveH  implements CompositePropositionParent{
 			{
 				stringBuilder.append(CLOSE_P);
 			}
-			else{
-				stringBuilder.append(NEXT);
-			}
+			
 		}
+		stringBuilder.append(NEXT);
+		
+		
+		stringBuilder.append(OPEN_P);
+		for(int i=2;i< aCount;i++)
+		{
+			if(i == 2){
+				stringBuilder.append(" p" + i + " ");
+			}
+			else{
+				stringBuilder.append(AND + NOT + " p" + i + " ");
+			}
+			
+			if(aCount - i == 1)
+			{
+				stringBuilder.append(CLOSE_P);
+			}
+			
+		}
+		
 		stringBuilder.append(CLOSE_P);
 		
 		return stringBuilder.toString();
