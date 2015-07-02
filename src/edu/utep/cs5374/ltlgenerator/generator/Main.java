@@ -40,7 +40,14 @@ public class Main {
 			{
 				L= ParallelC.compute(n);
 				System.out.println("ParallelC pattern is"+L);
-			} 
+			}
+			if(l==6)
+			{
+				ParallelE pleCP = new ParallelE();
+				L=pleCP.compute(n);
+				System.out.println("ParallelC pattern is"+L);
+
+			}  
 			
 			sc.close();
 		}
