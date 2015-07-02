@@ -3,7 +3,9 @@ package edu.utep.cs5374.ltlgenerator.generator;
 import java.util.Scanner;
 
 import edu.utep.cs5374.ltlgenerator.cp.AtleastOneC;
+import edu.utep.cs5374.ltlgenerator.cp.ConsecutiveH;
 import edu.utep.cs5374.ltlgenerator.cp.ParallelC;
+import edu.utep.cs5374.ltlgenerator.cp.ParallelE;
 
 
 public class Main {
@@ -22,7 +24,8 @@ public class Main {
 			"5 # AtleastOneE"+"\n"+
 		    "6 # ParallelE"+"\n"+
 		    "7 # ConsecutiveE"+"\n"+
-		    "8 # EventualE");
+		    "8 # ConsecutiveH"+"\n"+
+		    "9 # EventualE");
 			
 			System.out.println("Enter the number of propositions:");
 			n=sc.nextInt();
@@ -45,9 +48,16 @@ public class Main {
 			{
 				ParallelE pleCP = new ParallelE();
 				L=pleCP.compute(n);
-				System.out.println("ParallelC pattern is"+L);
+				System.out.println("ParallelE pattern is"+L);
 
-			}  
+			} 
+			if(l==8)
+			{
+				ConsecutiveH cshCP = new ConsecutiveH();
+				L=cshCP.compute(n);
+				System.out.println("ConsecutiveH pattern is"+L);
+
+			} 
 			sc.close();
 		}
 	}
