@@ -16,7 +16,7 @@ public class ParallelH implements CompositePropositionParent {
 		
 		StringBuilder ltlFormula = new StringBuilder(OPEN_Parenth);
 		
-		for(int i = 0; i< numProposition; i++)
+		for(int i = 0; i < numProposition; i++)
 		{
 			ltlFormula.append("p" + i);
 			
