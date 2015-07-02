@@ -35,23 +35,25 @@ public class EventualC extends CompositePropositionParent {
 		for(int i=0;i< aCount;i++)
 		{
 			if(i == 0){
-				stringBuilder.append(" p " + i + AND + NEXT + OPEN_P);
+				stringBuilder.append(" p " + i + AND + NEXT );
 			}
 			
 		}/*first part done*/
 		
-		
+		int count=0;
 		/*second part*/
 		for(int i=1;i< aCount;i++)
 		{
 			if(aCount - i > 1)
 			{
-				stringBuilder.append(NOT + " p" + i + UNTIL	+ OPEN_P + " p" + i + AND + NEXT  );
+				stringBuilder.append(OPEN_P + NOT + " p" + i + UNTIL + OPEN_P + " p" + i + AND + NEXT   );
+				count=count+1;
 			}
 				
 			else
 			{
 				stringBuilder.append(OPEN_P + NOT + " p" + i + UNTIL + " p " + i + CLOSE_P + CLOSE_P );
+				System.out.println(count);
 			}
 			
 						
