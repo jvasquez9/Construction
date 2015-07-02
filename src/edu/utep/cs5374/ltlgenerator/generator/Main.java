@@ -50,7 +50,7 @@ public class Main {
 
 			
 			L= AtleastOneH.compute(n);
-			System.out.println("AtleastOneH pattern is"+L);
+			System.out.println("AtleastOneH pattern is" + L);
 
 
 		}
@@ -60,7 +60,7 @@ public class Main {
 
 			
 			L= AtleastOneE.compute(n);
-			System.out.println("AtleastOneE pattern is"+L);
+			System.out.println("AtleastOneE pattern is" + L);
 
 
 		}
@@ -70,7 +70,7 @@ public class Main {
 
 			
 			L= ParallelC.compute(n);
-			System.out.println("ParallelC pattern is"+L);
+			System.out.println("ParallelC pattern is" + L);
 
 
 		}
@@ -79,29 +79,26 @@ public class Main {
 
 			
 			L= ParallelH.compute(n);
-			System.out.println("ParallelH pattern is"+L);
-
-
+			System.out.println("ParallelH pattern is" + L);
 		}
 		
 		if(l==6)
 		{
-
-			
 			L=ParallelE.compute(n);
-			System.out.println("ParallelE pattern is"+L);
-
-
-
+			System.out.println("ParallelE pattern is" + L);
 		} 
 		if(l==8)
 		{
-			ConsecutiveH cshCP = new ConsecutiveH();
-			L=cshCP.compute(n);
-			System.out.println("ConsecutiveH pattern is"+L);
-
-			sc.close();
+			L = ConsecutiveH.compute(n);
+			System.out.println("ConsecutiveH pattern is" + L);
 		}
+		if(l==12)
+		{
+			L = EventualE.compute(n);
+			System.out.println("ConsecutiveH pattern is" + L);
+		}
+		
+		sc.close();
 	}
 }
 
