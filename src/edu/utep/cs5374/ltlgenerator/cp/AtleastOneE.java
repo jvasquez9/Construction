@@ -1,18 +1,6 @@
-/**
- * 
- */
 package edu.utep.cs5374.ltlgenerator.cp;
 
-/**
- * @author John
- *
- */
-public class AtleastOneE extends CompositePropositionParent {
-
-	/**
-	 * 
-	 */
-
+public class AtleastOneE implements CompositePropositionParent {
 
 	private static final String OR = " | ";
 	private static final String AND = "& ";
@@ -21,8 +9,8 @@ public class AtleastOneE extends CompositePropositionParent {
 	private static final String OPEN_P = "(";
 	private static final String CLOSE_P = ")";
 
-
-	public static String compute(int aCount)
+	@Override
+	public String compute(int aCount)
 	{
 		if (aCount <= 0)
 		{

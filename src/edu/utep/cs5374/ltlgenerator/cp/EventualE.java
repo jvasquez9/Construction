@@ -1,17 +1,9 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
-public class EventualE extends CompositePropositionParent {
+public class EventualE implements CompositePropositionParent {
 
-	
-	public static void main(String[] args)
-	{
-		for(int i = 0; i < 10; i++)
-		{
-			System.out.println(compute(i));
-		}
-	}
-	
-	public static String compute(int aCount)
+	@Override
+	public String compute(int aCount)
 	{
 		if(aCount <= 0)
 		{

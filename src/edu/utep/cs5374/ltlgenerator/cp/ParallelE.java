@@ -1,14 +1,6 @@
-/**
- * 
- */
 package edu.utep.cs5374.ltlgenerator.cp;
 
-/**
- * @author John
- *
- */
-public class ParallelE  {
-
+public class ParallelE implements CompositePropositionParent  {
 
 	private static final String OR = " | ";
 	private static final String AND = "& ";
@@ -17,8 +9,8 @@ public class ParallelE  {
 	private static final String OPEN_P = "(";
 	private static final String CLOSE_P = ")";
 
-
-	public static String compute(int aCount)
+	@Override
+	public String compute(int aCount)
 	{
 		if (aCount <= 0)
 		{

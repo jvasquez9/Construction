@@ -1,15 +1,6 @@
-/**
- * 
- */
 package edu.utep.cs5374.ltlgenerator.cp;
 
-/**
- * @author John
- *
- */
-public class CompositePropositionParent {
+public interface CompositePropositionParent {
 
-	public String getCPString(String CPChoice){
-		return "";
-	}
+	public String compute(int aCount);
 }

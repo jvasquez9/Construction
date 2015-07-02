@@ -31,63 +31,17 @@ public class Main {
 		System.out.println("Enter the type of proposition for L:");
 		l=sc.nextInt();
 
-		if(l==1)
+		CompositePropositionParent[] cpTable = {
+				new AtleastOneC(), new AtleastOneH(), new AtleastOneE(),
+				new ParallelC(), new ParallelH(), new ParallelE(),
+				new ConsecutiveC(), new ConsecutiveH(), new ConsecutiveE(),
+				new EventualC(), new EventualH(), new EventualE()
+		};
+		
+		if(l >= 1 && l <= cpTable.length)
 		{
-			L= AtleastOneC.compute(n);
-			System.out.println("AtleastOneC pattern is " + L);
-		} 
-		else if(l==2)
-		{
-			L= AtleastOneH.compute(n);
-			System.out.println("AtleastOneH pattern is " + L);
-		}
-		else if(l==3)
-		{
-			L= AtleastOneE.compute(n);
-			System.out.println("AtleastOneE pattern is " + L);
-		}
-		else if(l==4)
-		{
-			L= ParallelC.compute(n);
-			System.out.println("ParallelC pattern is " + L);
-		}
-		else if(l==5)
-		{
-			L= ParallelH.compute(n);
-			System.out.println("ParallelH pattern is " + L);
-		}
-		else if(l==6)
-		{
-			L=ParallelE.compute(n);
-			System.out.println("ParallelE pattern is " + L);
-		} 
-		else if(l==7)
-		{
-			L = ConsecutiveC.compute(n);
-			System.out.println("ConsecutiveC pattern is " + L);
-		}
-		else if(l==8)
-		{
-			L = ConsecutiveH.compute(n);
-			System.out.println("ConsecutiveH pattern is " + L);
-		}
-		else if(l==10)
-		{
-			L = EventualC.compute(n);
-			System.out.println("EventualC pattern is " + L);
-		}
-		else if(l==11)
-		{
-			// Not implemented yet
-			System.out.println("EventualH pattern is not implemented yet");
-		}
-		else if(l==12)
-		{
-			L = EventualE.compute(n);
-			System.out.println("ConsecutiveH pattern is " + L);
-		}
-		else {
-			System.out.println("Type doesn't match!");
+			L = cpTable[l - 1].compute(n);
+			System.out.println("Result: " + L);
 		}
 		
 		sc.close();

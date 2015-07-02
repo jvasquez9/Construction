@@ -1,18 +1,14 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
-/**
- * @author Porag
- *
- */
-
-public class ConsecutiveC extends CompositePropositionParent {
+public class ConsecutiveC implements CompositePropositionParent {
 
 	private static final String AND = " & ";
 	private static final String OPEN_Parenth = "(";
 	private static final String CLOSE_Parenth = ")";
 	private static final String NEXT = "X";
 
-	public static String compute(int numProposition)
+	@Override
+	public String compute(int numProposition)
 	{
 		int openParenthCount = 0;
 		

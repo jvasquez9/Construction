@@ -1,19 +1,9 @@
-/**
- * 
- */
 package edu.utep.cs5374.ltlgenerator.cp;
 
-/**
- * @author John
- *
- */
-public class ConsecutiveE extends CompositePropositionParent {
+public class ConsecutiveE implements CompositePropositionParent {
 
-	/**
-	 * 
-	 */
-	public ConsecutiveE() {
-		// TODO Auto-generated constructor stub
+	@Override
+	public String compute(int aCount) {
+		return null;
 	}
-
 }

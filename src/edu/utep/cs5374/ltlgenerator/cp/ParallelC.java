@@ -1,10 +1,11 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
-public class ParallelC extends CompositePropositionParent {
+public class ParallelC implements CompositePropositionParent {
 	
 	private static final String AND = " & ";
 	
-	public static String compute(int aCount)
+	@Override
+	public String compute(int aCount)
 	{
 		if (aCount <= 0)
 		{

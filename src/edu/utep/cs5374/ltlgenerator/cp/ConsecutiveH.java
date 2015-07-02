@@ -1,13 +1,6 @@
-/**
- * 
- */
 package edu.utep.cs5374.ltlgenerator.cp;
 
-/**
- * @author John
- *
- */
-public class ConsecutiveH  {
+public class ConsecutiveH  implements CompositePropositionParent{
 	
 	private static final String OR = " | ";
 	private static final String AND = "& ";
@@ -17,16 +10,8 @@ public class ConsecutiveH  {
 	private static final String CLOSE_P = ")";
 	private static final String NEXT = "X";
 
-	/**
-	 * 
-	 */
-	public ConsecutiveH() {
-		 String OnePropFormula = "([p1]&![p2]&X(p2))";
-	     String TwoPropFormula = "(![p1]&![p2]&![p3]&X(p2&![p3]&X(p3)))";
-	     String ThreePropFormula = "(![p1]&![p2]&![p3]&X(p2&![p3]&X(p3)))";
-	  }
-
-	public static String compute(int aCount)
+	@Override
+	public String compute(int aCount)
 	{
 		if (aCount <= 0)
 		{

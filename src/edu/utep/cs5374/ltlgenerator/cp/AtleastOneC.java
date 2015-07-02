@@ -1,10 +1,11 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
-public class AtleastOneC extends CompositePropositionParent {
+public class AtleastOneC implements CompositePropositionParent {
 
 	private static final String OR = " | ";
 	
-	public static String compute(int aCount)
+	@Override
+	public String compute(int aCount)
 	{
 		if (aCount <= 0)
 		{
