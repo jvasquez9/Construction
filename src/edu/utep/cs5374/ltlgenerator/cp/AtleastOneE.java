@@ -29,7 +29,7 @@ public class AtleastOneE extends CompositePropositionParent {
 			return "";
 		}
 
-		/*First half of ParallelE*/
+		/*First half of AtleastOneE*/
 		StringBuilder stringBuilder = new StringBuilder(OPEN_P);
 		for(int i=0;i< aCount;i++)
 		{
@@ -44,7 +44,7 @@ public class AtleastOneE extends CompositePropositionParent {
 		/*First half done*/
 
 
-		/**Second half of ParallelE**/
+		/**Second half of AtleastOneE**/
 		stringBuilder.append(AND);
 		stringBuilder.append(OPEN_P);
 		stringBuilder.append(OPEN_P);
@@ -59,7 +59,7 @@ public class AtleastOneE extends CompositePropositionParent {
 		/*Second half done*/
 
 
-		/*Third part of parallelE*/
+		/*Third part of AtleastOneE*/
 		stringBuilder.append(UNTIL);
 		stringBuilder.append(OPEN_P);
 		for(int i = 0; i < aCount; i++){
