@@ -2,11 +2,15 @@ package edu.utep.cs5374.ltlgenerator.generator;
 
 import java.util.Scanner;
 
+<<<<<<< HEAD
 import edu.utep.cs5374.ltlgenerator.cp.AtleastOneC;
 import edu.utep.cs5374.ltlgenerator.cp.ConsecutiveH;
 import edu.utep.cs5374.ltlgenerator.cp.ParallelC;
 import edu.utep.cs5374.ltlgenerator.cp.ParallelE;
 
+=======
+import edu.utep.cs5374.ltlgenerator.cp.*;
+>>>>>>> origin/master
 
 public class Main {
 	public static void main(String[] args) {
@@ -42,13 +46,18 @@ public class Main {
 			if(l==2)
 			{
 				L= ParallelC.compute(n);
-				System.out.println("ParallelC pattern is"+L);
+				System.out.println("ParallelC pattern is" + L);
 			} 
 			if(l==6)
 			{
+<<<<<<< HEAD
 				ParallelE pleCP = new ParallelE();
 				L=pleCP.compute(n);
 				System.out.println("ParallelE pattern is"+L);
+=======
+				L= ParallelE.compute(n);
+				System.out.println("ParallelC pattern is" + L);
+>>>>>>> origin/master
 
 			} 
 			if(l==8)
