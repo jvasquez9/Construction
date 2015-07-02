@@ -92,6 +92,11 @@ public class Main {
 			L = ConsecutiveH.compute(n);
 			System.out.println("ConsecutiveH pattern is" + L);
 		}
+		if(l==10)
+		{
+			L = EventualC.compute(n);
+			System.out.println("EventualC pattern is" + L);
+		}
 		if(l==12)
 		{
 			L = EventualE.compute(n);
