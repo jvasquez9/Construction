@@ -1,4 +1,5 @@
 package edu.utep.cs5374.ltlgenerator.generator;
+
 import java.util.Scanner;
 
 
@@ -22,9 +23,17 @@ public class Generic {
 		System.out.println("Enter the number of propositions");
 		n=sc.nextInt();
 		String[] LProp = new String[n];
-		for(int i=0;i<LProp.length;i++)
+		String[] PProp = new String[n];
+		String[] QProp = new String[n];
+		String[] RProp = new String[n];
+		for(int i=0;i<n;i++)
 		{
 			LProp[i]="l"+(i+1);
+			PProp[i]="p"+(i+1);
+			QProp[i]="q"+(i+1);
+			RProp[i]="r"+(i+1);
+
+			
 			//System.out.println(LProp[i]);
 		}
 		
