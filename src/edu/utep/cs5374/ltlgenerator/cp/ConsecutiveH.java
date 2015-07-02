@@ -34,7 +34,24 @@ public class ConsecutiveH  {
 		}
 		
 		StringBuilder stringBuilder = new StringBuilder(OPEN_P);
+		for(int i=0;i< aCount;i++)
+		{
+			if(i == 0){
+				stringBuilder.append(" p" + i + " ");
+			}
+			else{
+				stringBuilder.append(AND + NOT + " p" + i + " ");
+			}
+			
+			if(aCount - i == 1)
+			{
+				stringBuilder.append(NEXT);
+			}
+		}
+		/*first part done*/
 		
+		
+		stringBuilder.append(OPEN_P);
 		for(int i=0;i< aCount;i++)
 		{
 			if(i == 0){
