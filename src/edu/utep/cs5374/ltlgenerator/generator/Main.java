@@ -3,6 +3,7 @@ package edu.utep.cs5374.ltlgenerator.generator;
 import java.util.Scanner;
 
 import edu.utep.cs5374.ltlgenerator.cp.AtleastOneC;
+import edu.utep.cs5374.ltlgenerator.cp.AtleastOneH;
 import edu.utep.cs5374.ltlgenerator.cp.ParallelC;
 
 
@@ -15,14 +16,19 @@ public class Main {
 			Scanner sc = new Scanner(System.in);
 			
 			System.out.println(
-			"1 # AtleastOneC "+"\n"+ 
-			"2 # ParallelC"+"\n"+
-			"3 # ConsecutiveC" +"\n"+
-			"4 # EventualC"+"\n"+
-			"5 # AtleastOneE"+"\n"+
-		    "6 # ParallelE"+"\n"+
-		    "7 # ConsecutiveE"+"\n"+
-		    "8 # EventualE");
+					"1 # AtleastOneC "+"\n"+ 
+					"2 # AtleastOneH "+"\n"+ 
+					"3 # AtleastOneE "+"\n"+ 
+					"4 # ParallelC"+"\n"+
+					"5 # ParallelH"+"\n"+
+					"6 # ParallelE"+"\n"+		
+					"7 # ConsecutiveC" +"\n"+
+					"8 # ConsecutiveH" +"\n"+
+					"9 # ConsecutiveE" +"\n"+		
+					"10 # EventualC"+"\n"+
+					"11 # EventualH"+"\n"+
+			        "12 # EventualE");
+
 			
 			System.out.println("Enter the number of propositions:");
 			n=sc.nextInt();
@@ -38,10 +44,20 @@ public class Main {
 			} 
 			if(l==2)
 			{
+
+				L= AtleastOneH.compute(n);
+				System.out.println("ParallelC pattern is"+L);
+			} 
+			if(l==4)
+			{
 				L= ParallelC.compute(n);
 				System.out.println("ParallelC pattern is"+L);
 			} 
-			
 			sc.close();
 		}
 	}
+
+
+			
+	
+
