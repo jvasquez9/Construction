@@ -42,65 +42,55 @@ public class Main {
 		if(l==1)
 		{
 			L= AtleastOneC.compute(n);
-			System.out.println("AtleastOneC pattern is" + L);
-
+			System.out.println("AtleastOneC pattern is " + L);
 		} 
-		if(l==2)
+		else if(l==2)
 		{
-
-			
 			L= AtleastOneH.compute(n);
-			System.out.println("AtleastOneH pattern is" + L);
-
-
+			System.out.println("AtleastOneH pattern is " + L);
 		}
-		
-		if(l==3)
+		else if(l==3)
 		{
-
-			
 			L= AtleastOneE.compute(n);
-			System.out.println("AtleastOneE pattern is" + L);
-
-
+			System.out.println("AtleastOneE pattern is " + L);
 		}
-		
-		if(l==4)
+		else if(l==4)
 		{
-
-			
 			L= ParallelC.compute(n);
-			System.out.println("ParallelC pattern is" + L);
-
-
+			System.out.println("ParallelC pattern is " + L);
 		}
-		if(l==5)
+		else if(l==5)
 		{
-
-			
 			L= ParallelH.compute(n);
-			System.out.println("ParallelH pattern is" + L);
+			System.out.println("ParallelH pattern is " + L);
 		}
-		
-		if(l==6)
+		else if(l==6)
 		{
 			L=ParallelE.compute(n);
-			System.out.println("ParallelE pattern is" + L);
+			System.out.println("ParallelE pattern is " + L);
 		} 
-		if(l==8)
+		else if(l==7)
+		{
+			L = ConsecutiveC.compute(n);
+			System.out.println("ConsecutiveC pattern is " + L);
+		}
+		else if(l==8)
 		{
 			L = ConsecutiveH.compute(n);
-			System.out.println("ConsecutiveH pattern is" + L);
+			System.out.println("ConsecutiveH pattern is " + L);
 		}
-		if(l==10)
+		else if(l==10)
 		{
 			L = EventualC.compute(n);
-			System.out.println("EventualC pattern is" + L);
+			System.out.println("EventualC pattern is " + L);
 		}
-		if(l==12)
+		else if(l==12)
 		{
 			L = EventualE.compute(n);
-			System.out.println("ConsecutiveH pattern is" + L);
+			System.out.println("ConsecutiveH pattern is " + L);
+		}
+		else {
+			System.out.println("Type doesn't match!");
 		}
 		
 		sc.close();
