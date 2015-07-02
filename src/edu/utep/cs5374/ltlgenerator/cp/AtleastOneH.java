@@ -15,7 +15,7 @@ private static final String OR = " | ";
 		
 		for(int i=0;i< aCount;i++)
 		{
-			stringBuilder.append(" p" + i + " ");
+			stringBuilder.append("p" + i + " ");
 			
 			if(i < aCount - 1)
 			{
