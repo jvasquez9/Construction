@@ -51,10 +51,11 @@ public class ConsecutiveH  {
 		/*first part done*/
 		
 		
+		/*second part*/
 		stringBuilder.append(OPEN_P);
-		for(int i=0;i< aCount;i++)
+		for(int i=1;i< aCount;i++)
 		{
-			if(i == 0){
+			if(i == 1){
 				stringBuilder.append(" p" + i + " ");
 			}
 			else{
@@ -63,6 +64,9 @@ public class ConsecutiveH  {
 			
 			if(aCount - i == 1)
 			{
+				stringBuilder.append(CLOSE_P);
+			}
+			else{
 				stringBuilder.append(NEXT);
 			}
 		}
