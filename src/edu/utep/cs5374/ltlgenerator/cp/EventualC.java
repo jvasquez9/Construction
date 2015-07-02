@@ -36,7 +36,7 @@ public class EventualC extends CompositePropositionParent {
 		for(int i=0;i< aCount;i++)
 		{
 			if(i == 0){
-				stringBuilder.append(" p" + i + AND + NEXT );
+				stringBuilder.append("p" + i + AND + NEXT );
 			}
 			
 			else
@@ -44,13 +44,13 @@ public class EventualC extends CompositePropositionParent {
 						
 			if(aCount - i > 1)
 			{
-				stringBuilder.append(OPEN_P + NOT + " p" + i + UNTIL + OPEN_P + " p" + i + AND + NEXT);
+				stringBuilder.append(OPEN_P + NOT + "p" + i + UNTIL + OPEN_P + "p" + i + AND + NEXT);
 				count=count+2;
 			}
 				
 			else
 			{
-				stringBuilder.append(OPEN_P + NOT + " p" + i + UNTIL + " p" + i + CLOSE_P );
+				stringBuilder.append(OPEN_P + NOT + "p" + i + UNTIL + "p" + i + CLOSE_P );
 				
 			}
 			
