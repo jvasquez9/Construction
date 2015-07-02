@@ -33,6 +33,11 @@ public class ConsecutiveC implements CompositePropositionParent {
 	@Override
 	public String compute(int numProposition)
 	{
+		if(numProposition < 1)
+		{
+			return "";
+		}
+		
 		StringBuilder ltlFormula = new StringBuilder(OPEN_Parenth);
 		int recursionCount = 1;
 		ltlFormula.append(ltlFormulaGenerator(numProposition, recursionCount, new StringBuilder("")));
