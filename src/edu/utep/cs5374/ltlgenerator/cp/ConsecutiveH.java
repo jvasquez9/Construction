@@ -44,12 +44,12 @@ public class ConsecutiveH  {
 				stringBuilder.append(AND + NOT + " p" + i + " ");
 			}
 			
-			if(i < aCount - 1)
+			if(aCount - i == 1)
 			{
 				stringBuilder.append(NEXT);
 			}
 		}
-		stringBuilder.append(")");
+		stringBuilder.append(CLOSE_P);
 		
 		return stringBuilder.toString();
 	}
