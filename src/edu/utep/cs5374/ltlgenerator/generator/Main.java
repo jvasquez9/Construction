@@ -2,19 +2,16 @@ package edu.utep.cs5374.ltlgenerator.generator;
 
 import java.util.Scanner;
 
-<<<<<<< HEAD
-import edu.utep.cs5374.ltlgenerator.cp.AtleastOneC;
-<<<<<<< HEAD
+
 import edu.utep.cs5374.ltlgenerator.cp.AtleastOneH;
-=======
+
 import edu.utep.cs5374.ltlgenerator.cp.ConsecutiveH;
->>>>>>> origin/master
+
 import edu.utep.cs5374.ltlgenerator.cp.ParallelC;
 import edu.utep.cs5374.ltlgenerator.cp.ParallelE;
 
-=======
 import edu.utep.cs5374.ltlgenerator.cp.*;
->>>>>>> origin/master
+
 
 public class Main {
 	public static void main(String[] args) {
@@ -25,7 +22,7 @@ public class Main {
 			Scanner sc = new Scanner(System.in);
 			
 			System.out.println(
-<<<<<<< HEAD
+
 					"1 # AtleastOneC "+"\n"+ 
 					"2 # AtleastOneH "+"\n"+ 
 					"3 # AtleastOneE "+"\n"+ 
@@ -38,17 +35,7 @@ public class Main {
 					"10 # EventualC"+"\n"+
 					"11 # EventualH"+"\n"+
 			        "12 # EventualE");
-=======
-			"1 # AtleastOneC "+"\n"+ 
-			"2 # ParallelC"+"\n"+
-			"3 # ConsecutiveC" +"\n"+
-			"4 # EventualC"+"\n"+
-			"5 # AtleastOneE"+"\n"+
-		    "6 # ParallelE"+"\n"+
-		    "7 # ConsecutiveE"+"\n"+
-		    "8 # ConsecutiveH"+"\n"+
-		    "9 # EventualE");
->>>>>>> origin/master
+
 			
 			System.out.println("Enter the number of propositions:");
 			n=sc.nextInt();
@@ -64,28 +51,17 @@ public class Main {
 			} 
 			if(l==2)
 			{
-<<<<<<< HEAD
+
 				L= AtleastOneH.compute(n);
 				System.out.println("ParallelC pattern is"+L);
-=======
-				L= ParallelC.compute(n);
-				System.out.println("ParallelC pattern is" + L);
->>>>>>> origin/master
+
 			} 
 			if(l==4)
 			{
-<<<<<<< HEAD
+
 				L= ParallelC.compute(n);
 				System.out.println("ParallelC pattern is"+L);
-=======
-<<<<<<< HEAD
-				ParallelE pleCP = new ParallelE();
-				L=pleCP.compute(n);
-				System.out.println("ParallelE pattern is"+L);
-=======
-				L= ParallelE.compute(n);
-				System.out.println("ParallelC pattern is" + L);
->>>>>>> origin/master
+
 
 			} 
 			if(l==8)
@@ -94,7 +70,6 @@ public class Main {
 				L=cshCP.compute(n);
 				System.out.println("ConsecutiveH pattern is"+L);
 
->>>>>>> origin/master
 			} 
 			sc.close();
 		}
