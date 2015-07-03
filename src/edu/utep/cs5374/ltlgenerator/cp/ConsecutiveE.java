@@ -48,6 +48,19 @@ public class ConsecutiveE implements CompositePropositionParent {
 		stringBuilder.append(CLOSE_P);
 		/*Second part done*/
 		
+		/*Third part of ConsecutiveE*/
+		stringBuilder.append(UNTIL);
+		stringBuilder.append(OPEN_P);
+		for(int i = 0; i < aCount; i++){
+			stringBuilder.append(" p" + i + " ");
+			if(i < aCount - 1)
+			{
+				stringBuilder.append(AND);
+			}
+		}
+		
+		
+		
 		return stringBuilder.toString();
 		
 
