@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class CPUnitTests {
 
-	
 	/****** AtLeastOneC ***************/
 	
 	@Test
@@ -39,8 +38,6 @@ public class CPUnitTests {
 		assertTrue(TestCP(new AtleastOneC().compute(3), "(p0|p1|p2)"));
 	}
 	
-	
-	
 	/****** AtLeastOneH ***************/
 	
 	@Test
@@ -72,8 +69,6 @@ public class CPUnitTests {
 		//N = 3 test case
 		assertTrue(TestCP(new AtleastOneH().compute(3), "(p0|p1|p2)"));
 	}
-
-	
 	
 	/****** EventualC ***************/
 	
@@ -107,8 +102,8 @@ public class CPUnitTests {
 		assertTrue(TestCP(new EventualC().compute(3), "(p0&X(!p1U(p1&X(!p2Up2))))"));
 	}
 
-	
 	/****** ConsecutiveC ***************/
+	
 	@Test
 	public void ConsecutiveCTestOne() {
 		//N = -1 test case
@@ -134,7 +129,6 @@ public class CPUnitTests {
 		//N = 3 test case
 		assertTrue(TestCP(new ConsecutiveC().compute(3), "(p0 & X(p1 & X(p2)))"));
 	}
-	
 	
 	/****** ParallelH***************/
 	
@@ -163,6 +157,9 @@ public class CPUnitTests {
 		//N = 3 test case
 		assertTrue(TestCP(new ParallelH().compute(3), "(p0 & p1 & p2)"));
 	}
+	
+	/****** ParallelE ***************/
+	
 	@Test
 	public void ParallelETestOne() {
 		//N = -1 test case
@@ -188,6 +185,8 @@ public class CPUnitTests {
 		//N = 3 test case
 		assertTrue(TestCP(new ParallelE().compute(3), "(! p0 & ! p1 & ! p2 )& ((! p0 & ! p1 & ! p2 )U( p0 &  p1 &  p2 ))"));
 	}
+	
+	/****** ConsecutiveH ***************/
 	
 	@Test
 	public void ConsecutiveHTestOne() {
@@ -215,14 +214,47 @@ public class CPUnitTests {
 		assertTrue(TestCP(new ConsecutiveH().compute(3), "( p0 & ! p1 & ! p2 & X( p1 & ! p2 & X( p2 )))"));
 	}
 	
-	 
+	/****** EventualE ***************/
+	
+	@Test
+	public void EventualETestOne() {
+		//N = 0 test case
+		assertTrue(TestCP(new EventualE().compute(0), ""));
+	}
+	
+	@Test
+	public void EventualETestTwo() {
+		//N = -1 test case
+		assertTrue(TestCP(new EventualE().compute(-1), ""));
+	}
+	
+	@Test
+	public void EventualETestThree() {
+		//N = 1 test case
+		assertTrue(TestCP(new EventualE().compute(1), "(!p0)&((!p0)U(p0))"));
+	}
+	
+	@Test
+	public void EventualETestFour() {
+		//N = 2 test case
+		assertTrue(TestCP(new EventualE().compute(2), "(!p0&!p1)&((!p0&!p1)U(p0&!p1&((!p1)U(p1)))"));
+	}
+	
+	@Test
+	public void EventualETestFive() {
+		//N = 3 test case
+		assertTrue(TestCP(new EventualE().compute(3), "(!p0&!p1&!p2)&((!p0&!p1&!p2)U(p0&!p1&!p2&((!p1&!p2)U(p1&!p2&((!p2)U(p2))))"));
+	}
 
+	/****** Tester Helper Method ***************/
 	
 	public static boolean TestCP(String result, String expectedResult)
 	{
 		//Remove all white space from both strings
 		result = result.replaceAll("\\s+","");
 		expectedResult = expectedResult.replaceAll("\\s+", "");
+		
+		//Check if strings are equal
 		return result.equals(expectedResult);
 	}
 
