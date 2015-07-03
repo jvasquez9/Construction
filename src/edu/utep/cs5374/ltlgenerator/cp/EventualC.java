@@ -11,57 +11,57 @@ public class EventualC implements CompositePropositionParent {
 	private static final String NEXT = "X";
 
 	@Override
-	public String compute(int aCount)
+	public String compute(int numProposition)
 	{
-		int count=0;
-		if (aCount <= 0)
+		int openParenthesesCount=0;
+		if (numProposition <= 0)
 		{
 			return "";
 		}
 		
-		StringBuilder stringBuilder = new StringBuilder(OPEN_P);
-		for(int i=0;i< aCount;i++)
+		StringBuilder ltlFormula = new StringBuilder(OPEN_P);
+		for(int i=0;i< numProposition;i++)
 		{
 			//stringBuilder.append(" p " + i + AND + NEXT );
-			if(aCount==1)
+			if(numProposition==1)
 			{
-				stringBuilder.append(" p " + i );
+				ltlFormula.append(" p " + i );
 			}
 			
 			else
 			{
 			if(i == 0){
-				stringBuilder.append(" p " + i + AND + NEXT );
+				ltlFormula.append(" p " + i + AND + NEXT );
 			}
 			
 			else
 			{
 						
-			if(aCount - i > 1)
+			if(numProposition - i > 1)
 			{
-				stringBuilder.append(OPEN_P + NOT + " p" + i + UNTIL + OPEN_P + " p" + i + AND + NEXT   );
-				count=count+2;
+				ltlFormula.append(OPEN_P + NOT + " p" + i + UNTIL + OPEN_P + " p" + i + AND + NEXT   );
+				openParenthesesCount=openParenthesesCount+2;
 			}
 				
 			else
 			{
-				stringBuilder.append(OPEN_P + NOT + " p" + i + UNTIL + " p " + i + CLOSE_P );
+				ltlFormula.append(OPEN_P + NOT + " p" + i + UNTIL + " p " + i + CLOSE_P );
 				
 			}
 			
 			}			
 		}
 		}
-		while(count>0)
+		while(openParenthesesCount>0)
 		{
-			stringBuilder.append(CLOSE_P);
-			count--;
+			ltlFormula.append(CLOSE_P);
+			openParenthesesCount--;
 		}
 		
-		stringBuilder.append(CLOSE_P);
-		System.out.println(stringBuilder);
+		ltlFormula.append(CLOSE_P);
+		System.out.println(ltlFormula);
 		
-		return stringBuilder.toString();
+		return ltlFormula.toString();
 	}
 
 }

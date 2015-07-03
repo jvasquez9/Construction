@@ -3,30 +3,32 @@ package edu.utep.cs5374.ltlgenerator.cp;
 public class AtleastOneH implements CompositePropositionParent {
 
 	private static final String OR = " | ";
+	private static final String OPEN_Parenth = "(";
+	private static final String CLOSE_Parenth = ")";
 	
 	@Override
-	public String compute(int aCount)
+	public String compute(int numProposition)
 	{
-		if (aCount <= 0)
+		if (numProposition <= 0)
 		{
 			return "";
 		}
 		
-		StringBuilder stringBuilder = new StringBuilder("(");
+		StringBuilder ltlFormula = new StringBuilder(OPEN_Parenth);
 		
-		for(int i=0;i< aCount;i++)
+		for(int i=0;i< numProposition;i++)
 		{
-			stringBuilder.append("p" + i + " ");
+			ltlFormula.append("p" + i + " ");
 			
-			if(i < aCount - 1)
+			if(i < numProposition - 1)
 			{
-				stringBuilder.append(OR);
+				ltlFormula.append(OR);
 			}
 		}
 		
-		stringBuilder.append(")");
+		ltlFormula.append(CLOSE_Parenth);
 		
-		return stringBuilder.toString();
+		return ltlFormula.toString();
 	}
 
 }
