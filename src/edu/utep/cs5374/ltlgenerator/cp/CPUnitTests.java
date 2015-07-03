@@ -6,6 +6,9 @@ import org.junit.Test;
 
 public class CPUnitTests {
 
+	
+	/****** AtLeastOneC ***************/
+	
 	@Test
 	public void AtleastOneCTestOne() {
 		//N = 0 test case
@@ -35,7 +38,77 @@ public class CPUnitTests {
 		//N = 3 test case
 		assertTrue(TestCP(new AtleastOneC().compute(3), "(p0|p1|p2)"));
 	}
+	
+	
+	
+	/****** AtLeastOneH ***************/
+	
+	@Test
+	public void AtleastOneHTestOne() {
+		//N = 0 test case
+		assertTrue(TestCP(new AtleastOneH().compute(0), ""));
+	}
+	
+	@Test
+	public void AtleastOneHTestTwo() {
+		//N = -1 test case
+		assertTrue(TestCP(new AtleastOneH().compute(-1), ""));
+	}
+	
+	@Test
+	public void AtleastOneHTestThree() {
+		//N = 1 test case
+		assertTrue(TestCP(new AtleastOneH().compute(1), "(p0)"));
+	}
+	
+	@Test
+	public void AtleastOneHTestFour() {
+		//N = 2 test case
+		assertTrue(TestCP(new AtleastOneH().compute(2), "(p0|p1)"));
+	}
+	
+	@Test
+	public void AtleastOneHTestFive() {
+		//N = 3 test case
+		assertTrue(TestCP(new AtleastOneH().compute(3), "(p0|p1|p2)"));
+	}
 
+	
+	
+	/****** EventualC ***************/
+	
+	@Test
+	public void EventualCTestOne() {
+		//N = 0 test case
+		assertTrue(TestCP(new EventualC().compute(0), ""));
+	}
+	
+	@Test
+	public void EventualCTestTwo() {
+		//N = -1 test case
+		assertTrue(TestCP(new EventualC().compute(-1), ""));
+	}
+	
+	/*@Test
+	public void EventualCTestThree() {
+		//N = 1 test case
+		assertTrue(TestCP(new EventualC().compute(1), "(p0)"));
+	}*/
+	
+	@Test
+	public void EventualCTestFour() {
+		//N = 2 test case
+		assertTrue(TestCP(new EventualC().compute(2), "(p0&X(!p1Up1))"));
+	}
+	
+	@Test
+	public void EventualCTestFive() {
+		//N = 3 test case
+		assertTrue(TestCP(new EventualC().compute(3), "(p0&X(!p1U(p1&X(!p2Up2))))"));
+	}
+
+	
+	/****** ConsecutiveC ***************/
 	@Test
 	public void ConsecutiveCTestOne() {
 		//N = -1 test case
@@ -61,6 +134,9 @@ public class CPUnitTests {
 		//N = 3 test case
 		assertTrue(TestCP(new ConsecutiveC().compute(3), "(p0 & X(p1 & X(p2)))"));
 	}
+	
+	
+	/****** ParallelH***************/
 	
 	@Test
 	public void ParallelHTestOne() {
