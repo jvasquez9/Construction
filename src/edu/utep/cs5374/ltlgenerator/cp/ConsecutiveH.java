@@ -31,7 +31,7 @@ public class ConsecutiveH  implements CompositePropositionParent{
 			return ltlFormula.toString();
 		}
 		else{
-			return ltlFormula.toString();
+			return ltlFormula.append(")").toString();
 		}
 	}
 
