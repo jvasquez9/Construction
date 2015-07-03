@@ -87,6 +87,31 @@ public class CPUnitTests {
 		//N = 3 test case
 		assertTrue(TestCP(new ParallelH().compute(3), "(p0 & p1 & p2)"));
 	}
+	@Test
+	public void ParallelETestOne() {
+		//N = -1 test case
+		assertTrue(TestCP(new ParallelE().compute(-1), ""));
+	}
+	@Test
+	public void ParallelETestTwo() {
+		//N = 0 test case
+		assertTrue(TestCP(new ParallelE().compute(0), ""));
+	}
+	@Test
+	public void ParallelETestThree() {
+		//N = 1 test case
+		assertTrue(TestCP(new ParallelE().compute(1), "(! p0 )& ((! p0 )U( p0 ))"));
+	}
+	@Test
+	public void ParallelETestFour() {
+		//N = 2 test case
+		assertTrue(TestCP(new ParallelE().compute(2), "(! p0 & ! p1 )& ((! p0 & ! p1 )U( p0 &  p1 ))"));
+	}
+	@Test
+	public void ParallelETestFive() {
+		//N = 3 test case
+		assertTrue(TestCP(new ParallelE().compute(3), "(! p0 & ! p1 & ! p2 )& ((! p0 & ! p1 & ! p2 )U( p0 &  p1 &  p2 ))"));
+	}
 	
 	@Test
 	public void ConsecutiveHTestOne() {
