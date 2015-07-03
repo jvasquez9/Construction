@@ -89,11 +89,11 @@ public class CPUnitTests {
 		assertTrue(TestCP(new EventualC().compute(-1), ""));
 	}
 	
-	/*@Test
+	@Test
 	public void EventualCTestThree() {
 		//N = 1 test case
 		assertTrue(TestCP(new EventualC().compute(1), "(p0)"));
-	}*/
+	}
 	
 	@Test
 	public void EventualCTestFour() {
