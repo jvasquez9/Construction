@@ -1,25 +1,49 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
 public class ConsecutiveH  implements CompositePropositionParent{
-	
-	private static final String OR = " | ";
+
+
 	private static final String AND = "& ";
 	private static final String NOT = "!";
-	private static final String UNTIL = "U";
-	private static final String OPEN_P = "(";
-	private static final String CLOSE_P = ")";
 	private static final String NEXT = "X";
+	private static final String OPEN_Parenth = "(";
+	private static final String CLOSE_Parenth = ")";
+
+	public String ltlFormulaGenerator(int numP, int countRecursion, StringBuilder ltlFormula){
+		for(int i=countRecursion;i< numP;i++)
+		{
+			if(i == countRecursion){
+				ltlFormula.append(" p" + i + " ");
+			}
+			else{
+				ltlFormula.append(AND + NOT + " p" + i + " ");
+			}
+
+		}
+		if(numP-countRecursion > 1){
+
+			ltlFormula.append(AND);
+			ltlFormula.append(NEXT);
+			ltlFormula.append(OPEN_Parenth);
+			countRecursion++;
+			ltlFormulaGenerator(numP, countRecursion, ltlFormula);
+			ltlFormula.append(CLOSE_Parenth);
+			return ltlFormula.toString();
+		}
+		else{
+			return ltlFormula.toString();
+		}
+	}
 
 	@Override
-	public String compute(int aCount)
+	public String compute(int numProposition)
 	{
-		if (aCount <= 0)
+		StringBuilder stringBuilder = new StringBuilder(OPEN_Parenth);
+		if(numProposition < 1)
 		{
 			return "";
 		}
-		
-		StringBuilder stringBuilder = new StringBuilder(OPEN_P);
-		for(int i=0;i< aCount;i++)
+		for(int i=0;i< numProposition;i++)
 		{
 			if(i == 0){
 				stringBuilder.append(" p" + i + " ");
@@ -27,54 +51,16 @@ public class ConsecutiveH  implements CompositePropositionParent{
 			else{
 				stringBuilder.append(AND + NOT + " p" + i + " ");
 			}
-			
-			if(aCount - i == 1)
-			{
-				stringBuilder.append(NEXT);
-			}
+
 		}
-		/*first part done*/
-		
-		
-		/*second part*/
-		stringBuilder.append(OPEN_P);
-		for(int i=1;i< aCount;i++)
-		{
-			if(i == 1){
-				stringBuilder.append(" p" + i + " ");
-			}
-			else{
-				stringBuilder.append(AND + NOT + " p" + i + " ");
-			}
-			
-			if(aCount - i == 1)
-			{
-				stringBuilder.append(CLOSE_P);
-			}
-			
-		}
-		stringBuilder.append(NEXT);
-		
-		
-		stringBuilder.append(OPEN_P);
-		for(int i=2;i< aCount;i++)
-		{
-			if(i == 2){
-				stringBuilder.append(" p" + i + " ");
-			}
-			else{
-				stringBuilder.append(AND + NOT + " p" + i + " ");
-			}
-			
-			if(aCount - i == 1)
-			{
-				stringBuilder.append(CLOSE_P);
-			}
-			
-		}
-		
-		stringBuilder.append(CLOSE_P);
-		
-		return stringBuilder.toString();
+
+		StringBuilder ltlFormula = new StringBuilder(stringBuilder);
+		ltlFormula.append(AND);
+		ltlFormula.append(NEXT);
+		ltlFormula.append(OPEN_Parenth);
+		int recursionCount = 1;
+		ltlFormula.append(ltlFormulaGenerator(numProposition, recursionCount, new StringBuilder("")));
+		ltlFormula.append(CLOSE_Parenth);
+		return ltlFormula.toString();
 	}
 }
