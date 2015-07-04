@@ -6,59 +6,59 @@ public class ParallelE implements CompositePropositionParent  {
 	private static final String AND = "& ";
 	private static final String NOT = "!";
 	private static final String UNTIL = "U";
-	private static final String OPEN_P = "(";
-	private static final String CLOSE_P = ")";
+	private static final String OPEN_Parenth = "(";
+	private static final String CLOSE_Parenth = ")";
 
 	@Override
-	public String compute(int aCount)
+	public String compute(int numProposition)
 	{
-		if (aCount <= 0)
+		if (numProposition <= 0)
 		{
 			return "";
 		}
 
 		/*First half of ParallelE*/
-		StringBuilder stringBuilder = new StringBuilder(OPEN_P);
-		for(int i=0;i< aCount;i++)
+		StringBuilder stringBuilder = new StringBuilder(OPEN_Parenth);
+		for(int i=0;i< numProposition;i++)
 		{
 			stringBuilder.append(NOT + " p" + i + " ");
-			if(i < aCount - 1)
+			if(i < numProposition - 1)
 			{
 				stringBuilder.append(AND);
 			}
 
 		}
-		stringBuilder.append(CLOSE_P);
+		stringBuilder.append(CLOSE_Parenth);
 		/*First half done*/
 
 
 		/**Second half of ParallelE**/
 		stringBuilder.append(AND);
-		stringBuilder.append(OPEN_P);
-		stringBuilder.append(OPEN_P);
-		for(int i = 0; i < aCount; i++){
+		stringBuilder.append(OPEN_Parenth);
+		stringBuilder.append(OPEN_Parenth);
+		for(int i = 0; i < numProposition; i++){
 			stringBuilder.append(NOT + " p" + i + " ");
-			if(i < aCount - 1)
+			if(i < numProposition - 1)
 			{
 				stringBuilder.append(AND);
 			}
 		}
-		stringBuilder.append(CLOSE_P);
+		stringBuilder.append(CLOSE_Parenth);
 		/*Second half done*/
 
 
 		/*Third part of parallelE*/
 		stringBuilder.append(UNTIL);
-		stringBuilder.append(OPEN_P);
-		for(int i = 0; i < aCount; i++){
+		stringBuilder.append(OPEN_Parenth);
+		for(int i = 0; i < numProposition; i++){
 			stringBuilder.append(" p" + i + " ");
-			if(i < aCount - 1)
+			if(i < numProposition - 1)
 			{
 				stringBuilder.append(AND);
 			}
 		}
-		stringBuilder.append(CLOSE_P);
-		stringBuilder.append(CLOSE_P);
+		stringBuilder.append(CLOSE_Parenth);
+		stringBuilder.append(CLOSE_Parenth);
 		/*Third part done*/
 
 		return stringBuilder.toString();
