@@ -5,20 +5,20 @@ public class AtleastOneC implements CompositePropositionParent {
 	private static final String OR = " | ";
 	
 	@Override
-	public String compute(int aCount)
+	public String compute(int numProposition)
 	{
-		if (aCount <= 0)
+		if (numProposition <= 0)
 		{
 			return "";
 		}
 		
 		StringBuilder stringBuilder = new StringBuilder("(");
 		
-		for(int i=0;i< aCount;i++)
+		for(int i=0;i< numProposition;i++)
 		{
 			stringBuilder.append(" p" + i + " ");
 			
-			if(i < aCount - 1)
+			if(i < numProposition - 1)
 			{
 				stringBuilder.append(OR);
 			}

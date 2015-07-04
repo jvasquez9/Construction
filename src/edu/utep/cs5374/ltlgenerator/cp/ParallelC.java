@@ -3,28 +3,30 @@ package edu.utep.cs5374.ltlgenerator.cp;
 public class ParallelC implements CompositePropositionParent {
 	
 	private static final String AND = " & ";
+	private static final String OPEN_Parenth = "(";
+	private static final String CLOSE_Parenth = ")";
 	
 	@Override
-	public String compute(int aCount)
+	public String compute(int numProposition)
 	{
-		if (aCount <= 0)
+		if (numProposition <= 0)
 		{
 			return "";
 		}
 		
-		StringBuilder stringBuilder = new StringBuilder("(");
+		StringBuilder stringBuilder = new StringBuilder(OPEN_Parenth);
 		
-		for(int i=0;i< aCount;i++)
+		for(int i=0;i< numProposition;i++)
 		{
 			stringBuilder.append(" p" + i + " ");
 			
-			if(i < aCount - 1)
+			if(i < numProposition - 1)
 			{
 				stringBuilder.append(AND);
 			}
 		}
 		
-		stringBuilder.append(")");
+		stringBuilder.append(CLOSE_Parenth);
 		
 		return stringBuilder.toString();
 	}

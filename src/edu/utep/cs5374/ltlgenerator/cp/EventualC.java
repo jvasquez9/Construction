@@ -6,8 +6,8 @@ public class EventualC implements CompositePropositionParent {
 	private static final String AND = "& ";
 	private static final String NOT = "!";
 	private static final String UNTIL = "U";
-	private static final String OPEN_P = "(";
-	private static final String CLOSE_P = ")";
+	private static final String OPEN_Parenth = "(";
+	private static final String CLOSE_Parenth = ")";
 	private static final String NEXT = "X";
 
 	@Override
@@ -19,7 +19,7 @@ public class EventualC implements CompositePropositionParent {
 			return "";
 		}
 		
-		StringBuilder ltlFormula = new StringBuilder(OPEN_P);
+		StringBuilder ltlFormula = new StringBuilder(OPEN_Parenth);
 		for(int i=0;i< numProposition;i++)
 		{
 			//stringBuilder.append(" p " + i + AND + NEXT );
@@ -39,13 +39,13 @@ public class EventualC implements CompositePropositionParent {
 						
 			if(numProposition - i > 1)
 			{
-				ltlFormula.append(OPEN_P + NOT + " p" + i + UNTIL + OPEN_P + " p" + i + AND + NEXT   );
+				ltlFormula.append(OPEN_Parenth + NOT + " p" + i + UNTIL + OPEN_Parenth + " p" + i + AND + NEXT   );
 				openParenthesesCount=openParenthesesCount+2;
 			}
 				
 			else
 			{
-				ltlFormula.append(OPEN_P + NOT + " p" + i + UNTIL + " p " + i + CLOSE_P );
+				ltlFormula.append(OPEN_Parenth + NOT + " p" + i + UNTIL + " p " + i + CLOSE_Parenth );
 				
 			}
 			
@@ -54,11 +54,11 @@ public class EventualC implements CompositePropositionParent {
 		}
 		while(openParenthesesCount>0)
 		{
-			ltlFormula.append(CLOSE_P);
+			ltlFormula.append(CLOSE_Parenth);
 			openParenthesesCount--;
 		}
 		
-		ltlFormula.append(CLOSE_P);
+		ltlFormula.append(CLOSE_Parenth);
 		System.out.println(ltlFormula);
 		
 		return ltlFormula.toString();

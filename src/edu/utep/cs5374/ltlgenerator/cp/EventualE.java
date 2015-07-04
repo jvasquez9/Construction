@@ -2,59 +2,66 @@ package edu.utep.cs5374.ltlgenerator.cp;
 
 public class EventualE implements CompositePropositionParent {
 
+	private static final String AND = "& ";
+	private static final String NOT = "!";
+	private static final String NEXT = "X";
+	private static final String UNTIL = "U";
+	private static final String OPEN_Parenth = "(";
+	private static final String CLOSE_Parenth = ")";
+	
 	@Override
-	public String compute(int aCount)
+	public String compute(int numProposition)
 	{
-		if(aCount <= 0)
+		if(numProposition <= 0)
 		{
 			return "";
 		}
 		
-		StringBuilder stringBuilder = new StringBuilder("(");
+		StringBuilder stringBuilder = new StringBuilder(CLOSE_Parenth);
 		
-		for (int i = 0; i < aCount; i++)
+		for (int i = 0; i < numProposition; i++)
 		{
-			stringBuilder.append(" !p" + i + " ");
+			stringBuilder.append(NOT + " p" + i + " ");
 			
-			if(i < aCount - 1)
+			if(i < numProposition - 1)
 			{
-				stringBuilder.append("&");
+				stringBuilder.append(AND);
 			}
 		}
-		stringBuilder.append(") & (");
+		stringBuilder.append(CLOSE_Parenth + AND + OPEN_Parenth);
 		
-		for (int front = 0; front < aCount; front++)
+		for (int front = 0; front < numProposition; front++)
 		{
-			stringBuilder.append("(");
-			for (int i = front; i < aCount; i++)
+			stringBuilder.append(CLOSE_Parenth);
+			for (int i = front; i < numProposition; i++)
 			{
-				stringBuilder.append(" !p" + i + " ");
-				if(i < aCount - 1)
+				stringBuilder.append(NOT + " p" + i + " ");
+				if(i < numProposition - 1)
 				{
-					stringBuilder.append("&");
+					stringBuilder.append(AND);
 				}
 			}
 			
-			stringBuilder.append(") U (");
-			for (int i = front; i < aCount; i++)
+			stringBuilder.append(CLOSE_Parenth + UNTIL + OPEN_Parenth);
+			for (int i = front; i < numProposition; i++)
 			{
 				String negation = i == front ? "" : "!";
 				stringBuilder.append(" " + negation + "p" + i + " ");
-				if (front != aCount - 1)
+				if (front != numProposition - 1)
 				{
-					stringBuilder.append("&");
+					stringBuilder.append(AND);
 				}
 			}
 			
-			if(front < aCount - 1)
+			if(front < numProposition - 1)
 			{
-				stringBuilder.append("(");
+				stringBuilder.append(CLOSE_Parenth);
 			}
 		}
 		
-		for (int i = 0; i <= aCount; i++)
+		for (int i = 0; i <= numProposition; i++)
 		{
-			stringBuilder.append(")");
+			stringBuilder.append(CLOSE_Parenth);
 		}
 		
 		return stringBuilder.toString();
