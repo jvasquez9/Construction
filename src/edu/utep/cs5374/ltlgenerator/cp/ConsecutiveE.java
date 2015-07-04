@@ -122,11 +122,11 @@ public class ConsecutiveE implements CompositePropositionParent {
 			ltlFormula.append(OPEN_Parenth);
 			int recursionCount = 1;
 			ltlFormula.append(ltlFormulaGenerator(aCount, recursionCount, new StringBuilder("")));
-			ltlFormula.append(CLOSE_Parenth);
+			ltlFormula.append(CLOSE_Parenth + CLOSE_Parenth);
 			return ltlFormula.toString();
 		}
 		else{
-			return stringBuilder.append(CLOSE_Parenth).toString();
+			return stringBuilder.append(CLOSE_Parenth + CLOSE_Parenth).toString();
 		}
 <<<<<<< HEAD
 		
