@@ -38,19 +38,19 @@ public class ConsecutiveE implements CompositePropositionParent {
 	}
 	
 	@Override
-	public String compute(int aCount) 
+	public String compute(int numProposition) 
 	{
-		if (aCount <= 0)
+		if (numProposition <= 0)
 		{
 			return "";
 		}
 
 		/*First part of ConsecutiveE*/
 		StringBuilder stringBuilder = new StringBuilder(OPEN_Parenth);
-		for(int i=0;i< aCount;i++)
+		for(int i=0;i< numProposition;i++)
 		{
 			stringBuilder.append(NOT + " p" + i + " ");
-			if(i < aCount - 1)
+			if(i < numProposition - 1)
 			{
 				stringBuilder.append(AND);
 			}
@@ -64,9 +64,9 @@ public class ConsecutiveE implements CompositePropositionParent {
 		stringBuilder.append(AND);
 		stringBuilder.append(OPEN_Parenth);
 		stringBuilder.append(OPEN_Parenth);
-		for(int i = 0; i < aCount; i++){
+		for(int i = 0; i < numProposition; i++){
 			stringBuilder.append(NOT + " p" + i + " ");
-			if(i < aCount - 1)
+			if(i < numProposition - 1)
 			{
 				stringBuilder.append(AND);
 			}
@@ -79,7 +79,7 @@ public class ConsecutiveE implements CompositePropositionParent {
 		stringBuilder.append(OPEN_Parenth);
 		
 		
-		for(int i=0;i< aCount;i++)
+		for(int i=0;i< numProposition;i++)
 		{
 			if(i == 0){
 				stringBuilder.append(" p" + i + " ");
@@ -89,13 +89,13 @@ public class ConsecutiveE implements CompositePropositionParent {
 			}
 
 		}
-		if(aCount > 1){
+		if(numProposition > 1){
 			StringBuilder ltlFormula = new StringBuilder(stringBuilder);
 			ltlFormula.append(AND);
 			ltlFormula.append(NEXT);
 			ltlFormula.append(OPEN_Parenth);
 			int recursionCount = 1;
-			ltlFormula.append(ltlFormulaGenerator(aCount, recursionCount, new StringBuilder("")));
+			ltlFormula.append(ltlFormulaGenerator(numProposition, recursionCount, new StringBuilder("")));
 			ltlFormula.append(CLOSE_Parenth + CLOSE_Parenth);
 			return ltlFormula.toString();
 		}
