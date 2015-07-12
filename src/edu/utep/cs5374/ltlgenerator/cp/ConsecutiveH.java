@@ -1,44 +1,39 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
+import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
+
 public class ConsecutiveH  implements CompositePropositionParent{
 
-
-	private static final String AND = "& ";
-	private static final String NOT = "!";
-	private static final String NEXT = "X";
-	private static final String OPEN_Parenth = "(";
-	private static final String CLOSE_Parenth = ")";
-
-	public String ltlFormulaGenerator(int numP, int countRecursion, StringBuilder ltlFormula){
+	private String ltlFormulaGenerator(int numP, int countRecursion, StringBuilder ltlFormula){
 		for(int i=countRecursion;i< numP;i++)
 		{
 			if(i == countRecursion){
 				ltlFormula.append(" p" + i + " ");
 			}
 			else{
-				ltlFormula.append(AND + NOT + " p" + i + " ");
+				ltlFormula.append(Symbols.AND + Symbols.NOT + " p" + i + " ");
 			}
 
 		}
 		if(numP-countRecursion > 1){
 
-			ltlFormula.append(AND);
-			ltlFormula.append(NEXT);
-			ltlFormula.append(OPEN_Parenth);
+			ltlFormula.append(Symbols.AND);
+			ltlFormula.append(Symbols.NEXT);
+			ltlFormula.append(Symbols.OPEN_Parenth);
 			countRecursion++;
 			ltlFormulaGenerator(numP, countRecursion, ltlFormula);
-			ltlFormula.append(CLOSE_Parenth);
+			ltlFormula.append(Symbols.CLOSE_Parenth);
 			return ltlFormula.toString();
 		}
 		else{
-			return ltlFormula.append(CLOSE_Parenth).toString();
+			return ltlFormula.append(Symbols.CLOSE_Parenth).toString();
 		}
 	}
 
 	@Override
 	public String compute(int numProposition)
 	{
-		StringBuilder stringBuilder = new StringBuilder(OPEN_Parenth);
+		StringBuilder stringBuilder = new StringBuilder(Symbols.OPEN_Parenth);
 		if(numProposition < 1)
 		{
 			return "";
@@ -49,23 +44,23 @@ public class ConsecutiveH  implements CompositePropositionParent{
 				stringBuilder.append(" p" + i + " ");
 			}
 			else{
-				stringBuilder.append(AND + NOT + " p" + i + " ");
+				stringBuilder.append(Symbols.AND + Symbols.NOT + " p" + i + " ");
 			}
 
 		}
 
 		if(numProposition > 1){
 			StringBuilder ltlFormula = new StringBuilder(stringBuilder);
-			ltlFormula.append(AND);
-			ltlFormula.append(NEXT);
-			ltlFormula.append(OPEN_Parenth);
+			ltlFormula.append(Symbols.AND);
+			ltlFormula.append(Symbols.NEXT);
+			ltlFormula.append(Symbols.OPEN_Parenth);
 			int recursionCount = 1;
 			ltlFormula.append(ltlFormulaGenerator(numProposition, recursionCount, new StringBuilder("")));
-			ltlFormula.append(CLOSE_Parenth);
+			ltlFormula.append(Symbols.CLOSE_Parenth);
 			return ltlFormula.toString();
 		}
 		else{
-			return stringBuilder.append(CLOSE_Parenth).toString();
+			return stringBuilder.append(Symbols.CLOSE_Parenth).toString();
 		}
 	}
 }

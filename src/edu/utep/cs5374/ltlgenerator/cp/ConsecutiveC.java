@@ -1,13 +1,10 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
-public class ConsecutiveC implements CompositePropositionParent {
+import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
-	private static final String AND = " & ";
-	private static final String OPEN_Parenth = "(";
-	private static final String CLOSE_Parenth = ")";
-	private static final String NEXT = "X";
+public class ConsecutiveC implements CompositePropositionParent {
 	
-	public String ltlFormulaGenerator(int numP, int countRecursion, StringBuilder ltlFormula){
+	private String ltlFormulaGenerator(int numP, int countRecursion, StringBuilder ltlFormula){
 		if(numP == countRecursion)
 		{
 			ltlFormula.append("p");
@@ -20,12 +17,12 @@ public class ConsecutiveC implements CompositePropositionParent {
 			// appending (countRecursion - 1) 
 			// as we are considering p0 instead of p1 when number of prop is 1
 			ltlFormula.append(countRecursion-1);
-			ltlFormula.append(AND);
-			ltlFormula.append(NEXT);
-			ltlFormula.append(OPEN_Parenth);
+			ltlFormula.append(Symbols.AND);
+			ltlFormula.append(Symbols.NEXT);
+			ltlFormula.append(Symbols.OPEN_Parenth);
 			countRecursion++;
 			ltlFormulaGenerator(numP, countRecursion, ltlFormula);
-			ltlFormula.append(CLOSE_Parenth);
+			ltlFormula.append(Symbols.CLOSE_Parenth);
 			return ltlFormula.toString();
 		}
 	}
@@ -38,11 +35,10 @@ public class ConsecutiveC implements CompositePropositionParent {
 			return "";
 		}
 		
-		
-		StringBuilder ltlFormula = new StringBuilder(OPEN_Parenth);
+		StringBuilder ltlFormula = new StringBuilder(Symbols.OPEN_Parenth);
 		int recursionCount = 1;
 		ltlFormula.append(ltlFormulaGenerator(numProposition, recursionCount, new StringBuilder("")));
-		ltlFormula.append(CLOSE_Parenth);
+		ltlFormula.append(Symbols.CLOSE_Parenth);
 		return ltlFormula.toString();
 	}
 

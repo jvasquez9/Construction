@@ -1,8 +1,8 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
-public class AtleastOneC implements CompositePropositionParent {
+import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
-	private static final String OR = " | ";
+public class AtleastOneC implements CompositePropositionParent {
 	
 	@Override
 	public String compute(int numProposition)
@@ -20,7 +20,7 @@ public class AtleastOneC implements CompositePropositionParent {
 			
 			if(i < numProposition - 1)
 			{
-				stringBuilder.append(OR);
+				stringBuilder.append(Symbols.OR);
 			}
 		}
 		

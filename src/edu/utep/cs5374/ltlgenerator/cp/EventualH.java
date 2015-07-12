@@ -1,14 +1,8 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
-public class EventualH implements CompositePropositionParent {
+import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
-	private static final String OR = " | ";
-	private static final String AND = "& ";
-	private static final String NOT = "!";
-	private static final String UNTIL = "U";
-	private static final String OPEN_Parenth = "(";
-	private static final String CLOSE_Parenth = ")";
-	private static final String NEXT = "X";
+public class EventualH implements CompositePropositionParent {
 	
 	@Override
 	public String compute(int numProposition) {
@@ -19,33 +13,35 @@ public class EventualH implements CompositePropositionParent {
 			return "";
 		}
 		
-		StringBuilder stringBuilder = new StringBuilder(OPEN_Parenth);
+		StringBuilder stringBuilder = new StringBuilder(Symbols.OPEN_Parenth);
 	
 		int nextP;
 		
 		for(int i = 0; i < numProposition; i++){
 			nextP = i + 1;
-			stringBuilder.append("p" + i + " " + AND);
+			stringBuilder.append("p" + i + " " + Symbols.AND);
 			for(;nextP < numProposition; nextP++){
-				stringBuilder.append(NOT + "p" + nextP + " " + AND);
+				stringBuilder.append(Symbols.NOT + "p" + nextP + " " + Symbols.AND);
 			}
-			stringBuilder.append(OPEN_Parenth + OPEN_Parenth);
+			stringBuilder.append(Symbols.OPEN_Parenth + Symbols.OPEN_Parenth);
 			nextP = i + 1;
 			if(numProposition - i != 2){
 				for(;nextP < numProposition; nextP++){
 					if(numProposition - nextP == 1){
-						stringBuilder.append(NOT + "p" + nextP);
+						stringBuilder.append(Symbols.NOT + "p" + nextP);
 					}
 					else{
-						stringBuilder.append(NOT + "p" + nextP + " " + AND);
+						stringBuilder.append(Symbols.NOT + "p" + nextP 
+								+ " " + Symbols.AND);
 					}
 				}
-					stringBuilder.append(CLOSE_Parenth + " " + UNTIL + " " + OPEN_Parenth);
+					stringBuilder.append(Symbols.CLOSE_Parenth + " " 
+							+ Symbols.UNTIL + " " + Symbols.OPEN_Parenth);
 					count += 2;
 			}
 			else{
-				stringBuilder.append(NOT + "p" + nextP + " "
-				+ UNTIL + " " + "p" + nextP);
+				stringBuilder.append(Symbols.NOT + "p" + nextP + " "
+						+ Symbols.UNTIL + " " + "p" + nextP);
 				count += 2;
 				break;
 			}
@@ -53,11 +49,11 @@ public class EventualH implements CompositePropositionParent {
 		
 		while(count > 0)
 		{
-			stringBuilder.append(CLOSE_Parenth);
+			stringBuilder.append(Symbols.CLOSE_Parenth);
 			count--;
 		}
 		
-		stringBuilder.append(CLOSE_Parenth);
+		stringBuilder.append(Symbols.CLOSE_Parenth);
 		
 		return stringBuilder.toString();
 	}

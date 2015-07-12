@@ -1,10 +1,8 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
-public class ParallelH implements CompositePropositionParent {
+import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
-	private static final String AND = " & ";
-	private static final String OPEN_Parenth = "(";
-	private static final String CLOSE_Parenth = ")";
+public class ParallelH implements CompositePropositionParent {
 	
 	@Override
 	public String compute(int numProposition)
@@ -14,7 +12,7 @@ public class ParallelH implements CompositePropositionParent {
 			return "";
 		}
 		
-		StringBuilder ltlFormula = new StringBuilder(OPEN_Parenth);
+		StringBuilder ltlFormula = new StringBuilder(Symbols.OPEN_Parenth);
 		
 		for(int i = 0; i < numProposition; i++)
 		{
@@ -22,11 +20,11 @@ public class ParallelH implements CompositePropositionParent {
 			
 			if(i < numProposition - 1)
 			{
-				ltlFormula.append(AND);
+				ltlFormula.append(Symbols.AND);
 			}
 		}
 		
-		ltlFormula.append(CLOSE_Parenth);
+		ltlFormula.append(Symbols.CLOSE_Parenth);
 		
 		return ltlFormula.toString();
 	}

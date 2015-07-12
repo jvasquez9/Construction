@@ -4,9 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
+
 public class AndUnitTests {
 
-	public static final char RIGHTARROW = '\u2192';
 	@Test
 	public void testAndROne()
 	{
@@ -52,8 +53,8 @@ public class AndUnitTests {
 	@Test
 	public void testAndRSeven()
 	{
-		String andResult = new AndR().and("(a" + RIGHTARROW + "b)", "P");
-		TestAnd(andResult, "(a&P)" + RIGHTARROW + "(b&P)");
+		String andResult = new AndR().and("(a" + Symbols.RIGHT_ARROW + "b)", "P");
+		TestAnd(andResult, "(a&P)" + Symbols.RIGHT_ARROW + "(b&P)");
 	}
 	
 	@Test

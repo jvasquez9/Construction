@@ -1,25 +1,21 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
-public class EventualC implements CompositePropositionParent {
+import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
-	private static final String OR = " | ";
-	private static final String AND = "& ";
-	private static final String NOT = "!";
-	private static final String UNTIL = "U";
-	private static final String OPEN_Parenth = "(";
-	private static final String CLOSE_Parenth = ")";
-	private static final String NEXT = "X";
+public class EventualC implements CompositePropositionParent {
 
 	@Override
 	public String compute(int numProposition)
 	{
-		int openParenthesesCount=0;
+		int openParenthesesCount = 0;
+		
 		if (numProposition <= 0)
 		{
 			return "";
 		}
 		
-		StringBuilder ltlFormula = new StringBuilder(OPEN_Parenth);
+		StringBuilder ltlFormula = new StringBuilder(Symbols.OPEN_Parenth);
+		
 		for(int i=0;i< numProposition;i++)
 		{
 			//stringBuilder.append(" p " + i + AND + NEXT );
@@ -27,38 +23,38 @@ public class EventualC implements CompositePropositionParent {
 			{
 				ltlFormula.append(" p " + i );
 			}
-			
 			else
 			{
-			if(i == 0){
-				ltlFormula.append(" p " + i + AND + NEXT );
+				if(i == 0)
+				{
+					ltlFormula.append(" p " + i + Symbols.AND + Symbols.NEXT );
+				}
+				else
+				{		
+					if(numProposition - i > 1)
+					{
+						ltlFormula.append(Symbols.OPEN_Parenth + Symbols.NOT 
+								+ " p" + i + Symbols.UNTIL + Symbols.OPEN_Parenth 
+								+ " p" + i + Symbols.AND + Symbols.NEXT   );
+						openParenthesesCount=openParenthesesCount+2;
+					}
+					else
+					{
+						ltlFormula.append(Symbols.OPEN_Parenth + Symbols.NOT 
+								+ " p" + i + Symbols.UNTIL + " p " + i 
+								+ Symbols.CLOSE_Parenth );
+					}
+				}			
 			}
-			
-			else
-			{
-						
-			if(numProposition - i > 1)
-			{
-				ltlFormula.append(OPEN_Parenth + NOT + " p" + i + UNTIL + OPEN_Parenth + " p" + i + AND + NEXT   );
-				openParenthesesCount=openParenthesesCount+2;
-			}
-				
-			else
-			{
-				ltlFormula.append(OPEN_Parenth + NOT + " p" + i + UNTIL + " p " + i + CLOSE_Parenth );
-				
-			}
-			
-			}			
 		}
-		}
-		while(openParenthesesCount>0)
+		
+		while(openParenthesesCount > 0)
 		{
-			ltlFormula.append(CLOSE_Parenth);
+			ltlFormula.append(Symbols.CLOSE_Parenth);
 			openParenthesesCount--;
 		}
 		
-		ltlFormula.append(CLOSE_Parenth);
+		ltlFormula.append(Symbols.CLOSE_Parenth);
 		System.out.println(ltlFormula);
 		
 		return ltlFormula.toString();
