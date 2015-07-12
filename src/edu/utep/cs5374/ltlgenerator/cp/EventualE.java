@@ -17,28 +17,28 @@ public class EventualE implements CompositePropositionParent {
 			return "";
 		}
 		
-		StringBuilder stringBuilder = new StringBuilder(CLOSE_Parenth);
+		StringBuilder stringBuilder = new StringBuilder(OPEN_Parenth);
 		
 		for (int i = 0; i < numProposition; i++)
 		{
-			stringBuilder.append(NOT + " p" + i + " ");
+			stringBuilder.append(NOT + "p" + i);
 			
 			if(i < numProposition - 1)
 			{
-				stringBuilder.append(AND);
+				stringBuilder.append(" " + AND);
 			}
 		}
 		stringBuilder.append(CLOSE_Parenth + AND + OPEN_Parenth);
 		
 		for (int front = 0; front < numProposition; front++)
 		{
-			stringBuilder.append(CLOSE_Parenth);
+			stringBuilder.append(OPEN_Parenth);
 			for (int i = front; i < numProposition; i++)
 			{
-				stringBuilder.append(NOT + " p" + i + " ");
+				stringBuilder.append(NOT + "p" + i);
 				if(i < numProposition - 1)
 				{
-					stringBuilder.append(AND);
+					stringBuilder.append(" " + AND);
 				}
 			}
 			
@@ -46,16 +46,16 @@ public class EventualE implements CompositePropositionParent {
 			for (int i = front; i < numProposition; i++)
 			{
 				String negation = i == front ? "" : "!";
-				stringBuilder.append(" " + negation + "p" + i + " ");
-				if (front != numProposition - 1)
+				stringBuilder.append(negation + "p" + i);
+				if (front < numProposition - 1)
 				{
-					stringBuilder.append(AND);
+					stringBuilder.append(" " + AND);
 				}
 			}
 			
 			if(front < numProposition - 1)
 			{
-				stringBuilder.append(CLOSE_Parenth);
+				stringBuilder.append(OPEN_Parenth);
 			}
 		}
 		
