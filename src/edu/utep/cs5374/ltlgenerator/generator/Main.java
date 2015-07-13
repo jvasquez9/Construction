@@ -2,16 +2,18 @@ package edu.utep.cs5374.ltlgenerator.generator;
 
 import java.util.Scanner;
 import edu.utep.cs5374.ltlgenerator.cp.*;
+import edu.utep.cs5374.ltlgenerator.and.*;
 
 public class Main {
 	public static void main(String[] args) {
 
-		int l, p, q, r, n; // to store user input type of proposition
+		int l, p, q, r, n, andType; // to store user input type of proposition
 		String L="", P="", Q="", R=""; //to keep pattern before ANDL, ANDR
 
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println(
+				"CP\n" +
 				"1 # AtleastOneC "+"\n"+ 
 				"2 # AtleastOneH "+"\n"+ 
 				"3 # AtleastOneE "+"\n"+ 
@@ -30,6 +32,14 @@ public class Main {
 
 		System.out.println("Enter the type of proposition for L:");
 		l=sc.nextInt();
+		
+		System.out.println(
+				"And\n" +
+				"1 # AndR "+"\n"+ 
+				"2 # AndL "+"\n"+ 
+				"3 # AndMinusL "+"\n");
+		System.out.println("Enter the type of And (P is fixed for now):");
+		andType = sc.nextInt();
 
 		CompositePropositionParent[] cpTable = {
 				new AtleastOneC(), new AtleastOneH(), new AtleastOneE(),
@@ -41,7 +51,28 @@ public class Main {
 		if(l >= 1 && l <= cpTable.length)
 		{
 			L = cpTable[l - 1].compute(n);
-			System.out.println("Result: " + L);
+			
+			System.out.println("Applying CP Result: " + L);
+		}
+		
+		String andResult;
+		if(andType == 1)
+		{
+			
+		}
+		else if(andType == 2)
+		{
+			// AndL
+			andResult = new AndL().and(L, "P");
+			System.out.println("AndL result " + andResult);
+		}
+		else if(andType == 3)
+		{
+			
+		}
+		else 
+		{
+			System.out.println("And type doesn't match");
 		}
 		
 		sc.close();
