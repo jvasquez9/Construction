@@ -68,7 +68,9 @@ public class Main {
 		}
 		else if(andType == 3)
 		{
-			
+			// AndMinusL
+						andResult = new AndMinusL().and(L, "Q");
+						System.out.println("AndMinusL result " + andResult);
 		}
 		else 
 		{

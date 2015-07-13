@@ -4,8 +4,15 @@ public class AndMinusL implements AndParent{
 
 	@Override
 	public String and(String leftHandSide, String rightHandSide) {
-		// TODO Auto-generated method stub
-		return null;
+		String ltlFormula = "";
+		
+		// trim the spaces
+		leftHandSide = leftHandSide.replaceAll("\\s+","");
+		
+		ltlFormula=leftHandSide;
+		// Need to work on logic
+		return ltlFormula;
 	}
+	
 
 }
