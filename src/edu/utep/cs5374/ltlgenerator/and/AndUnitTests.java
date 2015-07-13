@@ -67,57 +67,57 @@ public class AndUnitTests {
 	@Test
 	public void testAndLOne()
 	{
-		String andResult = new AndR().and("(a1|a2|a3)", "P");
+		String andResult = new AndL().and("(a1|a2|a3)", "P");
 		TestAnd(andResult, "(a1|a2|a3)&P");
 	}
 	
 	@Test
 	public void testAndLTwo()
 	{
-		String andResult = new AndR().and("(a1&a2&a3)", "P");
+		String andResult = new AndL().and("(a1&a2&a3)", "P");
 		TestAnd(andResult, "(a1&a2&a3)&P");
 	}
 	
 	@Test
 	public void testAndLThree()
 	{
-		String andResult = new AndR().and("(a1&X(a2&Xa3))", "P");
+		String andResult = new AndL().and("(a1&X(a2&Xa3))", "P");
 		TestAnd(andResult, "(a1&X(a2&X(a3&P)))");
 	}
 	
 	@Test
 	public void testAndLFour()
 	{
-		String andResult = new AndR().and("(a1&X(!a2U(a2&X(!a3Ua3))))", "P");
+		String andResult = new AndL().and("(a1&X(!a2U(a2&X(!a3Ua3))))", "P");
 		TestAnd(andResult, "(a1&X(!a2U(a2&X(!a3U(a3&P)))))");
 	}
 	
 	@Test
 	public void testAndLFive()
 	{
-		String andResult = new AndR().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U(a1|a2|a3))", "P");
+		String andResult = new AndL().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U(a1|a2|a3))", "P");
 		TestAnd(andResult, "(!a1&!a2&!a3)&((!a1&!a2&!a3)U((a1|a2|a3)&P))");
 	}
 	
 	@Test
 	public void testAndLSix()
 	{
-		String andResult = new AndR().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& a2 & a3))", "P");
+		String andResult = new AndL().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& a2 & a3))", "P");
 		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& a2 & a3) & P)) ");
 	}
 	
 	@Test
 	public void testAndLSeven()
 	{
-		String andResult = new AndR().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& !a2 & !a3 & X(a2 & !a3 & X(a3)))))", "P");
-		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& !a2 & !a3 & X(a2 & !a3 & X(a3 & P)))))");
+		String andResult = new AndL().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& !a2 & !a3 & X(a2 & !a3 & X(a3)))))", "P");
+		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& !a2 & !a3 & X(a2 & !a3 & X((a3) & P)))))");
 	}
 	
 	@Test
 	public void testAndLEight()
 	{
-		String andResult = new AndR().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2 & !a3) U (a2 & !a3 & (!a3 U a3)))))", "P");
-		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2 & !a3) U (a2 & !a3 & (!a3 U (a3 & P)))))");
+		String andResult = new AndL().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2 & !a3) U (a2 & !a3 & (!a3 U a3)))))", "P");
+		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2 & !a3) U (a2 & !a3 & (!a3 U (a3 & P))))))");
 	}	
 
 	public static void TestAnd(String result, String expectedResult)
