@@ -55,7 +55,7 @@ public class EventualC implements CompositePropositionParent {
 		}
 		
 		ltlFormula.append(Symbols.CLOSE_Parenth);
-		System.out.println(ltlFormula);
+		//System.out.println(ltlFormula);
 		
 		return ltlFormula.toString();
 	}
