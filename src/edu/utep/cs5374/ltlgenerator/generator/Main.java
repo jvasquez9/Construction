@@ -1,6 +1,8 @@
 package edu.utep.cs5374.ltlgenerator.generator;
 
 import java.util.Scanner;
+
+import edu.utep.cs5374.ltlgenerator.and.AndMinusL;
 import edu.utep.cs5374.ltlgenerator.cp.*;
 
 public class Main {
@@ -45,6 +47,12 @@ public class Main {
 		}
 		
 		sc.close();
+		
+		AndMinusL aml = new AndMinusL();
+		
+		L = aml.replaceAndLMinus(L);
+		
+		System.out.println(L);
 	}
 }
 
