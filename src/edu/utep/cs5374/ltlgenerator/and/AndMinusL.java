@@ -1,67 +1,71 @@
 package edu.utep.cs5374.ltlgenerator.and;
 
-public class AndMinusL implements AndParent{
+import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
+public class AndMinusL implements AndParent {
+	private int STARTINDEX = 0;
+	private int ONECHARFLAG = 1;
+	
 	@Override
 	public String and(String leftHandSide, String rightHandSide) {
-		// TODO Auto-generated method stub
-		return leftHandSide.replaceAll("\\", "&"+rightHandSide);
-	}
-	
-	public String replaceAndLMinus(String formula){
 		
-		while(formula.contains("&P")){
-			int positionOfAnd = formula.indexOf("&P");
-			int positionLeft = manageleft(formula, positionOfAnd);
-			int positionRight = manageright(formula, positionOfAnd);
+		String formula = "";
+		// Trim the spaces
+		leftHandSide = leftHandSide.replaceAll("\\s+","");
+
+		int length = leftHandSide.length();
+		
+		// Get the position of the special character i.e. X and U
+		int specialCharPos = getFirstSpecialCharPositionFromEnd(leftHandSide);
+		
+		if(specialCharPos == 0){
+			// No special character found; just join with &
+			formula = leftHandSide + Symbols.AND + rightHandSide;
+		}
+		else {
+			// Special character found
+			String rightPart;
+			String middlePart;
+			String leftPart = leftHandSide.substring(STARTINDEX,specialCharPos+ONECHARFLAG);
 			
-			String substringleft = formula.substring(positionLeft, positionOfAnd);
-            String substringright = formula.substring(positionOfAnd+2, positionRight+1);
-            
-            String toReplace = and(substringright, substringleft);
-            
-            String substring = formula.substring(positionLeft, positionRight+1);
-            formula = formula.replace(substring, toReplace);
+			// Extract the middle part 
+			int middlePartEndIndex = getMiddlePartEndIndex(specialCharPos+1, leftHandSide);
+			if(leftHandSide.charAt(specialCharPos+1) == Symbols.OPEN_Parenth.charAt(STARTINDEX))
+			{
+				middlePart = leftHandSide.substring(specialCharPos+ONECHARFLAG,middlePartEndIndex+ONECHARFLAG);
+				rightPart = leftHandSide.substring(middlePartEndIndex+1,length);
+			}
+			else {
+				middlePart = leftHandSide.substring(specialCharPos+ONECHARFLAG,middlePartEndIndex);
+				rightPart = leftHandSide.substring(middlePartEndIndex,length);
+			}
 			
+			// Create the formula by adding And P with the middle part 
+			formula = leftPart + Symbols.OPEN_Parenth + middlePart + Symbols.AND + "P" + Symbols.CLOSE_Parenth + rightPart;
 		}
 		
 		return formula;
 	}
 	
-	 public int manageleft(String formula, int pos){
-	        int open = 0;
-	        int close = 0;
-	        int finalPos = 0;
-	        
-	        for (int i = pos; i >= 0; i--){
-	            if (formula.charAt(i) == ')')
-	                close ++;
-	             if (formula.charAt(i) == '(')
-	                open ++;
-	             if (open == close && open > 0 && close > 0){
-	                     finalPos = i;
-	                     return finalPos;
-	             }
-	        }
-	        return 0;
-	    }
-
-	    public int manageright(String formula, int pos){
-	        int open = 0;
-	        int close = 0;
-	        int finalPos = 0;
-	        
-	        for (int i = pos; i <= formula.length(); i++){
-	            if (formula.charAt(i) == ')')
-	                close ++;
-	             if (formula.charAt(i) == '(')
-	                open ++;
-	             if (open == close && open > 0 && close > 0){
-	                     finalPos = i;
-	                     return finalPos;
-	             }
-	        }
-	        return 0;
-	    }
-
+	public int getFirstSpecialCharPositionFromEnd(String leftHandString)
+	{
+		int indexPos = leftHandString.length()-ONECHARFLAG;
+		for(; indexPos >= 0; indexPos--)
+		{
+			if(leftHandString.charAt(indexPos) == Symbols.NEXT.charAt(STARTINDEX) ||
+					leftHandString.charAt(indexPos) == Symbols.UNTIL.charAt(STARTINDEX))
+				return indexPos;
+		}
+		return 0;
+	}
+	
+	public int getMiddlePartEndIndex(int pos, String leftside){
+		for(; pos < leftside.length()-ONECHARFLAG; pos++){
+			if(leftside.charAt(pos) == Symbols.CLOSE_Parenth.charAt(0)){
+				return pos;
+			}
+		}
+		return 0;
+	}
 }
+
