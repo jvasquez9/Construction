@@ -119,6 +119,64 @@ public class AndUnitTests {
 		String andResult = new AndL().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2 & !a3) U (a2 & !a3 & (!a3 U a3)))))", "P");
 		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2 & !a3) U (a2 & !a3 & (!a3 U (a3 & P))))))");
 	}	
+	
+	/****** ANDL MINUS TESTS ********/
+	@Test
+	public void testAndLMINUSOne()
+	{
+		String andResult = new AndL().and("(p0|p1|p23)", "P");
+		TestAnd(andResult, "(p0|p1|p2)&P");
+	}
+	
+	@Test
+	public void testAndLMINUSTwo()
+	{
+		String andResult = new AndL().and("(p0&p2&p3)", "Q");
+		TestAnd(andResult, "(p0&p1&p2)&Q");
+	}
+	
+	@Test
+	public void testAndLMINUSThree()
+	{
+		String andResult = new AndL().and("(p0&X(p1&Xp2))", "Q");
+		TestAnd(andResult, "((p0&Q)&X((p1&Q)&Xp2))");
+	}
+	
+	/*@Test
+	public void testAndLMINUSFour()
+	{
+		String andResult = new AndL().and("(a1&X(!a2U(a2&X(!a3Ua3))))", "P");
+		TestAnd(andResult, "(a1&X(!a2U(a2&X(!a3U(a3&P)))))");
+	}
+	
+	@Test
+	public void testAndLMINUSFive()
+	{
+		String andResult = new AndL().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U(a1|a2|a3))", "P");
+		TestAnd(andResult, "(!a1&!a2&!a3)&((!a1&!a2&!a3)U((a1|a2|a3)&P))");
+	}
+	
+	@Test
+	public void testAndLMINUSSix()
+	{
+		String andResult = new AndL().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& a2 & a3))", "P");
+		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& a2 & a3) & P)) ");
+	}
+	
+	@Test
+	public void testAndLMINUSSeven()
+	{
+		String andResult = new AndL().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& !a2 & !a3 & X(a2 & !a3 & X(a3)))))", "P");
+		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& !a2 & !a3 & X(a2 & !a3 & X((a3) & P)))))");
+	}
+	
+	@Test
+	public void testAndLMINUSEight()
+	{
+		String andResult = new AndL().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2 & !a3) U (a2 & !a3 & (!a3 U a3)))))", "P");
+		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2 & !a3) U (a2 & !a3 & (!a3 U (a3 & P))))))");
+	}	
+*/
 
 	public static void TestAnd(String result, String expectedResult)
 	{
