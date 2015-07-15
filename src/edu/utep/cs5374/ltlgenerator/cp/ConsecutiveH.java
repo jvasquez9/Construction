@@ -26,7 +26,7 @@ public class ConsecutiveH  implements CompositePropositionParent{
 			return ltlFormula.toString();
 		}
 		else{
-			return ltlFormula.append(Symbols.CLOSE_Parenth).toString() + " &L-";
+			return ltlFormula.append(Symbols.CLOSE_Parenth).toString();
 		}
 	}
 
@@ -60,7 +60,7 @@ public class ConsecutiveH  implements CompositePropositionParent{
 			return ltlFormula.toString() + " &L-";
 		}
 		else{
-			return stringBuilder.append(Symbols.CLOSE_Parenth).toString() + " &L-";
+			return stringBuilder.append(Symbols.CLOSE_Parenth).toString() ;
 		}
 	}
 }
