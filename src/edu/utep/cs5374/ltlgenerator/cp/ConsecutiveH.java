@@ -57,7 +57,7 @@ public class ConsecutiveH  implements CompositePropositionParent{
 			int recursionCount = 1;
 			ltlFormula.append(ltlFormulaGenerator(numProposition, recursionCount, new StringBuilder("")));
 			ltlFormula.append(Symbols.CLOSE_Parenth);
-			return ltlFormula.toString() + " &L-";
+			return ltlFormula.toString();
 		}
 		else{
 			return stringBuilder.append(Symbols.CLOSE_Parenth).toString() ;
