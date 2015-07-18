@@ -30,26 +30,21 @@ public class andL_Ex implements AndParent {
 			String middlePart;
 			String ActualPart = leftHandSide.substring(STARTINDEX,specialCharPos+ONECHARFLAG);
 			String lastPart=leftHandSide.substring(specialCharPos+ONECHARFLAG);
+		
 			//System.out.println("left part to append"+ActualPart);
 			//System.out.println("fnal right part to append"+lastPart);
-			//(!p0&!p1&!p2)&((!p0&!p1&!p2)U(p0&!p1&!p2&X(p1&!p2&X
-			//((!p0&!p1&!p2)&P)&(((!p0&!p1&!p2) &P )U(p0&!p1&!p2 &P&X(p1&!p2 &P &X
-			//last part (p2))))
-		
+	
 			
 			btr=new StringBuilder(ActualPart);
-           
-			//Handle open close scenario like (!p0&!p1&!p2)
-			btr=handleCloseOpen(btr);
-			//System.out.println("Actual Part before X : "+btr.toString());
+			String result = btr.toString();
 			
-			//Handle &X scenario like (p0&!p1&!p2 &P&X
-			StringBuilder result = new StringBuilder("");
-			result=handleandX(btr);
-	
-			////Handle U scenario
+					
+			btr=handleandX(btr);
+			
+			btr=handlU(btr);
+		
 				
-			formula=result.toString()+lastPart;
+			formula=btr.toString()+lastPart;
 			 
 			//System.out.println("formula"+formula);
 		}
@@ -60,19 +55,24 @@ public class andL_Ex implements AndParent {
 	 //Handle open close scenario	
 public StringBuilder handleCloseOpen(StringBuilder btr)
 {
-	
-
-	for (int i = 0; i < btr.length(); i++) {
+	//String formula=btr.toString();
+	  int open = 0;
+	  int close = 0;
+	  int finalPos = 0,posStart=0;
+	  
+	for (int j = 0; j < btr.length(); j++) {
+		
+		       
 	   
-	    if(btr.charAt(i)==')')
+	    if(btr.charAt(j)==')')
 	    {
 	    	
 	    	
-	    	btr.insert(i+1, "&Q");
+	    	btr.insert(j+1, "&Q");
 	    	
 	    }
-	    
-	   	}
+	}
+
 	 return btr;
 }
 
@@ -81,16 +81,19 @@ public StringBuilder handleCloseOpen(StringBuilder btr)
 public StringBuilder handleandX(StringBuilder btr)
 {
 	
-	StringBuilder result=new StringBuilder("");
-	String[] andXArray = btr.toString().split("&X|\\n");
+	String checkAndX=btr.toString();
+	StringBuilder result = new StringBuilder("");
+	String[] andXArray = btr.toString().split("X");
 	
-	for(int i=0;i<andXArray.length;i++)
+	for(int i=0;i<(andXArray.length);i++)
 	{
-		
-		
-		
-		
-		andXArray[i]=andXArray[i]+"&Q&X";
+		System.out.println("Array is "+andXArray[i]);
+
+	    if(andXArray[i].endsWith("&"))
+	    {
+	    	
+		andXArray[i]=andXArray[i]+"Q&X";
+		}
 		
 	}
 	
@@ -106,10 +109,37 @@ public StringBuilder handleandX(StringBuilder btr)
 	return result;
 }
 
+
+
 // Handle U scenario	
 public StringBuilder handlU(StringBuilder btr)
 {
-	return btr;
+	StringBuilder result = new StringBuilder(btr);
+	/*String checkAndX=btr.toString();
+	StringBuilder result = new StringBuilder("");
+	String[] andXArray = btr.toString().split("U");
+	
+	for(int i=0;i<(andXArray.length);i++)
+	{
+		System.out.println("Array is "+andXArray[i]);
+
+	    
+	    	
+		andXArray[i]=andXArray[i]+"U";
+		
+		
+	}
+	
+	for(int i=0;i<andXArray.length;i++)
+	{
+		
+		
+		result.append(andXArray[i]);
+		
+		
+	}*/
+	
+	return result;
 	
 }
 	
