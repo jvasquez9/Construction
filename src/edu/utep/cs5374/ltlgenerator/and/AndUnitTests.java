@@ -65,6 +65,13 @@ public class AndUnitTests {
 	}
 	
 	@Test
+	public void testAndRNine()
+	{
+		String andResult = new AndR().and("(p0&X(p1&Xp2))", "Q");
+		TestAnd(andResult, "((p0&Q)&X((p1&Q)&X(p2&Q)))");
+	}
+	
+	@Test
 	public void testAndLOne()
 	{
 		String andResult = new AndL().and("(a1|a2|a3)", "P");
