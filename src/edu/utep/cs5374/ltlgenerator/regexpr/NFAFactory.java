@@ -168,7 +168,7 @@ public class NFAFactory{
 		
 		private static boolean isLetter(char c)
 		{
-			return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || (c == '&');
+			return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || (c == '&') || (c == '>');
 		}
 		
 		private static boolean isCloseParenthesis(char c)

@@ -10,10 +10,12 @@ public class AndR implements AndParent{
 	private Language fChain;
 	private Language gChain;
 	private Language untilChain;
+	private Language nextChain;
+	private Language arrowChain;
 	
 	public static void main(String[] args)
 	{
-		System.out.println(new AndR().and("(aUb)", "P"));
+		
 	}
 	
 	private static String generateRange(char front, char back, char weavingSymbol)
@@ -36,14 +38,23 @@ public class AndR implements AndParent{
 	{
 		andChain = DFAFactory.generate("(" + alphabetOrString + "." + numericOrString +"*)+(&." +
 				alphabetOrString + "." + numericOrString + "*)*");
-		fChain = DFAFactory.generate("f." + alphabetOrString);
-		gChain = DFAFactory.generate("g." + alphabetOrString);
+		fChain = DFAFactory.generate("f." + alphabetOrString + "." + numericOrString + "*");
+		gChain = DFAFactory.generate("g." + alphabetOrString + "." + numericOrString + "*");
 		untilChain = DFAFactory.generate("(" + alphabetOrString + "." + numericOrString + "*).u.(" 
 				+ alphabetOrString + "." + numericOrString + "*)");
+		nextChain = DFAFactory.generate("x." + alphabetOrString + "." + numericOrString + "*");
+		arrowChain = DFAFactory.generate("(" + alphabetOrString + "." + numericOrString + "*)." 
+				+ Symbols.RIGHT_ARROW + ".(" + alphabetOrString + "." + numericOrString + "*)");
 	}
 	
 	@Override
 	public String and(String leftHandSide, String rightHandSide) {
+		
+		//Strip white space from both strings
+		leftHandSide = leftHandSide.replaceAll("\\s+","");
+		rightHandSide = rightHandSide.replaceAll("\\s+", "");
+		
+		//Now delegate the work to our helper function
 		return andHelper(leftHandSide.toLowerCase(), rightHandSide);
 	}
 
@@ -71,6 +82,10 @@ public class AndR implements AndParent{
 			{
 				return "(G(" + leftHandSide.substring(1) + "&" + rightHandSide + "))";
 			}
+			else if(nextChain.recognizes(leftHandSide))
+			{
+				return "(X(" + leftHandSide.substring(1) + "&" + rightHandSide + "))";
+			}
 			else if(untilChain.recognizes(leftHandSide))
 			{
 				//Find U then split based on U
@@ -81,6 +96,20 @@ public class AndR implements AndParent{
 						break;
 				}
 				return "((" + leftHandSide.substring(0,i)+ "&" + rightHandSide + ")U(" 
+					+ leftHandSide.substring(i+1, leftHandSide.length()) + "&" + rightHandSide 
+					+ "))";
+			}
+			else if(arrowChain.recognizes(leftHandSide))
+			{
+				//Find arrow then split based on arrow
+				System.out.println(leftHandSide);
+				int i;
+				for(i = 0;i < leftHandSide.length(); i++)
+				{
+					if(leftHandSide.charAt(i) == Symbols.RIGHT_ARROW.charAt(0))
+						break;
+				}
+				return "((" + leftHandSide.substring(0,i)+ "&" + rightHandSide + ")" + Symbols.RIGHT_ARROW + "(" 
 					+ leftHandSide.substring(i+1, leftHandSide.length()) + "&" + rightHandSide 
 					+ "))";
 			}
@@ -110,6 +139,6 @@ public class AndR implements AndParent{
 		}
 		
 		System.out.println("We were not able to partition the string. Terminating...");
-		return leftHandSide;
+		return leftHandSide + "&" + rightHandSide;
 	}
 }

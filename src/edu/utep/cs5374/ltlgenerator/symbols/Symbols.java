@@ -8,7 +8,7 @@ public class Symbols {
 							NOT = 				"!",
 							OPEN_Parenth = 		"(",
 							CLOSE_Parenth = 	")",
-							RIGHT_ARROW = 		"\u2192",
+							RIGHT_ARROW = 		">",
 							F =					"F",
 							G = 				"G";
 	

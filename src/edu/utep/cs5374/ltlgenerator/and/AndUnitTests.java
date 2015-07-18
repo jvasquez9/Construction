@@ -54,7 +54,7 @@ public class AndUnitTests {
 	public void testAndRSeven()
 	{
 		String andResult = new AndR().and("(a" + Symbols.RIGHT_ARROW + "b)", "P");
-		TestAnd(andResult, "(a&P)" + Symbols.RIGHT_ARROW + "(b&P)");
+		TestAnd(andResult, "((a&P)" + Symbols.RIGHT_ARROW + "(b&P))");
 	}
 	
 	@Test
