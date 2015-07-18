@@ -17,7 +17,7 @@ public class AndR implements AndParent{
 	
 	public static void main(String[] args)
 	{
-		
+		System.out.println(new AndL().and("(p0|p1|p2)", "P"));
 	}
 	
 	private static String generateRange(char front, char back, char weavingSymbol)
