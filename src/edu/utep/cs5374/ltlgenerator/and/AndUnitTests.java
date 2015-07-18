@@ -124,51 +124,54 @@ public class AndUnitTests {
 	@Test
 	public void testAndLMINUSOne()
 	{
-		String andResult = new AndMinusL().and("(p0|p1|p2)", "P");
-		TestAnd(andResult, "(p0|p1|p2)&P");
+		String andResult = new AndMinusL().and("(a0|a1|a2)", "P");
+		TestAnd(andResult, "(a0|a1|a2)&P ");
 	}
 	
 	@Test
 	public void testAndLMINUSTwo()
 	{
-		String andResult = new AndMinusL().and("(p0&p1&p2)", "Q");
-		TestAnd(andResult, "(p0&p1&p2)&Q");
+		String andResult = new AndMinusL().and("(a0&a1&a2)", "P");
+		TestAnd(andResult, "(a0&a1&a2)&P");
 	}
 	
 	@Test
 	public void testAndLMINUSThree()
 	{
-		String andResult = new AndMinusL().and("(p0&X(p1&Xp2))", "Q");
-		TestAnd(andResult, "((p0&Q)&X((p1&Q)&Xp2))");
+		String andResult = new AndMinusL().and("(a0&X(a1&Xa2))", "P");
+		TestAnd(andResult, "((a0&P)&X((a1&P)&Xa2))");
 	}
 	
-	/*@Test
+	@Test
 	public void testAndLMINUSFour()
 	{
-		String andResult = new AndL().and("(a1&X(!a2U(a2&X(!a3Ua3))))", "P");
-		TestAnd(andResult, "(a1&X(!a2U(a2&X(!a3U(a3&P)))))");
+		String andResult = new AndL().and("(a0&X(!a1U(a1&X(!a2Ua2))))", "P");
+		TestAnd(andResult, "((a0&P)&X((!a1&P)U(a1&P)&X((!a2&P)Ua2))))");
 	}
 	
 	@Test
 	public void testAndLMINUSFive()
 	{
 		String andResult = new AndL().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U(a1|a2|a3))", "P");
-		TestAnd(andResult, "(!a1&!a2&!a3)&((!a1&!a2&!a3)U((a1|a2|a3)&P))");
+		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U((a1|a2|a3))");
 	}
 	
 	@Test
 	public void testAndLMINUSSix()
 	{
-		String andResult = new AndL().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& a2 & a3))", "P");
-		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& a2 & a3) & P)) ");
+		String andResult = new AndL().and("((!a1&!a2&!a3)&((!a1&!a2&!a3)U((a1&!a2&!a3&X(a2&!a3&X(a3))))) ", "P");
+		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U((a1&!a2&!a3&P&X(a2&!a3&P&Xa3))))");
 	}
 	
 	@Test
 	public void testAndLMINUSSeven()
 	{
-		String andResult = new AndL().and("(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& !a2 & !a3 & X(a2 & !a3 & X(a3)))))", "P");
-		TestAnd(andResult, "(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U ((a1& !a2 & !a3 & X(a2 & !a3 & X((a3) & P)))))");
+		String andResult = new AndL().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U(a1&!a2&!a3&((!a2&!a3)U(a2&!a3&(!a3Ua3)))))", "P");
+		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U(a1&!a2&!a3&P&((!a2&!a3&P)U(a2&!a3&P&(!a3&PUa3))))");
 	}
+	
+	/*@Test
+	
 	
 	@Test
 	public void testAndLMINUSEight()
