@@ -26,7 +26,7 @@ public class andL_Ex implements AndParent {
 		}
 		else {
 			// Special character found
-			String rightPart;
+			String rightPart=rightHandSide;
 			String middlePart;
 			String ActualPart = leftHandSide.substring(STARTINDEX,specialCharPos+ONECHARFLAG);
 			String lastPart=leftHandSide.substring(specialCharPos+ONECHARFLAG);
@@ -114,8 +114,7 @@ public StringBuilder handleandX(StringBuilder btr)
 // Handle U scenario	
 public StringBuilder handlU(StringBuilder btr)
 {
-	StringBuilder result = new StringBuilder(btr);
-	/*String checkAndX=btr.toString();
+	String checkAndX=btr.toString();
 	StringBuilder result = new StringBuilder("");
 	String[] andXArray = btr.toString().split("U");
 	
@@ -123,10 +122,11 @@ public StringBuilder handlU(StringBuilder btr)
 	{
 		System.out.println("Array is "+andXArray[i]);
 
-	    
+	    if(!andXArray[i].endsWith("&"))
+	    {
 	    	
-		andXArray[i]=andXArray[i]+"U";
-		
+		andXArray[i]=andXArray[i]+"&Q&U";
+		}
 		
 	}
 	
@@ -137,7 +137,7 @@ public StringBuilder handlU(StringBuilder btr)
 		result.append(andXArray[i]);
 		
 		
-	}*/
+	}
 	
 	return result;
 	
