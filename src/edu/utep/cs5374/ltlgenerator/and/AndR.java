@@ -12,6 +12,8 @@ public class AndR implements AndParent{
 	private Language untilChain;
 	private Language nextChain;
 	private Language arrowChain;
+	private Language orChain;
+	private Language notChain;
 	
 	public static void main(String[] args)
 	{
@@ -45,6 +47,9 @@ public class AndR implements AndParent{
 		nextChain = DFAFactory.generate("x." + alphabetOrString + "." + numericOrString + "*");
 		arrowChain = DFAFactory.generate("(" + alphabetOrString + "." + numericOrString + "*)." 
 				+ Symbols.RIGHT_ARROW + ".(" + alphabetOrString + "." + numericOrString + "*)");
+		orChain = DFAFactory.generate("(" + alphabetOrString + "." + numericOrString +"*)+(/." +
+				alphabetOrString + "." + numericOrString + "*)*");
+		notChain = DFAFactory.generate("~." + alphabetOrString + "." + numericOrString + "*");
 	}
 	
 	@Override
@@ -54,8 +59,21 @@ public class AndR implements AndParent{
 		leftHandSide = leftHandSide.replaceAll("\\s+","");
 		rightHandSide = rightHandSide.replaceAll("\\s+", "");
 		
+		//Since ! and | are used by the regexpr package,
+		//let's use temporary substitutions ~ and /
+		leftHandSide = leftHandSide.replaceAll("[!]", "~");
+		leftHandSide = leftHandSide.replaceAll("[|]", "/");
+		
 		//Now delegate the work to our helper function
-		return andHelper(leftHandSide.toLowerCase(), rightHandSide);
+		String result = andHelper(leftHandSide.toLowerCase(), rightHandSide);
+		
+		//Finally, if ~ and / are still left in the string
+		//replace them with their original symbols
+		result = result.replaceAll("[~]", "!");
+		result = result.replaceAll("[/]", "|");
+		
+		//Now let's return the result
+		return result;
 	}
 
 	private String andHelper(String leftHandSide, String rightHandSide)
@@ -63,14 +81,14 @@ public class AndR implements AndParent{
 		//First, if we have an empty string return an empty string.
 		if(leftHandSide.isEmpty())
 		{
-			return leftHandSide;
+			return "";
 		}
 		
 		//If the lead character is not an Open Parenthesis, submit
 		//the string to our pattern matching algorithms.
 		if(leftHandSide.charAt(0) != Symbols.OPEN_Parenth.charAt(0))
 		{			
-			if(andChain.recognizes(leftHandSide))
+			if(andChain.recognizes(leftHandSide) || orChain.recognizes(leftHandSide))
 			{
 				return "(" + leftHandSide + ")&" + rightHandSide;
 			}
@@ -85,6 +103,10 @@ public class AndR implements AndParent{
 			else if(nextChain.recognizes(leftHandSide))
 			{
 				return "(X(" + leftHandSide.substring(1) + "&" + rightHandSide + "))";
+			}
+			else if(notChain.recognizes(leftHandSide))
+			{
+				return "(!(" + leftHandSide.substring(1) + "&" + rightHandSide + "))";
 			}
 			else if(untilChain.recognizes(leftHandSide))
 			{
