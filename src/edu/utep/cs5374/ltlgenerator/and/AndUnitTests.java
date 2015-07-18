@@ -124,14 +124,14 @@ public class AndUnitTests {
 	@Test
 	public void testAndLMINUSOne()
 	{
-		String andResult = new AndL().and("(p0|p1|p23)", "P");
+		String andResult = new AndL().and("(p0|p1|p2)", "P");
 		TestAnd(andResult, "(p0|p1|p2)&P");
 	}
 	
 	@Test
 	public void testAndLMINUSTwo()
 	{
-		String andResult = new AndL().and("(p0&p2&p3)", "Q");
+		String andResult = new AndL().and("(p0&p1&p2)", "Q");
 		TestAnd(andResult, "(p0&p1&p2)&Q");
 	}
 	
