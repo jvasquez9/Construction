@@ -33,15 +33,33 @@ public class andL_Ex implements AndParent {
 		
 			//System.out.println("left part to append"+ActualPart);
 			//System.out.println("fnal right part to append"+lastPart);
-	
-			
-			btr=new StringBuilder(ActualPart);
-			String result = btr.toString();
-			
 					
-			btr=handleandX(btr);
+			btr=new StringBuilder(ActualPart);
+				
+			String result = btr.toString();
+			btr=handleCloseOpen(btr);
+			for(int i=0;i<btr.length();i++)
+			{
+				if(btr.toString().contains("X")&&!btr.toString().contains("U"))
+				{
+					System.out.println("trying for only one X"+!btr.toString().contains("U"));
+					btr=handleandX(btr);
+					break;
+				}
+				if(!btr.toString().contains("X")&&btr.toString().contains("U"))
+				{
+					System.out.println("trying for only one U"+!btr.toString().contains("X"));
+					btr=handlU(btr);
+					break;
+				}
+				else
+				{
+					System.out.println("Both X and U exist");
+				}
+				
+			}
 			
-			btr=handlU(btr);
+			
 		
 				
 			formula=btr.toString()+lastPart;
