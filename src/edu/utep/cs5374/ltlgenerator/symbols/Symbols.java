@@ -8,5 +8,26 @@ public class Symbols {
 							NOT = 				"!",
 							OPEN_Parenth = 		"(",
 							CLOSE_Parenth = 	")",
-							RIGHT_ARROW = 		"\u2192";
+							RIGHT_ARROW = 		"\u2192",
+							F =					"F";
+	
+	public static String[] SYMBOL_LIST = {AND, OR, UNTIL, NEXT, NOT, 
+		OPEN_Parenth, CLOSE_Parenth, RIGHT_ARROW, F};
+	
+	public static boolean isSymbol(char letter)
+	{
+		for(String symbolString : SYMBOL_LIST)
+		{
+			if(symbolString.toLowerCase().charAt(0) == letter)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isSymbol(String letterString)
+	{
+		return isSymbol(letterString.charAt(0));
+	}
 }
