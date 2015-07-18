@@ -8,6 +8,7 @@ public class AndR implements AndParent{
 	private static String numericOrString = generateRange('0','9', Symbols.OR.charAt(0));
 	private Language andChain;
 	private Language fChain;
+	private Language gChain;
 	private Language untilChain;
 	
 	public static void main(String[] args)
@@ -36,6 +37,7 @@ public class AndR implements AndParent{
 		andChain = DFAFactory.generate("(" + alphabetOrString + "." + numericOrString +"*)+(&." +
 				alphabetOrString + "." + numericOrString + "*)*");
 		fChain = DFAFactory.generate("f." + alphabetOrString);
+		gChain = DFAFactory.generate("g." + alphabetOrString);
 		untilChain = DFAFactory.generate("(" + alphabetOrString + "." + numericOrString + "*).u.(" 
 				+ alphabetOrString + "." + numericOrString + "*)");
 	}
@@ -64,6 +66,10 @@ public class AndR implements AndParent{
 			else if(fChain.recognizes(leftHandSide))
 			{
 				return "(F(" + leftHandSide.substring(1) + "&" + rightHandSide + "))";
+			}
+			else if(gChain.recognizes(leftHandSide))
+			{
+				return "(G(" + leftHandSide.substring(1) + "&" + rightHandSide + "))";
 			}
 			else if(untilChain.recognizes(leftHandSide))
 			{

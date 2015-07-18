@@ -9,10 +9,11 @@ public class Symbols {
 							OPEN_Parenth = 		"(",
 							CLOSE_Parenth = 	")",
 							RIGHT_ARROW = 		"\u2192",
-							F =					"F";
+							F =					"F",
+							G = 				"G";
 	
 	public static String[] SYMBOL_LIST = {AND, OR, UNTIL, NEXT, NOT, 
-		OPEN_Parenth, CLOSE_Parenth, RIGHT_ARROW, F};
+		OPEN_Parenth, CLOSE_Parenth, RIGHT_ARROW, F, G};
 	
 	public static boolean isSymbol(char letter)
 	{
