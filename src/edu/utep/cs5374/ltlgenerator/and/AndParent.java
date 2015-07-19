@@ -10,11 +10,6 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public abstract class AndParent {
 	
-	public static void main(String[] args)
-	{
-		System.out.println(AndParent.premiseAndNextChain.getRegExpr());
-	}
-	
 	private static String alphabetOrString = generateRange('a', 'z', Symbols.OR.charAt(0));
 	private static String numericOrString = generateRange('0','9', Symbols.OR.charAt(0));
 	
@@ -279,6 +274,7 @@ public abstract class AndParent {
 		return output;
 	}
 	
+	@SuppressWarnings("unused")
 	private boolean containsTimeOp(String testString)
 	{
 		for(int i = 0; i < testString.length(); i++)
