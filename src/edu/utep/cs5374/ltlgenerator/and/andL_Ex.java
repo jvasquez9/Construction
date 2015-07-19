@@ -12,12 +12,10 @@ public class andL_Ex implements AndParent {
 	public String and(String leftHandSide, String rightHandSide) {
 		
 		String formula = "";
-		//leftHandSide="(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2& !a3) U (a2 & !a3 & (!a3 U a3)))))";
 		
 		// Trim the spaces
 		leftHandSide = leftHandSide.replaceAll("\\s+","");
 
-		int length = leftHandSide.length();
 		
 		// Get the position of the special character i.e. X and U
 		int specialCharPos = getFirstSpecialCharPositionFromEnd(leftHandSide);
@@ -29,32 +27,29 @@ public class andL_Ex implements AndParent {
 		else {
 			// Special character found
 			String rightPart=rightHandSide;
-			String middlePart;
 			String ActualPart = leftHandSide.substring(STARTINDEX,specialCharPos+ONECHARFLAG);
 			String lastPart=leftHandSide.substring(specialCharPos+ONECHARFLAG);
-		
-			System.out.println("left part to append"+ActualPart);
-			//System.out.println("fnal right part to append"+lastPart);
+				
 					
 			btr=new StringBuilder(ActualPart);
-				
-			String result = btr.toString();
+			
+			// Appended &P when identified ')' which means there is a scenario like '()' case
 			btr=handleCloseOpen(btr);
 			for(int i=0;i<btr.length();i++)
 			{
 				if(btr.toString().contains("X")&&!btr.toString().contains("U"))
 				{
-					//System.out.println("trying for only one X"+!btr.toString().contains("U"));
+					//This is only to handle &X scenario
 					btr=handleandX(btr);
 					break;
 				}
 				if(!btr.toString().contains("X")&&btr.toString().contains("U"))
 				{
-					System.out.println("trying for only one U"+!btr.toString().contains("X")+"\t btr"+btr.toString());
+					
+					//This is only to handle &U scenario
 					
 					if(!(btr.toString().contains(")U")))
 					{
-						//System.out.println("not )U together"+!btr.toString().contains(")U"));
 						if(!btr.toString().endsWith("U"))
 					    {
 						btr=handlU(btr);
@@ -65,7 +60,7 @@ public class andL_Ex implements AndParent {
 				}
 				else
 				{
-					System.out.println("Both X and U exist");
+					//Both X and U exist exist in a formula
 					btr=handleandX(btr);
 					btr=handlU(btr);
 					break;
@@ -73,25 +68,20 @@ public class andL_Ex implements AndParent {
 				
 			}
 			
-			
-		
+					
 				
 			formula=btr.toString()+lastPart;
 			 
-			//System.out.println("formula"+formula);
 		}
 		
 		return formula;
 	}
 	
-	 //Handle open close scenario	
+//Handle open close scenario	
 public StringBuilder handleCloseOpen(StringBuilder btr)
 {
-	//String formula=btr.toString();
-	  int open = 0;
-	  int close = 0;
-	  int finalPos = 0,posStart=0;
-	  
+	//Identified ')' and appended &Q
+	 
 	for (int j = 0; j < btr.length(); j++) {
 		
 		       
@@ -105,12 +95,13 @@ public StringBuilder handleCloseOpen(StringBuilder btr)
 	    }
 	    
 	}
-	System.out.println("After handing close paranthesis scenario"+btr.toString());
 	 return btr;
 }
 
-//Handle &X scenario	
 
+/*Handle &X scenario, when &X found in a string splitted where 'X' 
+appears into an array and then appended &Q at each splitted string when ends with '&'
+*/
 public StringBuilder handleandX(StringBuilder btr)
 {
 	
@@ -138,14 +129,14 @@ public StringBuilder handleandX(StringBuilder btr)
 		
 		
 	}
-	System.out.println("After handing &X scenario"+result.toString());
 	return result;
 }
 
 
 
-// Handle U scenario	
-public StringBuilder handlU(StringBuilder btr)
+/*Handle U scenario, when U found in a string splitted where 'U' 
+appears into an array and then appended &Q at each splitted string when doean't ends woth 'Q' or 'X'
+*/public StringBuilder handlU(StringBuilder btr)
 {
 	String checkAndX=btr.toString();
 	StringBuilder result = new StringBuilder("");
@@ -177,7 +168,7 @@ public StringBuilder handlU(StringBuilder btr)
 		
 		
 	}
-	System.out.println("After handing U scenario"+result);
+	
 	return result;
 	
 }
