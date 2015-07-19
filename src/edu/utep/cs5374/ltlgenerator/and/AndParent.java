@@ -67,7 +67,7 @@ public abstract class AndParent {
 		}
 		else
 		{
-			//else delegate the work to template function
+			//else delegate the work to helper function
 			result = andHelper(leftHandSide.toLowerCase(), rightHandSide,
 					traversalType, true);
 		}
@@ -195,13 +195,15 @@ public abstract class AndParent {
 			currentCharacter++;
 		}
 		
-		//If we did not find a parenthesis pair, trim the first character off and try again
+		//If we did not find a parenthesis pair, trim the first character off and try again.
+		//This basically suggests something went wrong with the algorithm (missing or
+		//bad pattern)?
 		if(currentCharacter >= leftHandSide.length())
 		{
 			return andHelper(leftHandSide.substring(1), rightHandSide, traversalType, false);
 		}
 		
-		//Else we did find a parenthesis pair. Do a three way recursive call & try to find more sub formula
+		//Else we did find a parenthesis pair. Do a three way recursive call & try to find more sub formula.
 		String left = andHelper(leftHandSide.substring(0, openParenthesisLocation), rightHandSide,
 				traversalType, false);
 		String center = "(" + andHelper(leftHandSide.substring(openParenthesisLocation + 1, currentCharacter),
