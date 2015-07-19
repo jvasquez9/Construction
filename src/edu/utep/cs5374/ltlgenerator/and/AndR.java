@@ -4,7 +4,7 @@ public class AndR extends AndParent{
 
 	@Override
 	public String and(String leftHandSide, String rightHandSide) {
-		return andHelper(leftHandSide, rightHandSide, 0);
+		return andHelper(leftHandSide, rightHandSide, TraversalMode.AND_R);
 	}
 	
 }

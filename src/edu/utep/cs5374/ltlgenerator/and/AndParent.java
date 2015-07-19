@@ -25,6 +25,8 @@ public abstract class AndParent {
 	private static Language premiseAndNextPremiseChain = DFAFactory.generate(alphabetOrString + "." + numericOrString + "*.&.x."
 			+ alphabetOrString + "." + numericOrString + "*");
 	
+	protected enum TraversalMode {AND_R, AND_L, AND_MINUS_L}
+	
 	private static String generateRange(char front, char back, char weavingSymbol)
 	{
 		StringBuilder builder = new StringBuilder(Symbols.OPEN_Parenth);
@@ -43,7 +45,7 @@ public abstract class AndParent {
 	
 	public abstract String and(String leftHandSide, String rightHandSide);
 	
-	public String andHelper(String leftHandSide, String rightHandSide, int traversalType) {
+	public String andHelper(String leftHandSide, String rightHandSide, TraversalMode traversalType) {
 		
 		//Strip white space from both strings
 		leftHandSide = leftHandSide.replaceAll("\\s+","");
@@ -79,7 +81,7 @@ public abstract class AndParent {
 		return result;
 	}
 	
-	protected String andHelper(String leftHandSide, String rightHandSide, int andType, 
+	protected String andHelper(String leftHandSide, String rightHandSide, TraversalMode traversalType, 
 			boolean containsLeftMostTimeOp)
 	{
 		int openParenthesisLocation = 0;
@@ -148,7 +150,7 @@ public abstract class AndParent {
 			else if(premiseAndNextChain.recognizes(leftHandSide))
 			{
 				return "(" + andHelper(leftHandSide.substring(0,leftHandSide.length() - 2), rightHandSide,
-						0, false) + ")&X";
+						traversalType, false) + ")&X";
 			}
 			else if(premiseAndNextPremiseChain.recognizes(leftHandSide))
 			{
@@ -196,15 +198,16 @@ public abstract class AndParent {
 		//If we did not find a parenthesis pair, trim the first character off and try again
 		if(currentCharacter >= leftHandSide.length())
 		{
-			return andHelper(leftHandSide.substring(1), rightHandSide, 0, false);
+			return andHelper(leftHandSide.substring(1), rightHandSide, traversalType, false);
 		}
 		
 		//Else we did find a parenthesis pair. Do a three way recursive call & try to find more sub formula
 		String left = andHelper(leftHandSide.substring(0, openParenthesisLocation), rightHandSide,
-				0, false);
+				traversalType, false);
 		String center = "(" + andHelper(leftHandSide.substring(openParenthesisLocation + 1, currentCharacter),
-				rightHandSide, 0, false) + ")";
-		String right = andHelper(leftHandSide.substring(currentCharacter+1), rightHandSide, 0, false);
+				rightHandSide, traversalType, false) + ")";
+		String right = andHelper(leftHandSide.substring(currentCharacter+1), rightHandSide, 
+				traversalType, false);
 		
 		String output = left + center + right;
 		
