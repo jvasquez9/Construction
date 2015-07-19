@@ -153,7 +153,7 @@ public class AndUnitTests {
 	public void testAndLMINUSFour()
 	{
 		String andResult = new AndMinusL().and("(a0&X(!a1U(a1&X(!a2Ua2))))", "P");
-		TestAnd(andResult, "((a0&P)&X((!a1&P)U(a1&P)&X((!a2&P)Ua2))))");
+		TestAnd(andResult, "((a0&P)&X((!a1&P)U((a1&P)&X((!a2&P)Ua2))))");
 	}
 	
 	@Test
@@ -166,7 +166,7 @@ public class AndUnitTests {
 	@Test
 	public void testAndLMINUSSix()
 	{
-		String andResult = new AndMinusL().and("((!a1&!a2&!a3)&((!a1&!a2&!a3)U((a1&!a2&!a3&X(a2&!a3&X(a3))))) ", "P");
+		String andResult = new AndMinusL().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U((a1&!a2&!a3&X(a2&!a3&X(a3)))))", "P");
 		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U((a1&!a2&!a3&P&X(a2&!a3&P&Xa3))))");
 	}
 	
