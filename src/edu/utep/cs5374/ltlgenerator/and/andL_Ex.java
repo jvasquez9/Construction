@@ -39,14 +39,14 @@ public class andL_Ex implements AndParent {
 			{
 				if(btr.toString().contains("X")&&!btr.toString().contains("U"))
 				{
-					//This is only to handle &X scenario
+					//This is only to handle &X scenario, only &X exist in the formula
 					btr=handleandX(btr);
 					break;
 				}
 				if(!btr.toString().contains("X")&&btr.toString().contains("U"))
 				{
 					
-					//This is only to handle &U scenario
+					//This is only to handle &U scenario, only &U exist in the formula
 					
 					if(!(btr.toString().contains(")U")))
 					{
@@ -60,7 +60,7 @@ public class andL_Ex implements AndParent {
 				}
 				else
 				{
-					//Both X and U exist exist in a formula
+					//Both X and U exist exist in the formula
 					btr=handleandX(btr);
 					btr=handlU(btr);
 					break;
@@ -80,7 +80,7 @@ public class andL_Ex implements AndParent {
 //Handle open close scenario	
 public StringBuilder handleCloseOpen(StringBuilder btr)
 {
-	//Identified ')' and appended &Q
+	//If ')' exist just appended &Q
 	 
 	for (int j = 0; j < btr.length(); j++) {
 		
@@ -99,8 +99,7 @@ public StringBuilder handleCloseOpen(StringBuilder btr)
 }
 
 
-/*Handle &X scenario, when &X found in a string splitted where 'X' 
-appears into an array and then appended &Q at each splitted string when ends with '&'
+/*Handle &X scenario, when &X found in a string split string and then appended &Q at each substrings if they ends with '&'
 */
 public StringBuilder handleandX(StringBuilder btr)
 {
@@ -134,9 +133,9 @@ public StringBuilder handleandX(StringBuilder btr)
 
 
 
-/*Handle U scenario, when U found in a string splitted where 'U' 
-appears into an array and then appended &Q at each splitted string when doean't ends woth 'Q' or 'X'
-*/public StringBuilder handlU(StringBuilder btr)
+/*Handle &U scenario, when &U found in a string split string and then appended &Q at each substrings if they doesn't ends with 'Q' or 'X'
+*/
+public StringBuilder handlU(StringBuilder btr)
 {
 	String checkAndX=btr.toString();
 	StringBuilder result = new StringBuilder("");
