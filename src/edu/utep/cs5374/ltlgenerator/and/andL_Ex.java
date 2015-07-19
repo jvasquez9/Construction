@@ -1,10 +1,8 @@
 package edu.utep.cs5374.ltlgenerator.and;
 
-import java.util.ArrayList;
-
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
-public class andL_Ex implements AndParent {
+public class andL_Ex extends AndParent {
 	private int STARTINDEX = 0;
 	private int ONECHARFLAG = 1;
 	StringBuilder btr;
