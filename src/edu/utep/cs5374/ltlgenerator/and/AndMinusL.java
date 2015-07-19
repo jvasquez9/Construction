@@ -1,10 +1,10 @@
 package edu.utep.cs5374.ltlgenerator.and;
 
-public class AndMinusL implements AndParent {
+public class AndMinusL extends AndParent {
 
 	@Override
 	public String and(String leftHandSide, String rightHandSide) {
-		return new AndR().and(leftHandSide, rightHandSide);
+		return andHelper(leftHandSide, rightHandSide, TraversalMode.AND_MINUS_L);
 	}
 }
 

@@ -2,7 +2,7 @@ package edu.utep.cs5374.ltlgenerator.and;
 
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
-public class AndL implements AndParent {
+public class AndL extends AndParent {
 	private int STARTINDEX = 0;
 	private int ONECHARFLAG = 1;
 	
