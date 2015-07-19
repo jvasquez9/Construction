@@ -12,6 +12,8 @@ public class andL_Ex implements AndParent {
 	public String and(String leftHandSide, String rightHandSide) {
 		
 		String formula = "";
+		//leftHandSide="(!a1 & !a2 & !a3) & ((!a1 & !a2 & !a3) U (a1& !a2 & !a3 &((!a2& !a3) U (a2 & !a3 & (!a3 U a3)))))";
+		
 		// Trim the spaces
 		leftHandSide = leftHandSide.replaceAll("\\s+","");
 
@@ -48,7 +50,7 @@ public class andL_Ex implements AndParent {
 				}
 				if(!btr.toString().contains("X")&&btr.toString().contains("U"))
 				{
-					//System.out.println("trying for only one U"+!btr.toString().contains("X")+"\t btr"+btr.toString());
+					System.out.println("trying for only one U"+!btr.toString().contains("X")+"\t btr"+btr.toString());
 					
 					if(!(btr.toString().contains(")U")))
 					{
@@ -64,6 +66,8 @@ public class andL_Ex implements AndParent {
 				else
 				{
 					System.out.println("Both X and U exist");
+					btr=handleandX(btr);
+					btr=handlU(btr);
 					break;
 				}
 				
@@ -116,7 +120,7 @@ public StringBuilder handleandX(StringBuilder btr)
 	
 	for(int i=0;i<(andXArray.length);i++)
 	{
-		System.out.println("Array is "+andXArray[i]);
+		System.out.println("Array is in X "+andXArray[i]);
 
 	    if(andXArray[i].endsWith("&"))
 	    {
@@ -134,7 +138,7 @@ public StringBuilder handleandX(StringBuilder btr)
 		
 		
 	}
-	System.out.println("After handing &X scenario"+btr.toString());
+	System.out.println("After handing &X scenario"+result.toString());
 	return result;
 }
 
@@ -149,14 +153,20 @@ public StringBuilder handlU(StringBuilder btr)
 	
 	for(int i=0;i<(andXArray.length);i++)
 	{
-		System.out.println("Array is "+andXArray[i]);
+		System.out.println("Array is in U"+andXArray[i]);
 
 	    if(!andXArray[i].endsWith("Q"))
 	    {
-	    	
+	    	 if(!andXArray[i].endsWith("X"))
+	 	    {
+	    		 
 		andXArray[i]=andXArray[i]+"&Q&U";
 		}
-		
+	    	 else
+	    	 {
+	    		 return btr;
+	    	 }
+	 	    }
 	}
 	
 	for(int i=0;i<andXArray.length;i++)
