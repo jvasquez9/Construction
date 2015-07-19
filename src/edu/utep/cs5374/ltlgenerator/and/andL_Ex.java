@@ -31,7 +31,7 @@ public class andL_Ex implements AndParent {
 			String ActualPart = leftHandSide.substring(STARTINDEX,specialCharPos+ONECHARFLAG);
 			String lastPart=leftHandSide.substring(specialCharPos+ONECHARFLAG);
 		
-			//System.out.println("left part to append"+ActualPart);
+			System.out.println("left part to append"+ActualPart);
 			//System.out.println("fnal right part to append"+lastPart);
 					
 			btr=new StringBuilder(ActualPart);
@@ -42,19 +42,29 @@ public class andL_Ex implements AndParent {
 			{
 				if(btr.toString().contains("X")&&!btr.toString().contains("U"))
 				{
-					System.out.println("trying for only one X"+!btr.toString().contains("U"));
+					//System.out.println("trying for only one X"+!btr.toString().contains("U"));
 					btr=handleandX(btr);
 					break;
 				}
 				if(!btr.toString().contains("X")&&btr.toString().contains("U"))
 				{
-					System.out.println("trying for only one U"+!btr.toString().contains("X"));
-					btr=handlU(btr);
+					//System.out.println("trying for only one U"+!btr.toString().contains("X")+"\t btr"+btr.toString());
+					
+					if(!(btr.toString().contains(")U")))
+					{
+						//System.out.println("not )U together"+!btr.toString().contains(")U"));
+						if(!btr.toString().endsWith("U"))
+					    {
+						btr=handlU(btr);
+					    }
+					}
+					
 					break;
 				}
 				else
 				{
 					System.out.println("Both X and U exist");
+					break;
 				}
 				
 			}
@@ -89,8 +99,9 @@ public StringBuilder handleCloseOpen(StringBuilder btr)
 	    	btr.insert(j+1, "&Q");
 	    	
 	    }
+	    
 	}
-
+	System.out.println("After handing close paranthesis scenario"+btr.toString());
 	 return btr;
 }
 
@@ -123,7 +134,7 @@ public StringBuilder handleandX(StringBuilder btr)
 		
 		
 	}
-	
+	System.out.println("After handing &X scenario"+btr.toString());
 	return result;
 }
 
@@ -140,7 +151,7 @@ public StringBuilder handlU(StringBuilder btr)
 	{
 		System.out.println("Array is "+andXArray[i]);
 
-	    if(!andXArray[i].endsWith("&"))
+	    if(!andXArray[i].endsWith("Q"))
 	    {
 	    	
 		andXArray[i]=andXArray[i]+"&Q&U";
@@ -156,7 +167,7 @@ public StringBuilder handlU(StringBuilder btr)
 		
 		
 	}
-	
+	System.out.println("After handing U scenario"+result);
 	return result;
 	
 }
