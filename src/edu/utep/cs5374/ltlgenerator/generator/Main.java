@@ -77,6 +77,24 @@ public class Main {
 		{
 			System.out.println("And type doesn't match");
 		}
+		
+		System.out.println(
+				"1 # AtleastOneC "+"\n"+ 
+				"2 # AtleastOneH "+"\n"+ 
+				"3 # AtleastOneE "+"\n"+ 
+				"4 # ParallelC"+"\n"+
+				"5 # ParallelH"+"\n"+
+				"6 # ParallelE"+"\n"+		
+				"7 # ConsecutiveC" +"\n"+
+				"8 # ConsecutiveH" +"\n"+
+				"9 # ConsecutiveE" +"\n"+		
+				"10 # EventualC"+"\n"+
+				"11 # EventualH"+"\n"+
+				"12 # EventualE");
+
+		System.out.println("Enter the number of propositions:");
+		n = sc.nextInt();
+		
 
 
 		sc.close();
