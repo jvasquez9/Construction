@@ -12,8 +12,8 @@ public class QPrecedesPcStar extends GlobalScopeParent{
 
 	public String formulaOfScope(String P_ltl, String Q_ltl){
 		//      ! ( ( ! Q_ltl ) U ( P_ltl ) ) U P_ltl)
-		return Symbols.NOT + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + Symbols.AND + Qltl + Symbols.CLOSE_Parenth +
-				Symbols.UNTIL + Symbols.OPEN_Parenth + Pltl + Symbols.AND + Symbols.NOT + Qltl + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth;
+		return Symbols.NOT + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + Symbols.AND + Q_ltl + Symbols.CLOSE_Parenth +
+				Symbols.UNTIL + Symbols.OPEN_Parenth + P_ltl + Symbols.AND + Symbols.NOT + Q_ltl + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth;
 	}
 	
 
