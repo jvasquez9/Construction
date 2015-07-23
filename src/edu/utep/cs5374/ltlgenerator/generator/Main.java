@@ -54,7 +54,7 @@ public class Main {
 				"1 # AndR "+"\n"+ 
 				"2 # AndL "+"\n"+ 
 				"3 # AndMinusL "+"\n");
-		System.out.println("Enter the type of And (P is fixed for now):");
+		System.out.println("Enter the type of And :");
 		andType = sc.nextInt();
 
 		String andResult;
@@ -92,7 +92,7 @@ public class Main {
 				"8 # Q Precedes Pe*" +"\n"+
 				"9 # Q Precedes Pe+" +"\n");
 
-		System.out.println("Enter the number of propositions:");
+		System.out.println("Enter the type of Global Scope:");
 		globalScope = sc.nextInt();
 		
 		if(globalScope == 4){
