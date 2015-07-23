@@ -6,8 +6,8 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class QStrictlyPrecedesPe extends GlobalScopeParent {
 	public String getFormula(String Q_ltl, int numProposition){
-		ParallelH parallelH = new ParallelH();
-		String Ph_ltl = parallelH.compute(numProposition, 'p');
+		
+		String Ph_ltl = new ParallelH().compute(numProposition, 'p');
 		
 		String partialPart = "";
 		for(int i = 0; i < numProposition; i++)
@@ -16,9 +16,9 @@ public class QStrictlyPrecedesPe extends GlobalScopeParent {
 		}
 		partialPart += Symbols.NEXT + Ph_ltl;
 		
-		String afterAndPart = Symbols.NOT + Symbols.OPEN_Parenth + partialPart + Symbols.CLOSE_Parenth;
+		String afterAndRPart = Symbols.NOT + Symbols.OPEN_Parenth + partialPart + Symbols.CLOSE_Parenth;
 		
-		String firstPart = new AndR().and(Q_ltl, afterAndPart);
+		String firstPart = new AndR().and(Q_ltl, afterAndRPart);
 		
 		return Symbols.NOT + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + Symbols.NOT + 
 				Symbols.OPEN_Parenth + firstPart + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth +
