@@ -1,11 +1,27 @@
 package edu.utep.cs5374.ltlgenerator.globalscope;
 
+import edu.utep.cs5374.ltlgenerator.and.AndR;
+import edu.utep.cs5374.ltlgenerator.cp.ParallelH;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class QStrictlyPrecedesPe extends GlobalScopeParent {
-	public String getFormula(String Q, int numberofprop){
-		String fisrtPart = Symbols.NOT + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + Symbols.NOT ;
+	public String getFormula(String Q_ltl, int numProposition){
+		ParallelH parallelH = new ParallelH();
+		String Ph_ltl = parallelH.compute(numProposition, 'p');
 		
-		return null;
+		String partialPart = "";
+		for(int i = 0; i < numProposition; i++)
+		{
+			partialPart += "" + Symbols.NOT + "p" + i + Symbols.AND; 
+		}
+		partialPart += Symbols.NEXT + Ph_ltl;
+		
+		String afterAndPart = Symbols.NOT + Symbols.OPEN_Parenth + partialPart + Symbols.CLOSE_Parenth;
+		
+		String firstPart = new AndR().and(Q_ltl, afterAndPart);
+		
+		return Symbols.NOT + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + Symbols.NOT + 
+				Symbols.OPEN_Parenth + firstPart + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth +
+				Symbols.UNTIL + Symbols.OPEN_Parenth + partialPart + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth;
 	}
 }

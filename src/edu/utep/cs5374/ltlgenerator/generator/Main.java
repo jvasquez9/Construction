@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import edu.utep.cs5374.ltlgenerator.and.*;
 import edu.utep.cs5374.ltlgenerator.cp.*;
+import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPe;
 
 public class Main {
 	public static void main(String[] args) {
@@ -96,7 +97,8 @@ public class Main {
 		
 		if(globalScope == 4){
 			// Q Strictly Precedes Pc
-			
+			String temp = new QStrictlyPrecedesPe().getFormula(Q, n);
+			System.out.println("Q Strictly Precedes Pc : \n" + temp);
 		}
 		else{
 			System.out.println("Global scope doesn't match!");
