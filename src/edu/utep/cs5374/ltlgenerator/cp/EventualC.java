@@ -5,7 +5,7 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 public class EventualC implements CompositePropositionParent {
 
 	@Override
-	public String compute(int numProposition)
+	public String compute(int numProposition, char charValue)
 	{
 		int openParenthesesCount = 0;
 		
@@ -21,27 +21,27 @@ public class EventualC implements CompositePropositionParent {
 			//stringBuilder.append(" p " + i + AND + NEXT );
 			if(numProposition==1)
 			{
-				ltlFormula.append(" p " + i );
+				ltlFormula.append(" " + charValue +" " + i );
 			}
 			else
 			{
 				if(i == 0)
 				{
-					ltlFormula.append(" p " + i + Symbols.AND + Symbols.NEXT );
+					ltlFormula.append(" "+ charValue +" " + i + Symbols.AND + Symbols.NEXT );
 				}
 				else
 				{		
 					if(numProposition - i > 1)
 					{
 						ltlFormula.append(Symbols.OPEN_Parenth + Symbols.NOT 
-								+ " p" + i + Symbols.UNTIL + Symbols.OPEN_Parenth 
-								+ " p" + i + Symbols.AND + Symbols.NEXT   );
+								+ " " + charValue + i + Symbols.UNTIL + Symbols.OPEN_Parenth 
+								+ " " + charValue + i + Symbols.AND + Symbols.NEXT   );
 						openParenthesesCount=openParenthesesCount+2;
 					}
 					else
 					{
 						ltlFormula.append(Symbols.OPEN_Parenth + Symbols.NOT 
-								+ " p" + i + Symbols.UNTIL + " p " + i 
+								+ " " + charValue + i + Symbols.UNTIL + " p " + i 
 								+ Symbols.CLOSE_Parenth );
 					}
 				}			

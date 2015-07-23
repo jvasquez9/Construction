@@ -5,7 +5,7 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 public class EventualH implements CompositePropositionParent {
 	
 	@Override
-	public String compute(int numProposition) {
+	public String compute(int numProposition, char charValue) {
 		int count = 0;
 		
 		if (numProposition <= 0)
@@ -19,19 +19,19 @@ public class EventualH implements CompositePropositionParent {
 		
 		for(int i = 0; i < numProposition; i++){
 			nextP = i + 1;
-			stringBuilder.append("p" + i + " " + Symbols.AND);
+			stringBuilder.append(""+charValue + i + " " + Symbols.AND);
 			for(;nextP < numProposition; nextP++){
-				stringBuilder.append(Symbols.NOT + "p" + nextP + " " + Symbols.AND);
+				stringBuilder.append(Symbols.NOT + ""+ charValue + nextP + " " + Symbols.AND);
 			}
 			stringBuilder.append(Symbols.OPEN_Parenth + Symbols.OPEN_Parenth);
 			nextP = i + 1;
 			if(numProposition - i != 2){
 				for(;nextP < numProposition; nextP++){
 					if(numProposition - nextP == 1){
-						stringBuilder.append(Symbols.NOT + "p" + nextP);
+						stringBuilder.append(Symbols.NOT + "" + charValue + nextP);
 					}
 					else{
-						stringBuilder.append(Symbols.NOT + "p" + nextP 
+						stringBuilder.append(Symbols.NOT + "" + charValue + nextP 
 								+ " " + Symbols.AND);
 					}
 				}
@@ -40,8 +40,8 @@ public class EventualH implements CompositePropositionParent {
 					count += 2;
 			}
 			else{
-				stringBuilder.append(Symbols.NOT + "p" + nextP + " "
-						+ Symbols.UNTIL + " " + "p" + nextP);
+				stringBuilder.append(Symbols.NOT + "" + charValue + nextP + " "
+						+ Symbols.UNTIL + " " + charValue + nextP);
 				count += 2;
 				break;
 			}

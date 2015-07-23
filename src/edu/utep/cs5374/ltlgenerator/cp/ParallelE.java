@@ -5,7 +5,7 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 public class ParallelE implements CompositePropositionParent  {
 
 	@Override
-	public String compute(int numProposition)
+	public String compute(int numProposition, char charValue)
 	{
 		if (numProposition <= 0)
 		{
@@ -16,7 +16,7 @@ public class ParallelE implements CompositePropositionParent  {
 		StringBuilder stringBuilder = new StringBuilder(Symbols.OPEN_Parenth);
 		for(int i=0;i< numProposition;i++)
 		{
-			stringBuilder.append(Symbols.NOT + " p" + i + " ");
+			stringBuilder.append(Symbols.NOT + " " + charValue + i + " ");
 			if(i < numProposition - 1)
 			{
 				stringBuilder.append(Symbols.AND);
@@ -32,7 +32,7 @@ public class ParallelE implements CompositePropositionParent  {
 		stringBuilder.append(Symbols.OPEN_Parenth);
 		stringBuilder.append(Symbols.OPEN_Parenth);
 		for(int i = 0; i < numProposition; i++){
-			stringBuilder.append(Symbols.NOT + " p" + i + " ");
+			stringBuilder.append(Symbols.NOT + " " + charValue + i + " ");
 			if(i < numProposition - 1)
 			{
 				stringBuilder.append(Symbols.AND);
@@ -46,7 +46,7 @@ public class ParallelE implements CompositePropositionParent  {
 		stringBuilder.append(Symbols.UNTIL);
 		stringBuilder.append(Symbols.OPEN_Parenth);
 		for(int i = 0; i < numProposition; i++){
-			stringBuilder.append(" p" + i + " ");
+			stringBuilder.append(" " + charValue + i + " ");
 			if(i < numProposition - 1)
 			{
 				stringBuilder.append(Symbols.AND);

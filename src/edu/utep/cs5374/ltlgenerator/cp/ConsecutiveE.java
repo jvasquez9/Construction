@@ -4,14 +4,14 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class ConsecutiveE implements CompositePropositionParent {
 	
-	private String ltlFormulaGenerator(int numP, int countRecursion, StringBuilder ltlFormula){
+	private String ltlFormulaGenerator(int numP, char charValue, int countRecursion, StringBuilder ltlFormula){
 		for(int i=countRecursion;i< numP;i++)
 		{
 			if(i == countRecursion){
-				ltlFormula.append(" p" + i + " ");
+				ltlFormula.append(" " + charValue + i + " ");
 			}
 			else{
-				ltlFormula.append(Symbols.AND + Symbols.NOT + " p" + i + " ");
+				ltlFormula.append(Symbols.AND + Symbols.NOT + " " + charValue + i + " ");
 			}
 
 		}
@@ -21,7 +21,7 @@ public class ConsecutiveE implements CompositePropositionParent {
 			ltlFormula.append(Symbols.NEXT);
 			ltlFormula.append(Symbols.OPEN_Parenth);
 			countRecursion++;
-			ltlFormulaGenerator(numP, countRecursion, ltlFormula);
+			ltlFormulaGenerator(numP, charValue, countRecursion, ltlFormula);
 			ltlFormula.append(Symbols.CLOSE_Parenth);
 			return ltlFormula.toString();
 		}
@@ -31,7 +31,7 @@ public class ConsecutiveE implements CompositePropositionParent {
 	}
 	
 	@Override
-	public String compute(int numProposition) 
+	public String compute(int numProposition, char charValue) 
 	{
 		if (numProposition <= 0)
 		{
@@ -42,7 +42,7 @@ public class ConsecutiveE implements CompositePropositionParent {
 		StringBuilder stringBuilder = new StringBuilder(Symbols.OPEN_Parenth);
 		for(int i=0;i< numProposition;i++)
 		{
-			stringBuilder.append(Symbols.NOT + " p" + i + " ");
+			stringBuilder.append(Symbols.NOT + " " + charValue + i + " ");
 			if(i < numProposition - 1)
 			{
 				stringBuilder.append(Symbols.AND);
@@ -59,7 +59,7 @@ public class ConsecutiveE implements CompositePropositionParent {
 		stringBuilder.append(Symbols.OPEN_Parenth);
 		
 		for(int i = 0; i < numProposition; i++){
-			stringBuilder.append(Symbols.NOT + " p" + i + " ");
+			stringBuilder.append(Symbols.NOT + " " + charValue + i + " ");
 			if(i < numProposition - 1)
 			{
 				stringBuilder.append(Symbols.AND);
@@ -75,10 +75,10 @@ public class ConsecutiveE implements CompositePropositionParent {
 		
 		for(int i=0;i< numProposition;i++){
 			if(i == 0){
-				stringBuilder.append(" p" + i + " ");
+				stringBuilder.append(" " + charValue + i + " ");
 			}
 			else{
-				stringBuilder.append(Symbols.AND + Symbols.NOT + " p" + i + " ");
+				stringBuilder.append(Symbols.AND + Symbols.NOT + " " + charValue + i + " ");
 			}
 
 		}
@@ -88,7 +88,7 @@ public class ConsecutiveE implements CompositePropositionParent {
 			ltlFormula.append(Symbols.NEXT);
 			ltlFormula.append(Symbols.OPEN_Parenth);
 			int recursionCount = 1;
-			ltlFormula.append(ltlFormulaGenerator(numProposition, recursionCount, new StringBuilder("")));
+			ltlFormula.append(ltlFormulaGenerator(numProposition, charValue, recursionCount, new StringBuilder("")));
 			ltlFormula.append(Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth);
 			return ltlFormula.toString();
 		}

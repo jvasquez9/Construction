@@ -5,7 +5,7 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 public class ParallelC implements CompositePropositionParent {
 	
 	@Override
-	public String compute(int numProposition)
+	public String compute(int numProposition, char charValue)
 	{
 		if (numProposition <= 0)
 		{
@@ -16,7 +16,7 @@ public class ParallelC implements CompositePropositionParent {
 		
 		for(int i=0;i< numProposition;i++)
 		{
-			stringBuilder.append(" p" + i + " ");
+			stringBuilder.append(" " + charValue + i + " ");
 			
 			if(i < numProposition - 1)
 			{
