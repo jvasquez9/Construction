@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 import edu.utep.cs5374.ltlgenerator.and.*;
 import edu.utep.cs5374.ltlgenerator.cp.*;
+import edu.utep.cs5374.ltlgenerator.globalscope.AbsenseOfP;
+import edu.utep.cs5374.ltlgenerator.globalscope.ExistenceOfP;
+import edu.utep.cs5374.ltlgenerator.globalscope.QPrecedesPcStar;
+import edu.utep.cs5374.ltlgenerator.globalscope.QPrecedesPePlus;
+import edu.utep.cs5374.ltlgenerator.globalscope.QPrecedesPeStar;
 import edu.utep.cs5374.ltlgenerator.globalscope.QRespondsP;
 import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPe;
 
@@ -50,6 +55,10 @@ public class Main {
 			System.out.println("Qltl :" + Q);
 		}
 
+		/**
+		 * Don't seem to need this at the moment if the And's
+		 * are included with the Scopes...
+		 * 
 		System.out.println(
 				"\n\nAnd\n" +
 				"1 # AndR "+"\n"+ 
@@ -80,6 +89,7 @@ public class Main {
 		{
 			System.out.println("And type doesn't match");
 		}
+		**/
 		
 		System.out.println(
 				"\n\nGlobal Scope\n" +
@@ -95,15 +105,50 @@ public class Main {
 
 		System.out.println("Enter the type of Global Scope:");
 		globalScope = sc.nextInt();
-		if(globalScope == 3){
+		if(globalScope == 1){
+			// Q Strictly Precedes Pc
+			String formula = new AbsenseOfP().getFormula(Q, n);
+			System.out.println("Abscence of P : \n" + formula);
+		}
+		else if(globalScope == 2){
+			// Q Strictly Precedes Pc
+			String formula = new ExistenceOfP().getFormula(Q, n);
+			System.out.println("Existance of P : \n" + formula);
+		}
+		else if(globalScope == 3){
 			// Q Strictly Precedes Pc
 			String formula = new QRespondsP().getFormula(P,Q, n);
 			System.out.println("Q Responds P : \n" + formula);
 		}
 		else if(globalScope == 4){
 			// Q Strictly Precedes Pc
-			String temp = new QStrictlyPrecedesPe().getFormula(Q, n);
+			String temp = new QStrictlyPrecedesPc().getFormula(Q, n);
 			System.out.println("Q Strictly Precedes Pc : \n" + temp);
+		}
+		else if(globalScope == 5){
+			// Q Strictly Precedes Pc
+			String temp = new QStrictlyPrecedesPe().getFormula(Q, n);
+			System.out.println("Q Strictly Precedes Pe : \n" + temp);
+		}
+		else if(globalScope == 6){
+			// Q Strictly Precedes Pc
+			String temp = new QPrecedesPcStar().formulaOfScope(P, Q);
+			System.out.println("Q Precedes Pc* : \n" + temp);
+		}
+		else if(globalScope == 7){
+			// Q Strictly Precedes Pc
+			String temp = new QPrecedesPcPlus().getFormula(Q, n);
+			System.out.println("Q Precedes Pc+ : \n" + temp);
+		}
+		else if(globalScope == 8){
+			// Q Strictly Precedes Pc
+			String temp = new QPrecedesPeStar().getFormula(Q, n);
+			System.out.println("Q Precedes Pe* : \n" + temp);
+		}
+		else if(globalScope == 9){
+			// Q Strictly Precedes Pc
+			String temp = new QPrecedesPePlus().getFormula(Q, n);
+			System.out.println("Q Precedes Pe+ : \n" + temp);
 		}
 		else{
 			System.out.println("Global scope doesn't match!");
