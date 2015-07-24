@@ -3,6 +3,6 @@ package edu.utep.cs5374.ltlgenerator.and;
 public class AndR extends AndParent{
 	@Override
 	public String and(String leftHandSide, String rightHandSide) {
-		return andHelper(leftHandSide, rightHandSide, TraversalMode.AND_R);
+		return and(leftHandSide, rightHandSide, TraversalMode.AND_R);
 	}
 }

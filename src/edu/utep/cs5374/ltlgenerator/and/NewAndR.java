@@ -5,38 +5,39 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Stack;
 
-import edu.utep.cs5374.ltlgenerator.patterns.*;
+import edu.utep.cs5374.ltlgenerator.patterns.AndPattern;
+import edu.utep.cs5374.ltlgenerator.patterns.AndWithTrailingAndPattern;
+import edu.utep.cs5374.ltlgenerator.patterns.Pattern;
+import edu.utep.cs5374.ltlgenerator.patterns.SinglePremisePattern;
+import edu.utep.cs5374.ltlgenerator.patterns.PremiseUntilPattern;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
-import edu.utep.cs5374.ltlgenerator.utility.SubString;
+import edu.utep.cs5374.ltlgenerator.utility.*;
 
-public abstract class AndParent {
+public class NewAndR extends AndParent{
 	
 	private static Pattern singlePremiseChain = new SinglePremisePattern();
-	private static Pattern uniaryOperatorChain = new UniaryOperatorPattern();
 	private static Pattern untilChain = new PremiseUntilPattern();
 	private static Pattern AndChain = new AndPattern();
-	private static Pattern orChain = new OrPattern();
 	private static Pattern AndWithTrailingAndChain = new AndWithTrailingAndPattern();
-	private static Pattern notPremiseChain = new NotPremisePattern();
-	private static Pattern AndWithTrailingAndNextChain = new AndWithTrailingAndNextPattern();
-	
-	private static Pattern[] peliminaryTests = {notPremiseChain, AndChain, orChain};
-	
-	private static Pattern[] patternList = {singlePremiseChain, uniaryOperatorChain,
-		untilChain, orChain, AndChain, AndWithTrailingAndChain, AndWithTrailingAndNextChain};
-	
-	public enum TraversalMode{AND_R, AND_L, AND_MINUS_L};
-	
-	public abstract String and(String leftHandSide, String rightHandSide);
+	private static Pattern[] patternList = {singlePremiseChain,
+		untilChain, AndChain, AndWithTrailingAndChain};
 	
 	public static void main(String[] args)
 	{
-		SubString not = new SubString(0, 3, "(~a)");
-		System.out.println(new AndR().and("(!a)", "P"));
+		//new NewAndR().and("(a0|a1|a2)", "P");
+		//System.out.println("------------------------------");
+		//new NewAndR().and("(aUb)", "P");
+		//System.out.println("------------------------------");
+		new NewAndR().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U(a1&!a2&!a3&((!a2&!a3)U(a2&!a3&(!a3Ua3)))))", "P");
 	}
-	
+
+	@Override
+	public String and(String leftHandSide, String rightHandSide) {
+		return and(leftHandSide, rightHandSide, TraversalMode.AND_R);
+	}
 		
-	protected String and(String leftHandSide, String rightHandSide, TraversalMode traversalMode) {
+	public String and(String leftHandSide, String rightHandSide, TraversalMode traversalMode) {
+		
 		//Strip white space from both strings
 		leftHandSide = leftHandSide.replaceAll("\\s+","");
 		rightHandSide = rightHandSide.replaceAll("\\s+", "");
@@ -45,18 +46,7 @@ public abstract class AndParent {
 		//let's use temporary substitutions ~ and /
 		leftHandSide = leftHandSide.replaceAll("[!]", "~");
 		leftHandSide = leftHandSide.replaceAll("[|]", "/");
-		
-		String dirtyFix = patternMatchHelper(new SubString(0, leftHandSide.length() - 1, 
-				leftHandSide), rightHandSide, peliminaryTests);
-		
-		if(!dirtyFix.isEmpty())
-		{
-			dirtyFix = dirtyFix.replaceAll("[~]", "!");
-			dirtyFix = dirtyFix.replaceAll("[/]", "|");
-			System.out.println(dirtyFix);
-			return dirtyFix;
-		}
-		
+				
 		//First, compute our substrings.
 		String workingString = "(" + leftHandSide + ")";
 		Stack<SubString> initialSubStrings = computeSubStrings(workingString);
@@ -94,22 +84,12 @@ public abstract class AndParent {
 			
 			//If this condition is satisfied, we must split the string
 			if(currentCharacter == Symbols.NEXT.charAt(0) ||
-					currentCharacter == Symbols.UNTIL.charAt(0) ||
-					currentCharacter == Symbols.RIGHT_ARROW.charAt(0))
+					currentCharacter == Symbols.UNTIL.charAt(0))
 			{
-				SubString leftHandSide = new SubString(topToken.getLeftIndex(), i + 1, workingString);
-				SubString rightHandSide = new SubString(i, topToken.getRightIndex(), workingString);
-				
-				if(!leftHandSide.toString().isEmpty())
-				{
-					filteredSubStrings.push(leftHandSide);
-				}
-				
-				if(!rightHandSide.toString().isEmpty())
-				{
-					filteredSubStrings.push(rightHandSide);
-				}
-				
+				SubString leftHandSide = new SubString(topToken.getLeftIndex(), i, workingString);
+				SubString rightHandSide = new SubString(i - 1, topToken.getRightIndex(), workingString);
+				filteredSubStrings.push(leftHandSide);
+				filteredSubStrings.push(rightHandSide);
 				return;
 			}
 		}
@@ -138,7 +118,8 @@ public abstract class AndParent {
 			//do not modify the string.
 			if(useAnd(traversalMode, lastTimeBasedExpression))
 			{
-				outputString = patternMatch(currentPair, rightHandSide) + outputString;
+				outputString = patternMatch(currentPair, rightHandSide,
+						traversalMode, lastTimeBasedExpression) + outputString;
 			}
 			else
 			{
@@ -241,22 +222,25 @@ public abstract class AndParent {
 	private boolean useAnd(TraversalMode traversalMode, boolean isLastTimeBasedExpression)
 	{
 		if(traversalMode == TraversalMode.AND_MINUS_L)
-			return !isLastTimeBasedExpression;
-		else if(traversalMode == TraversalMode.AND_L)
 			return isLastTimeBasedExpression;
+		else if(traversalMode == TraversalMode.AND_L)
+			return !isLastTimeBasedExpression;
 		return true;
 	}
 	
-	private String patternMatch(SubString possiblePattern, String rightHandSide)
+	private String patternMatch(SubString possiblePattern, String rightHandSide,
+			TraversalMode traversalMode, boolean lastTimeBasedExpression)
 	{
 		//This is a chain of responsibility. We try to find a regular expression to find a
 		//replacement. If we do not find a pattern we return identity then log the pattern.
 		
-		String result = patternMatchHelper(possiblePattern, rightHandSide, patternList);
 		
-		if(!result.isEmpty())
+		for(Pattern p : patternList)
 		{
-			return result;
+			if(p.recognizes(possiblePattern))
+			{
+				return p.replace(possiblePattern, rightHandSide);
+			}
 		}
 		
 		//If all else fails, log the pattern and have Robert take a look at it.
@@ -274,18 +258,5 @@ public abstract class AndParent {
 		}
 		
 		return possiblePattern.toString();
-	}
-	
-	private String patternMatchHelper(SubString possiblePattern, String rightHandSide,
-			Pattern[] patternList)
-	{
-		for(Pattern p : patternList)
-		{
-			if(p.recognizes(possiblePattern))
-			{
-				return p.replace(possiblePattern, rightHandSide);
-			}
-		}
-		return "";
 	}
 }

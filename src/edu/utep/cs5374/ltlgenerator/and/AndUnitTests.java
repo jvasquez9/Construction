@@ -160,7 +160,7 @@ public class AndUnitTests {
 	public void testAndLMINUSFive()
 	{
 		String andResult = new AndMinusL().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U(a1|a2|a3))", "P");
-		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U((a1|a2|a3))");
+		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U(a1|a2|a3))");
 	}
 	
 	@Test
