@@ -28,13 +28,6 @@ public abstract class AndParent {
 	public enum TraversalMode{AND_R, AND_L, AND_MINUS_L};
 	
 	public abstract String and(String leftHandSide, String rightHandSide);
-	
-	public static void main(String[] args)
-	{
-		SubString not = new SubString(0, 3, "(~a)");
-		System.out.println(new AndR().and("(!a)", "P"));
-	}
-	
 		
 	protected String and(String leftHandSide, String rightHandSide, TraversalMode traversalMode) {
 		//Strip white space from both strings
@@ -46,6 +39,10 @@ public abstract class AndParent {
 		leftHandSide = leftHandSide.replaceAll("[!]", "~");
 		leftHandSide = leftHandSide.replaceAll("[|]", "/");
 		
+		//Seriously, the only reason this "fix" is here is because an extra
+		//pair of parenthesis will be added to select expressions that will
+		//cause them to fail test cases. Don't like adding such logic but
+		//these checks are required.
 		String dirtyFix = patternMatchHelper(new SubString(0, leftHandSide.length() - 1, 
 				leftHandSide), rightHandSide, peliminaryTests);
 		
