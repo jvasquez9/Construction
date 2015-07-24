@@ -19,11 +19,11 @@ String Ph_ltl = new ParallelH().compute(numProposition, 'p');
 		
 		String afterAndRPart = Symbols.NOT + Symbols.OPEN_Parenth + partialPart + Symbols.CLOSE_Parenth;
 		
-		String firstPart = new AndR().and(Q_ltl, afterAndRPart);
+		String firstPart = (Q_ltl + afterAndRPart);
 		
 		return Symbols.NOT + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + Symbols.NOT + 
 				Symbols.OPEN_Parenth + firstPart + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth +
-				Symbols.UNTIL + Symbols.OPEN_Parenth + partialPart + Symbols.AND + Symbols.NOT + Q_ltl + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth;
+				Symbols.UNTIL + Symbols.OPEN_Parenth + partialPart + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth;
 	}
 
 }

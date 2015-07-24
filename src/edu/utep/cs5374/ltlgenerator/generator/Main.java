@@ -106,24 +106,24 @@ public class Main {
 		System.out.println("Enter the type of Global Scope:");
 		globalScope = sc.nextInt();
 		if(globalScope == 1){
-			// Q Strictly Precedes Pc
+			// Abscence of P
 			String formula = new AbsenseOfP().getFormula(Q, n);
 			System.out.println("Abscence of P : \n" + formula);
 		}
 		else if(globalScope == 2){
-			// Q Strictly Precedes Pc
+			// Existance of P
 			String formula = new ExistenceOfP().getFormula(Q, n);
 			System.out.println("Existance of P : \n" + formula);
 		}
 		else if(globalScope == 3){
-			// Q Strictly Precedes Pc
+			// Q responds to P
 			String formula = new QRespondsP().getFormula(P,Q, n);
 			System.out.println("Q Responds P : \n" + formula);
 		}
 		else if(globalScope == 4){
 			// Q Strictly Precedes Pc
-			String temp = new QStrictlyPrecedesPc().getFormula(Q, n);
-			System.out.println("Q Strictly Precedes Pc : \n" + temp);
+			//String temp = new QStrictlyPrecedesPc().getFormula(Q, n);
+			//System.out.println("Q Strictly Precedes Pc : \n" + temp);
 		}
 		else if(globalScope == 5){
 			// Q Strictly Precedes Pc
@@ -131,22 +131,22 @@ public class Main {
 			System.out.println("Q Strictly Precedes Pe : \n" + temp);
 		}
 		else if(globalScope == 6){
-			// Q Strictly Precedes Pc
+			// Q precedes Pc star
 			String temp = new QPrecedesPcStar().formulaOfScope(P, Q);
 			System.out.println("Q Precedes Pc* : \n" + temp);
 		}
 		else if(globalScope == 7){
-			// Q Strictly Precedes Pc
-			String temp = new QPrecedesPcPlus().getFormula(Q, n);
-			System.out.println("Q Precedes Pc+ : \n" + temp);
+			// Q precedes Pc Plus
+		//	String temp = new QPrecedesPcPlus().getFormula(Q, n);
+		//	System.out.println("Q Precedes Pc+ : \n" + temp);
 		}
 		else if(globalScope == 8){
-			// Q Strictly Precedes Pc
+			// Q Precedes Pe Star
 			String temp = new QPrecedesPeStar().getFormula(Q, n);
 			System.out.println("Q Precedes Pe* : \n" + temp);
 		}
 		else if(globalScope == 9){
-			// Q Strictly Precedes Pc
+			// Q Precedes Pe Plus
 			String temp = new QPrecedesPePlus().getFormula(Q, n);
 			System.out.println("Q Precedes Pe+ : \n" + temp);
 		}
