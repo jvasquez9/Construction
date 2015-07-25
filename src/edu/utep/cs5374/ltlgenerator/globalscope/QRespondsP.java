@@ -22,7 +22,7 @@ public class QRespondsP extends GlobalScopeParent{
 		
 		String formula=new AndL().and(leftSide, rightSide);
 		
-		return Symbols.G+Symbols.OPEN_Parenth+P_ltl+Symbols.RIGHT_ARROW+Symbols.OPEN_Parenth+formula+Symbols.CLOSE_Parenth+Q_ltl+Symbols.CLOSE_Parenth+Q_ltl+Symbols.CLOSE_Parenth;
+		return Symbols.G+Symbols.OPEN_Parenth+P_ltl+Symbols.RIGHT_ARROW+Symbols.OPEN_Parenth+formula+Symbols.CLOSE_Parenth+Symbols.CLOSE_Parenth;
 		
 }
 }
