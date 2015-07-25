@@ -1,6 +1,6 @@
 package edu.utep.cs5374.ltlgenerator.globalscope;
 
-import edu.utep.cs5374.ltlgenerator.and.AndR;
+import edu.utep.cs5374.ltlgenerator.and.AndMinusL;
 import edu.utep.cs5374.ltlgenerator.cp.ParallelH;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
@@ -19,7 +19,7 @@ public String getFormula(String Q_ltl, int numProposition){
 		
 		String afterAndRPart = Symbols.NOT + Symbols.OPEN_Parenth + partialPart + Symbols.CLOSE_Parenth;
 		
-		String firstPart = new AndR().and(Q_ltl, afterAndRPart);
+		String firstPart = new AndMinusL().and(Q_ltl, afterAndRPart);
 		
 		return Symbols.NOT + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + Symbols.NOT + 
 				Symbols.OPEN_Parenth + firstPart + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth +

@@ -14,19 +14,15 @@ public class QRespondsP extends GlobalScopeParent{
 
 	
 	public String getFormula(String P_ltl, String Q_ltl,int numProposition){
-		// always(PLTL right arrow (PLTL &_l eventual QLTL)))
+		// always(PLTL right arrow (PLTL &_l eventual QLTL))
 	
-		/*return Symbols.G+Symbols.OPEN_Parenth+P_ltl+Symbols.RIGHT_ARROW+Symbols.OPEN_Parenth+P_ltl+"&L"+Symbols.F+
-				Q_ltl+Symbols.CLOSE_Parenth+Q_ltl+Symbols.CLOSE_Parenth+Q_ltl+Symbols.CLOSE_Parenth;
-	}*/
-	
-	
-		String leftSide=Symbols.G+Symbols.OPEN_Parenth+P_ltl+Symbols.RIGHT_ARROW+Symbols.OPEN_Parenth+P_ltl;
-		String rightSide=Symbols.F+	Q_ltl+Symbols.CLOSE_Parenth+Q_ltl+Symbols.CLOSE_Parenth+Q_ltl+Symbols.CLOSE_Parenth;
+		
+		String leftSide=P_ltl;
+		String rightSide=Symbols.F+	Q_ltl;
 		
 		String formula=new AndL().and(leftSide, rightSide);
 		
-		return formula;
+		return Symbols.G+Symbols.OPEN_Parenth+P_ltl+Symbols.RIGHT_ARROW+Symbols.OPEN_Parenth+formula+Symbols.CLOSE_Parenth+Q_ltl+Symbols.CLOSE_Parenth+Q_ltl+Symbols.CLOSE_Parenth;
 		
 }
 }
