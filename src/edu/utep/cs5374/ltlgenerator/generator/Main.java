@@ -6,10 +6,12 @@ import edu.utep.cs5374.ltlgenerator.and.*;
 import edu.utep.cs5374.ltlgenerator.cp.*;
 import edu.utep.cs5374.ltlgenerator.globalscope.AbsenseOfP;
 import edu.utep.cs5374.ltlgenerator.globalscope.ExistenceOfP;
+import edu.utep.cs5374.ltlgenerator.globalscope.QPrecedesPcPlus;
 import edu.utep.cs5374.ltlgenerator.globalscope.QPrecedesPcStar;
 import edu.utep.cs5374.ltlgenerator.globalscope.QPrecedesPePlus;
 import edu.utep.cs5374.ltlgenerator.globalscope.QPrecedesPeStar;
 import edu.utep.cs5374.ltlgenerator.globalscope.QRespondsP;
+import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPc;
 import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPe;
 
 public class Main {
@@ -122,8 +124,8 @@ public class Main {
 		}
 		else if(globalScope == 4){
 			// Q Strictly Precedes Pc
-			//String temp = new QStrictlyPrecedesPc().getFormula(Q, n);
-			//System.out.println("Q Strictly Precedes Pc : \n" + temp);
+			String temp = new QStrictlyPrecedesPc().formulaOfScope(Q, P);
+			System.out.println("Q Strictly Precedes Pc : \n" + temp);
 		}
 		else if(globalScope == 5){
 			// Q Strictly Precedes Pc
@@ -137,8 +139,8 @@ public class Main {
 		}
 		else if(globalScope == 7){
 			// Q precedes Pc Plus
-		//	String temp = new QPrecedesPcPlus().getFormula(Q, n);
-		//	System.out.println("Q Precedes Pc+ : \n" + temp);
+			String temp = new QPrecedesPcPlus().formulaOfScope(Q, P);
+			System.out.println("Q Precedes Pc+ : \n" + temp);
 		}
 		else if(globalScope == 8){
 			// Q Precedes Pe Star
