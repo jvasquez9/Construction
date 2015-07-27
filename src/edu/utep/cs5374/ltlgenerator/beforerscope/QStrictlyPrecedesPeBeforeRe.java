@@ -5,7 +5,7 @@ import edu.utep.cs5374.ltlgenerator.and.AndR;
 import edu.utep.cs5374.ltlgenerator.cp.ParallelH;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
-public class QPrecedesPeBeforeRe extends BeforeRScopeParent{
+public class QStrictlyPrecedesPeBeforeRe extends BeforeRScopeParent {
 
 	@Override
 	public String getFormula(String P_ltl, String Q_ltl, String R_ltl, int numProposition) {
@@ -15,13 +15,13 @@ public class QPrecedesPeBeforeRe extends BeforeRScopeParent{
 		
 		String partialPartP = getPartialPart(numProposition, 'p');
 		String partialPartR = getPartialPart(numProposition, 'r');
-		String andRPart = new AndR().and(Ph_ltl, Symbols.NOT + Rh_ltl);
+		String andRPartOne = new AndR().and(Ph_ltl, Symbols.NOT + Rh_ltl);
 		
-		String secondSyllable = Symbols.OPEN_Parenth + Symbols.NOT + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + partialPartP + Symbols.CLOSE_Parenth + Symbols.AND + Symbols.NOT + Rh_ltl + Symbols.AND + Symbols.NEXT + Symbols.OPEN_Parenth + andRPart + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth; 
+		String secondSyllable = Symbols.OPEN_Parenth + Symbols.NOT + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + partialPartP + Symbols.CLOSE_Parenth + Symbols.AND + Symbols.NOT + Rh_ltl + Symbols.AND + Symbols.NEXT + Symbols.OPEN_Parenth + andRPartOne + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth; 
 		
-		String andMinulLPart = new AndMinusL().and(Q_ltl, Symbols.NOT + Ph_ltl);
+		String andRPartTwo = new AndR().and(Q_ltl, Symbols.NOT + Ph_ltl);
 		
-		String thirdSyllable = Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + andMinulLPart + Symbols.CLOSE_Parenth + Symbols.OR + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + partialPartR + Symbols.CLOSE_Parenth + Symbols.AND + Symbols.NEXT + Rh_ltl + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth; 
+		String thirdSyllable = Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + andRPartTwo + Symbols.CLOSE_Parenth + Symbols.OR + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + partialPartR + Symbols.CLOSE_Parenth + Symbols.AND + Symbols.NEXT + Rh_ltl + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth; 
 		
 		return firstSyllable + Symbols.RIGHT_ARROW + secondSyllable + Symbols.UNTIL + thirdSyllable + Symbols.CLOSE_Parenth;
 	}
@@ -37,5 +37,4 @@ public class QPrecedesPeBeforeRe extends BeforeRScopeParent{
 		}
 		return partialPart;
 	}
-
 }

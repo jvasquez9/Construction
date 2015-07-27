@@ -3,6 +3,7 @@ package edu.utep.cs5374.ltlgenerator.generator;
 import java.util.Scanner;
 
 import edu.utep.cs5374.ltlgenerator.and.*;
+import edu.utep.cs5374.ltlgenerator.beforerscope.*;
 import edu.utep.cs5374.ltlgenerator.cp.*;
 import edu.utep.cs5374.ltlgenerator.globalscope.AbsenseOfP;
 import edu.utep.cs5374.ltlgenerator.globalscope.ExistenceOfP;
@@ -17,7 +18,7 @@ import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPe;
 public class Main {
 	public static void main(String[] args) {
 
-		int l, p, q, r, n, andType, globalScope; // to store user input type of proposition
+		int l, p, q, r, n, andType, globalScope, beforeRScope; // to store user input type of proposition
 		String L="", P="", Q="", R=""; //to keep pattern before ANDL, ANDR
 
 		Scanner sc = new Scanner(System.in);
@@ -53,6 +54,7 @@ public class Main {
 		{
 			P = cpTable[l - 1].compute(n,'p');
 			Q = cpTable[l - 1].compute(n,'q');
+			R = cpTable[l - 1].compute(n,'r');
 			System.out.println("\n\nPltl :" + P);
 			System.out.println("Qltl :" + Q);
 		}
@@ -156,6 +158,38 @@ public class Main {
 			System.out.println("Global scope doesn't match!");
 		}
 
+		System.out.println(
+				"\n\nBefore R Scope\n" +
+				"1 # QPrecedesPcBeforeRe"+"\n"+ 
+				"2 # QStrictlyPrecedesPcBeforeRe "+"\n"+ 
+				"3 # QPrecedesPeBeforeRe "+"\n" +
+				"4 # QStrictlyPrecedesPeBeforeRe "+"\n"
+				);
+
+		System.out.println("Enter the type of Global Scope:");
+		beforeRScope = sc.nextInt();
+		if(beforeRScope == 1){
+			// QPrecedesPcBeforeRe
+			String formula = new QPrecedesPcBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QPrecedesPcBeforeRe : \n" + formula);
+		}
+		else if(beforeRScope == 2){
+			// QStrictlyPrecedesPcBeforeRe
+			String formula = new QStrictlyPrecedesPcBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QStrictlyPrecedesPcBeforeRe : \n" + formula);
+		}
+		else if(beforeRScope == 3){
+			// QStrictlyPrecedesPcBeforeRe
+			String formula = new QPrecedesPeBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QPrecedesPeBeforeRe : \n" + formula);
+		}
+		else if(beforeRScope == 4){
+			// QStrictlyPrecedesPcBeforeRe
+			String formula = new QStrictlyPrecedesPeBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QStrictlyPrecedesPeBeforeRe : \n" + formula);
+		}
+
+		
 		sc.close();
 	}
 }
