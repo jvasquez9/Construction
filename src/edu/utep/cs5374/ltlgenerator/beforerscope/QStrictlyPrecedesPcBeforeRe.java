@@ -20,9 +20,9 @@ public class QStrictlyPrecedesPcBeforeRe extends BeforeRScopeParent {
 		for(int i = 0; i < numProposition; i++)
 		{
 			if(i == numProposition-1)
-				partialPart += "" + Symbols.NOT + "p" + i;
+				partialPart += "" + Symbols.NOT + "r" + i;
 			else
-				partialPart += "" + Symbols.NOT + "p" + i + Symbols.AND; 
+				partialPart += "" + Symbols.NOT + "r" + i + Symbols.AND; 
 		}
 		String fourthSyllable = Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + partialPart + Symbols.CLOSE_Parenth + Symbols.AND + Symbols.NEXT + Rh_ltl + Symbols.CLOSE_Parenth;
 		

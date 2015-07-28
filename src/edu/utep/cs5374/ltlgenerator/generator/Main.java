@@ -163,7 +163,9 @@ public class Main {
 				"1 # QPrecedesPcBeforeRe"+"\n"+ 
 				"2 # QStrictlyPrecedesPcBeforeRe "+"\n"+ 
 				"3 # QPrecedesPeBeforeRe "+"\n" +
-				"4 # QStrictlyPrecedesPeBeforeRe "+"\n"
+				"4 # QStrictlyPrecedesPeBeforeRe "+"\n"+
+				"13 # QRespondstoPBeforeRc "+"\n"+
+				"14 # QRespondstoPBeforeRe "+"\n"
 				);
 
 		System.out.println("Enter the type of Global Scope:");
@@ -187,6 +189,17 @@ public class Main {
 			// QStrictlyPrecedesPcBeforeRe
 			String formula = new QStrictlyPrecedesPeBeforeRe().getFormula(P,Q,R,n);
 			System.out.println("QStrictlyPrecedesPeBeforeRe : \n" + formula);
+		}
+		
+		else if(beforeRScope == 13){
+			// QStrictlyPrecedesPcBeforeRe
+			String formula = new QRespondstoPBeforeRc().getFormula(P,Q,R,n);
+			System.out.println("QRespondstoPBeforeRc : \n" + formula);
+		}
+		else if(beforeRScope == 14){
+			// QStrictlyPrecedesPcBeforeRe
+			String formula = new QRespondstoPBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QRespondstoPBeforeRe : \n" + formula);
 		}
 
 		
