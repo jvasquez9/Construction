@@ -9,8 +9,6 @@ public class QRespondstoPBeforeRc extends BeforeRScopeParent {
 	@Override
 	public String getFormula(String P_ltl, String Q_ltl, String R_ltl,int numProposition) {
 		// ¬((¬ RLTL) U ((PLTL & r ¬ RLTL) & l((¬ (QLTL & r ¬ RLTL)) U RLTL)))
-		// need to cross check parantheses
-		
 	
 		
 		String andRLeft=new AndR().and(P_ltl, Symbols.NOT+R_ltl);

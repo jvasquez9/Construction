@@ -59,42 +59,7 @@ public class Main {
 			System.out.println("Qltl :" + Q);
 		}
 
-		/**
-		 * Don't seem to need this at the moment if the And's
-		 * are included with the Scopes...
-		 * 
-		System.out.println(
-				"\n\nAnd\n" +
-				"1 # AndR "+"\n"+ 
-				"2 # AndL "+"\n"+ 
-				"3 # AndMinusL "+"\n");
-		System.out.println("Enter the type of And :");
-		andType = sc.nextInt();
-
-		String andResult;
-		if(andType == 1)
-		{
-			// AndR
-		}
-		else if(andType == 2)
-		{
-			// AndL
-			andResult = new AndL().and(P, "P");
-			System.out.println("AndL result " + andResult);
-		}
-		else if(andType == 3)
-		{
-			// AndMinusL
-			// AndL
-			andResult = new AndMinusL().and(P, "P");
-			System.out.println("AndL Minus result " + andResult);
-		}
-		else 
-		{
-			System.out.println("And type doesn't match");
-		}
-		**/
-		
+				
 		System.out.println(
 				"\n\nGlobal Scope\n" +
 				"1 # Absence of P "+"\n"+ 
