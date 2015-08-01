@@ -37,7 +37,6 @@ public class QPrecedesPeBeforeRc extends BeforeRScopeParent {
 		result.append(notRLTL);
 		
 		result.append(Symbols.AND);
-		result.append(Symbols.NOT);
 		result.append(Symbols.NEXT);
 		
 		AndR andRHelper = new AndR();
@@ -47,10 +46,7 @@ public class QPrecedesPeBeforeRc extends BeforeRScopeParent {
 		result.append(Symbols.CLOSE_Parenth);
 		result.append(Symbols.CLOSE_Parenth);
 		
-		//(F Rltl)->((!((!p0&...&!pn)&!rltl&X(Pltl &r !rltl)))U((Qltl &-l !(pltl))|rltl))
-		
 		result.append(Symbols.UNTIL);
-		result.append(Symbols.OPEN_Parenth);
 		result.append(Symbols.OPEN_Parenth);
 		
 		AndMinusL andMinusLHelper = new AndMinusL();
@@ -58,7 +54,6 @@ public class QPrecedesPeBeforeRc extends BeforeRScopeParent {
 		String andMinusLResult = andMinusLHelper.and(Q_ltl, notPLTL);
 		result.append(andMinusLResult);
 		
-		result.append(Symbols.CLOSE_Parenth);
 		result.append(Symbols.OR);
 		result.append(R_ltl);
 		result.append(Symbols.CLOSE_Parenth);

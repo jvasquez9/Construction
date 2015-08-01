@@ -12,7 +12,7 @@ public class QPrecedesPcBeforeRc extends BeforeRScopeParent{
 	}
 
 	@Override
-	//(F Rltl)->((!(Pltl &r !rltl))U((qltl &-l !pltl)|(Rltl))
+	//(F Rltl)->((!(Pltl &r !rltl))U((qltl &-l !pltl)|(Rltl)))
 	public String getFormula(String P_ltl, String Q_ltl, String R_ltl,
 			int numProposition) {
 		
@@ -45,6 +45,7 @@ public class QPrecedesPcBeforeRc extends BeforeRScopeParent{
 		result.append(Symbols.OR);
 		result.append(Symbols.OPEN_Parenth);
 		result.append(R_ltl);
+		result.append(Symbols.CLOSE_Parenth);
 		result.append(Symbols.CLOSE_Parenth);
 		result.append(Symbols.CLOSE_Parenth);
 		
