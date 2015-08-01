@@ -133,7 +133,7 @@ public class Main {
 				"14 # QRespondstoPBeforeRe "+"\n"
 				);
 
-		System.out.println("Enter the type of Global Scope:");
+		System.out.println("Enter the type of Before R Scope:");
 		beforeRScope = sc.nextInt();
 		if(beforeRScope == 1){
 			// QPrecedesPcBeforeRe
