@@ -2,7 +2,7 @@ package edu.utep.cs5374.ltlgenerator.patterns;
 
 import edu.utep.cs5374.ltlgenerator.utility.SubString;
 
-public class AndPattern extends Pattern {
+public class AndPattern extends PatternRecognizer {
 
 	public AndPattern() {
 		super("((~)*." + alphabetOrString + "." + numericOrString +"*)+(&.(~)*." +

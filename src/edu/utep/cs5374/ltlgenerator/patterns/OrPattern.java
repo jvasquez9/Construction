@@ -2,7 +2,7 @@ package edu.utep.cs5374.ltlgenerator.patterns;
 
 import edu.utep.cs5374.ltlgenerator.utility.SubString;
 
-public class OrPattern extends Pattern {
+public class OrPattern extends PatternRecognizer {
 
 	public OrPattern()
 	{

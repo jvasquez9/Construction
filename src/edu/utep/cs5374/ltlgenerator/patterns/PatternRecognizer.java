@@ -5,7 +5,7 @@ import edu.utep.cs5374.ltlgenerator.regexpr.DFAFactory;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 import edu.utep.cs5374.ltlgenerator.utility.SubString;
 
-public abstract class Pattern {
+public abstract class PatternRecognizer {
 	
 	protected static String alphabetOrString = generateRange('a', 'z', Symbols.OR.charAt(0));
 	protected static String numericOrString = generateRange('0','9', Symbols.OR.charAt(0));
@@ -13,7 +13,7 @@ public abstract class Pattern {
 	private static final int ERROR_VALUE = -1;
 	Language deterministicFiniteAutonoma;
 	
-	public Pattern(String regularExpression)
+	public PatternRecognizer(String regularExpression)
 	{
 		deterministicFiniteAutonoma = DFAFactory.generate(regularExpression);
 	}
@@ -26,16 +26,22 @@ public abstract class Pattern {
 	public abstract String replace(SubString stringToReplace, String rightHandSide);
 
 	protected int findSymbolLocation(String processedString, char symbol) {
-		int untilLocation = 0;
-		while(untilLocation < processedString.length())
+		int symbolLocation = 0;
+		while(symbolLocation < processedString.length())
 		{
-			if(processedString.charAt(untilLocation) == symbol)
-				return untilLocation;
-			untilLocation++;
+			if(processedString.charAt(symbolLocation) == symbol)
+				return symbolLocation;
+			symbolLocation++;
 		}
 		return ERROR_VALUE;
 	}
 
+	/*
+	 * Generates a range of characters on the ascii table from starting position front
+	 * to ending position back. It will place weaving symbols between each character
+	 * in the range omitting characters that are refered by the ltl system as special
+	 * characters.
+	 */
 	private static String generateRange(char front, char back, char weavingSymbol)
 	{
 		StringBuilder builder = new StringBuilder(Symbols.OPEN_Parenth);

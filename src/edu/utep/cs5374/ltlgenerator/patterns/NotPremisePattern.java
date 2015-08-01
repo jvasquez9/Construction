@@ -2,7 +2,7 @@ package edu.utep.cs5374.ltlgenerator.patterns;
 
 import edu.utep.cs5374.ltlgenerator.utility.SubString;
 
-public class NotPremisePattern extends Pattern {
+public class NotPremisePattern extends PatternRecognizer {
 
 	public NotPremisePattern() {
 		super("(~." + alphabetOrString + "." + numericOrString +"*)");

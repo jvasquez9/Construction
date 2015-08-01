@@ -2,7 +2,7 @@ package edu.utep.cs5374.ltlgenerator.patterns;
 
 import edu.utep.cs5374.ltlgenerator.utility.SubString;
 
-public class PremiseUntilPattern extends Pattern {
+public class PremiseUntilPattern extends PatternRecognizer {
 
 	public PremiseUntilPattern() {
 		super("((~)*." + alphabetOrString + "." + numericOrString + "*).(u|>)");

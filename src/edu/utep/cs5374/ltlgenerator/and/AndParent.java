@@ -11,18 +11,18 @@ import edu.utep.cs5374.ltlgenerator.utility.SubString;
 
 public abstract class AndParent {
 	
-	private static Pattern singlePremiseChain = new SinglePremisePattern();
-	private static Pattern uniaryOperatorChain = new UniaryOperatorPattern();
-	private static Pattern untilChain = new PremiseUntilPattern();
-	private static Pattern AndChain = new AndPattern();
-	private static Pattern orChain = new OrPattern();
-	private static Pattern AndWithTrailingAndChain = new AndWithTrailingAndPattern();
-	private static Pattern notPremiseChain = new NotPremisePattern();
-	private static Pattern AndWithTrailingAndNextChain = new AndWithTrailingAndNextPattern();
+	private static PatternRecognizer singlePremiseChain = new SinglePremisePattern();
+	private static PatternRecognizer uniaryOperatorChain = new UniaryOperatorPattern();
+	private static PatternRecognizer untilChain = new PremiseUntilPattern();
+	private static PatternRecognizer AndChain = new AndPattern();
+	private static PatternRecognizer orChain = new OrPattern();
+	private static PatternRecognizer AndWithTrailingAndChain = new AndWithTrailingAndPattern();
+	private static PatternRecognizer notPremiseChain = new NotPremisePattern();
+	private static PatternRecognizer AndWithTrailingAndNextChain = new AndWithTrailingAndNextPattern();
 	
-	private static Pattern[] peliminaryTests = {notPremiseChain, AndChain, orChain};
+	private static PatternRecognizer[] peliminaryTests = {notPremiseChain, AndChain, orChain};
 	
-	private static Pattern[] patternList = {singlePremiseChain, uniaryOperatorChain,
+	private static PatternRecognizer[] patternList = {singlePremiseChain, uniaryOperatorChain,
 		untilChain, orChain, AndChain, AndWithTrailingAndChain, AndWithTrailingAndNextChain};
 	
 	public enum TraversalMode{AND_R, AND_L, AND_MINUS_L};
@@ -50,7 +50,6 @@ public abstract class AndParent {
 		{
 			dirtyFix = dirtyFix.replaceAll("[~]", "!");
 			dirtyFix = dirtyFix.replaceAll("[/]", "|");
-			System.out.println(dirtyFix);
 			return dirtyFix;
 		}
 		
@@ -75,8 +74,6 @@ public abstract class AndParent {
 		
 		//Okay just kidding. We need to remove the extra parenthesis we added
 		outputString = outputString.substring(1, outputString.length() - 1);
-		
-		System.out.println(outputString);
 		
 		return outputString;
 	}
@@ -274,9 +271,9 @@ public abstract class AndParent {
 	}
 	
 	private String patternMatchHelper(SubString possiblePattern, String rightHandSide,
-			Pattern[] patternList)
+			PatternRecognizer[] patternList)
 	{
-		for(Pattern p : patternList)
+		for(PatternRecognizer p : patternList)
 		{
 			if(p.recognizes(possiblePattern))
 			{

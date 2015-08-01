@@ -1,5 +1,6 @@
 package edu.utep.cs5374.ltlgenerator.cp;
 
+import edu.utep.cs5374.ltlgenerator.patterns.PatternGenerator;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class EventualE implements CompositePropositionParent {
@@ -12,19 +13,11 @@ public class EventualE implements CompositePropositionParent {
 			return "";
 		}
 		
-		StringBuilder stringBuilder = new StringBuilder(Symbols.OPEN_Parenth);
+		StringBuilder stringBuilder = new StringBuilder();
+		String firstPartofPattern = PatternGenerator.generateNotAndNotPattern(numProposition, charValue);
+		stringBuilder.append(firstPartofPattern);
 		
-		for (int i = 0; i < numProposition; i++)
-		{
-			stringBuilder.append(Symbols.NOT + "" + charValue + i);
-			
-			if(i < numProposition - 1)
-			{
-				stringBuilder.append(" " + Symbols.AND);
-			}
-		}
-		stringBuilder.append(Symbols.CLOSE_Parenth + Symbols.AND 
-				+ Symbols.OPEN_Parenth);
+		stringBuilder.append(Symbols.AND + Symbols.OPEN_Parenth);
 		
 		for (int front = 0; front < numProposition; front++)
 		{
