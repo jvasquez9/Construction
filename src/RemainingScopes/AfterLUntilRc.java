@@ -11,7 +11,7 @@ public class AfterLUntilRc extends RemainingScopesParent{
 		//((LLTL&l¬RLTL)→	(LLTL&l((PLTL<R	∧((¬♦RLTL)	→PLTLG )))))
 		return Symbols.G + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + andLCall.and(L_ltl, Symbols.NOT + R_ltl) + 
 				Symbols.CLOSE_Parenth + Symbols.NEXT + Symbols.OPEN_Parenth + andLCall.and(L_ltl, P_ltl) + 
-				Symbols.AND + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + Symbols.NOT + //diamond? 
+				Symbols.AND + Symbols.OPEN_Parenth + Symbols.OPEN_Parenth + Symbols.NOT + Symbols.F +
 				R_ltl + Symbols.CLOSE_Parenth + Symbols.NEXT + Symbols.CLOSE_Parenth +
 				Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth;
 		
