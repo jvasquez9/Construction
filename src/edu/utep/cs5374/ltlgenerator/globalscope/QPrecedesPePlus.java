@@ -6,7 +6,7 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class QPrecedesPePlus extends GlobalScopeParent{
 	
-public String getFormula(String Q_ltl, int numProposition){
+	public String getFormula(String Q_ltl, int numProposition) {
 		
 		String Ph_ltl = new ParallelH().compute(numProposition, 'p');
 		

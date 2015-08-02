@@ -6,7 +6,6 @@ public class AbsenseOfP extends GlobalScopeParent{
 
 	@Override
 	public String getFormula(String Q, int numProposition) {
-		// TODO Auto-generated method stub
 		return Symbols.G + " " + Symbols.NOT + " " + Q;
 	}
 

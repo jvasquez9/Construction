@@ -5,6 +5,7 @@ import edu.utep.cs5374.ltlgenerator.cp.ParallelH;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class AbsenceofPBeforeRe extends BeforeRScopeParent{
+	
 	@Override
 	public String getFormula(String P_ltl, String Q_ltl, String R_ltl, int numProposition) {
 		// (♦RLTL)→	((¬((¬r1 ∧···∧¬rn)∧X(RLTLH ))) U (PLTL&r¬RLTLH ))
@@ -29,6 +30,6 @@ public class AbsenceofPBeforeRe extends BeforeRScopeParent{
 		
 		
 		return firstSyllable + partialPart + thirdSyllable + fourthSyllable;
-		
 	}
+	
 }

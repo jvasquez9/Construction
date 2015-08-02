@@ -29,6 +29,8 @@ public class Symbols {
 	
 	public static boolean isSymbol(String letterString)
 	{
+		if(letterString.length() != 1)
+			return false;
 		return isSymbol(letterString.charAt(0));
 	}
 }

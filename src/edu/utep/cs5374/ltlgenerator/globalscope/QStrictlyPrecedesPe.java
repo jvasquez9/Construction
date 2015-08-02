@@ -5,6 +5,8 @@ import edu.utep.cs5374.ltlgenerator.cp.ParallelH;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class QStrictlyPrecedesPe extends GlobalScopeParent {
+	
+	@Override
 	public String getFormula(String Q_ltl, int numProposition){
 		
 		String Ph_ltl = new ParallelH().compute(numProposition, 'p');
@@ -24,4 +26,5 @@ public class QStrictlyPrecedesPe extends GlobalScopeParent {
 				Symbols.OPEN_Parenth + firstPart + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth +
 				Symbols.UNTIL + Symbols.OPEN_Parenth + partialPart + Symbols.CLOSE_Parenth + Symbols.CLOSE_Parenth;
 	}
+	
 }

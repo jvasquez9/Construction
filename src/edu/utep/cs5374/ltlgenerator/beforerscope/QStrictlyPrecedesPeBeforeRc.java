@@ -5,11 +5,6 @@ import edu.utep.cs5374.ltlgenerator.patterns.PatternGenerator;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class QStrictlyPrecedesPeBeforeRc extends BeforeRScopeParent {
-	
-	public static void main(String[] args)
-	{
-		System.out.println(new QStrictlyPrecedesPeBeforeRc().getFormula("p0", "q0", "r0", 2));
-	}
 
 	@Override
 	//(F Rltl)->((!((!p0&...&!pn)&!rltl&X(Pltl &r !rltl)))U((Qltl &r !(pltl))|rltl))

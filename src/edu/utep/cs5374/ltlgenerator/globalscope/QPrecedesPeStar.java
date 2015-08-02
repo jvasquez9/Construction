@@ -7,7 +7,7 @@ public class QPrecedesPeStar extends GlobalScopeParent{
 
 	@Override
 	public String getFormula(String Q_ltl, int numProposition) {
-String Ph_ltl = new ParallelH().compute(numProposition, 'p');
+		String Ph_ltl = new ParallelH().compute(numProposition, 'p');
 		
 		String partialPart = "";
 		for(int i = 0; i < numProposition; i++)

@@ -5,11 +5,6 @@ import edu.utep.cs5374.ltlgenerator.and.AndR;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class QPrecedesPcBeforeRc extends BeforeRScopeParent{
-	
-	public static void main(String[] args)
-	{
-		System.out.println(new QPrecedesPcBeforeRc().getFormula("p0", "q0", "r0", 1));
-	}
 
 	@Override
 	//(F Rltl)->((!(Pltl &r !rltl))U((qltl &-l !pltl)|(Rltl)))
