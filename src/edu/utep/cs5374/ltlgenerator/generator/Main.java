@@ -2,6 +2,8 @@ package edu.utep.cs5374.ltlgenerator.generator;
 
 import java.util.Scanner;
 
+import RemainingScopes.AfterLUntilRc;
+import RemainingScopes.AfterLUntilRe;
 import edu.utep.cs5374.ltlgenerator.and.*;
 import edu.utep.cs5374.ltlgenerator.beforerscope.*;
 import edu.utep.cs5374.ltlgenerator.cp.*;
@@ -18,7 +20,7 @@ import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPe;
 public class Main {
 	public static void main(String[] args) {
 
-		int l, p, q, r, n, andType, globalScope, beforeRScope; // to store user input type of proposition
+		int l, p, q, r, n, andType, globalScope, beforeRScope, remainingScope; // to store user input type of proposition
 		String L="", P="", Q="", R=""; //to keep pattern before ANDL, ANDR
 
 		Scanner sc = new Scanner(System.in);
@@ -129,6 +131,7 @@ public class Main {
 				"2 # QStrictlyPrecedesPcBeforeRe "+"\n"+ 
 				"3 # QPrecedesPeBeforeRe "+"\n" +
 				"4 # QStrictlyPrecedesPeBeforeRe "+"\n"+
+				"5 # Existance of P before Re "+"\n"+
 				"13 # QRespondstoPBeforeRc "+"\n"+
 				"14 # QRespondstoPBeforeRe "+"\n"
 				);
@@ -155,6 +158,11 @@ public class Main {
 			String formula = new QStrictlyPrecedesPeBeforeRe().getFormula(P,Q,R,n);
 			System.out.println("QStrictlyPrecedesPeBeforeRe : \n" + formula);
 		}
+		else if(beforeRScope == 5){
+			// QStrictlyPrecedesPcBeforeRe
+			String formula = new ExistanceOfPBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("Existance of P Before Re : \n" + formula);
+		}
 		
 		else if(beforeRScope == 13){
 			// QStrictlyPrecedesPcBeforeRe
@@ -166,6 +174,42 @@ public class Main {
 			String formula = new QRespondstoPBeforeRe().getFormula(P,Q,R,n);
 			System.out.println("QRespondstoPBeforeRe : \n" + formula);
 		}
+		
+		System.out.println(
+				"\n\nRemaining Scope\n" +
+				"1 # After L"+"\n"+ 
+				"2 # Between L and Rc "+"\n"+ 
+				"3 # Between L and Re "+"\n" +
+				"4 # After L until Rc "+"\n"+
+				"5 # After L until Re "+"\n"				
+				);
+		remainingScope = sc.nextInt();
+		if(remainingScope == 1){
+			// After L
+			//String formula = new AfterL().getFormula(P,Q,R,n);
+			//System.out.println("After L : \n" + formula);
+		}
+		else if(remainingScope == 2){
+			// BetweenLandRc
+			//String formula = new BetweenLandRc().getFormula(P,Q,R,n);
+			//System.out.println("BetweenLandRc : \n" + formula);
+		}
+		else if(remainingScope == 3){
+			// BetweenLandRe
+			//String formula = new BetweenLandRe().getFormula(P,Q,R,n);
+			//System.out.println("Between L and Re : \n" + formula);
+		}
+		else if(remainingScope == 4){
+			// AfterLUntilRc
+			String formula = new AfterLUntilRc().getFormula(P,Q,R,L,n);
+			System.out.println("QStrictlyPrecedesPeBeforeRe : \n" + formula);
+		}
+		else if(remainingScope == 5){
+			// AfterLUntilRe
+			String formula = new AfterLUntilRe().getFormula(P,Q,R,L,n);
+			System.out.println("Existance of P Before Re : \n" + formula);
+		}
+		
 
 		
 		sc.close();
