@@ -22,6 +22,7 @@ public class Main {
 
 		int l, p, q, r, n, andType, globalScope, beforeRScope, remainingScope; // to store user input type of proposition
 		String L="", P="", Q="", R=""; //to keep pattern before ANDL, ANDR
+		String globalFormula = "", beforeRFormula = "", remainingScopeFormula = "";
 
 		Scanner sc = new Scanner(System.in);
 
@@ -78,48 +79,48 @@ public class Main {
 		globalScope = sc.nextInt();
 		if(globalScope == 1){
 			// Abscence of P
-			String formula = new AbsenseOfP().getFormula(Q, n);
-			System.out.println("Abscence of P : \n" + formula);
+			globalFormula = new AbsenseOfP().getFormula(Q, n);
+			System.out.println("Abscence of P : \n" + globalFormula);
 		}
 		else if(globalScope == 2){
 			// Existance of P
-			String formula = new ExistenceOfP().getFormula(Q, n);
-			System.out.println("Existance of P : \n" + formula);
+			globalFormula = new ExistenceOfP().getFormula(Q, n);
+			System.out.println("Existance of P : \n" + globalFormula);
 		}
 		else if(globalScope == 3){
 			// Q responds to P
-			String formula = new QRespondsP().getFormula(P,Q, n);
-			System.out.println("Q Responds P : \n" + formula);
+			globalFormula = new QRespondsP().getFormula(P,Q, n);
+			System.out.println("Q Responds P : \n" + globalFormula);
 		}
 		else if(globalScope == 4){
 			// Q Strictly Precedes Pc
-			String temp = new QStrictlyPrecedesPc().formulaOfScope(Q, P);
-			System.out.println("Q Strictly Precedes Pc : \n" + temp);
+			globalFormula = new QStrictlyPrecedesPc().formulaOfScope(Q, P);
+			System.out.println("Q Strictly Precedes Pc : \n" + globalFormula);
 		}
 		else if(globalScope == 5){
 			// Q Strictly Precedes Pc
-			String temp = new QStrictlyPrecedesPe().getFormula(Q, n);
-			System.out.println("Q Strictly Precedes Pe : \n" + temp);
+			globalFormula = new QStrictlyPrecedesPe().getFormula(Q, n);
+			System.out.println("Q Strictly Precedes Pe : \n" + globalFormula);
 		}
 		else if(globalScope == 6){
 			// Q precedes Pc star
-			String temp = new QPrecedesPcStar().formulaOfScope(P, Q);
-			System.out.println("Q Precedes Pc* : \n" + temp);
+			globalFormula = new QPrecedesPcStar().formulaOfScope(P, Q);
+			System.out.println("Q Precedes Pc* : \n" + globalFormula);
 		}
 		else if(globalScope == 7){
 			// Q precedes Pc Plus
-			String temp = new QPrecedesPcPlus().formulaOfScope(Q, P);
-			System.out.println("Q Precedes Pc+ : \n" + temp);
+			globalFormula = new QPrecedesPcPlus().formulaOfScope(Q, P);
+			System.out.println("Q Precedes Pc+ : \n" + globalFormula);
 		}
 		else if(globalScope == 8){
 			// Q Precedes Pe Star
-			String temp = new QPrecedesPeStar().getFormula(Q, n);
-			System.out.println("Q Precedes Pe* : \n" + temp);
+			globalFormula = new QPrecedesPeStar().getFormula(Q, n);
+			System.out.println("Q Precedes Pe* : \n" + globalFormula);
 		}
 		else if(globalScope == 9){
 			// Q Precedes Pe Plus
-			String temp = new QPrecedesPePlus().getFormula(Q, n);
-			System.out.println("Q Precedes Pe+ : \n" + temp);
+			globalFormula = new QPrecedesPePlus().getFormula(Q, n);
+			System.out.println("Q Precedes Pe+ : \n" + globalFormula);
 		}
 		else{
 			System.out.println("Global scope doesn't match!");
@@ -140,39 +141,39 @@ public class Main {
 		beforeRScope = sc.nextInt();
 		if(beforeRScope == 1){
 			// QPrecedesPcBeforeRe
-			String formula = new QPrecedesPcBeforeRe().getFormula(P,Q,R,n);
-			System.out.println("QPrecedesPcBeforeRe : \n" + formula);
+			beforeRFormula = new QPrecedesPcBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QPrecedesPcBeforeRe : \n" + beforeRFormula);
 		}
 		else if(beforeRScope == 2){
 			// QStrictlyPrecedesPcBeforeRe
-			String formula = new QStrictlyPrecedesPcBeforeRe().getFormula(P,Q,R,n);
-			System.out.println("QStrictlyPrecedesPcBeforeRe : \n" + formula);
+			beforeRFormula = new QStrictlyPrecedesPcBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QStrictlyPrecedesPcBeforeRe : \n" + beforeRFormula);
 		}
 		else if(beforeRScope == 3){
 			// QStrictlyPrecedesPcBeforeRe
-			String formula = new QPrecedesPeBeforeRe().getFormula(P,Q,R,n);
-			System.out.println("QPrecedesPeBeforeRe : \n" + formula);
+			beforeRFormula = new QPrecedesPeBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QPrecedesPeBeforeRe : \n" + beforeRFormula);
 		}
 		else if(beforeRScope == 4){
 			// QStrictlyPrecedesPcBeforeRe
-			String formula = new QStrictlyPrecedesPeBeforeRe().getFormula(P,Q,R,n);
-			System.out.println("QStrictlyPrecedesPeBeforeRe : \n" + formula);
+			beforeRFormula = new QStrictlyPrecedesPeBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QStrictlyPrecedesPeBeforeRe : \n" + beforeRFormula);
 		}
 		else if(beforeRScope == 5){
 			// QStrictlyPrecedesPcBeforeRe
-			String formula = new ExistanceOfPBeforeRe().getFormula(P,Q,R,n);
-			System.out.println("Existance of P Before Re : \n" + formula);
+			beforeRFormula = new ExistanceOfPBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("Existance of P Before Re : \n" + beforeRFormula);
 		}
 		
 		else if(beforeRScope == 13){
 			// QStrictlyPrecedesPcBeforeRe
-			String formula = new QRespondstoPBeforeRc().getFormula(P,Q,R,n);
-			System.out.println("QRespondstoPBeforeRc : \n" + formula);
+			beforeRFormula = new QRespondstoPBeforeRc().getFormula(P,Q,R,n);
+			System.out.println("QRespondstoPBeforeRc : \n" + beforeRFormula);
 		}
 		else if(beforeRScope == 14){
 			// QStrictlyPrecedesPcBeforeRe
-			String formula = new QRespondstoPBeforeRe().getFormula(P,Q,R,n);
-			System.out.println("QRespondstoPBeforeRe : \n" + formula);
+			beforeRFormula = new QRespondstoPBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QRespondstoPBeforeRe : \n" + beforeRFormula);
 		}
 		
 		System.out.println(
@@ -201,13 +202,13 @@ public class Main {
 		}
 		else if(remainingScope == 4){
 			// AfterLUntilRc
-			String formula = new AfterLUntilRc().getFormula(P,Q,R,L,n);
-			System.out.println("QStrictlyPrecedesPeBeforeRe : \n" + formula);
+			remainingScopeFormula = new AfterLUntilRc().getFormula(beforeRFormula,globalFormula,R,L,n);
+			System.out.println("After L until Rc : \n" + remainingScopeFormula);
 		}
 		else if(remainingScope == 5){
 			// AfterLUntilRe
-			String formula = new AfterLUntilRe().getFormula(P,Q,R,L,n);
-			System.out.println("Existance of P Before Re : \n" + formula);
+			remainingScopeFormula = new AfterLUntilRe().getFormula(beforeRFormula,globalFormula,R,L,n);
+			System.out.println("After L until Re : \n" + remainingScopeFormula);
 		}
 		
 
