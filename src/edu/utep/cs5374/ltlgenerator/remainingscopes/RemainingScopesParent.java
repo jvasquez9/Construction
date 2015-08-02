@@ -1,4 +1,4 @@
-package RemainingScopes;
+package edu.utep.cs5374.ltlgenerator.remainingscopes;
 
 public abstract class RemainingScopesParent {
 	

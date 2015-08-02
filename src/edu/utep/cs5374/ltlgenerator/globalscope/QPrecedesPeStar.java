@@ -1,6 +1,5 @@
 package edu.utep.cs5374.ltlgenerator.globalscope;
 
-import edu.utep.cs5374.ltlgenerator.and.AndR;
 import edu.utep.cs5374.ltlgenerator.cp.ParallelH;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 

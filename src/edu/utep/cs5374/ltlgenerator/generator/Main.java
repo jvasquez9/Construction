@@ -2,9 +2,6 @@ package edu.utep.cs5374.ltlgenerator.generator;
 
 import java.util.Scanner;
 
-import RemainingScopes.AfterLUntilRc;
-import RemainingScopes.AfterLUntilRe;
-import edu.utep.cs5374.ltlgenerator.and.*;
 import edu.utep.cs5374.ltlgenerator.beforerscope.*;
 import edu.utep.cs5374.ltlgenerator.cp.*;
 import edu.utep.cs5374.ltlgenerator.globalscope.AbsenseOfP;
@@ -16,10 +13,13 @@ import edu.utep.cs5374.ltlgenerator.globalscope.QPrecedesPeStar;
 import edu.utep.cs5374.ltlgenerator.globalscope.QRespondsP;
 import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPc;
 import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPe;
+import edu.utep.cs5374.ltlgenerator.remainingscopes.AfterLUntilRc;
+import edu.utep.cs5374.ltlgenerator.remainingscopes.AfterLUntilRe;
 
 public class Main {
 	public static void main(String[] args) {
 
+		@SuppressWarnings("unused")
 		int l, p, q, r, n, andType, globalScope, beforeRScope, remainingScope; // to store user input type of proposition
 		String L="", P="", Q="", R=""; //to keep pattern before ANDL, ANDR
 		String globalFormula = "", beforeRFormula = "", remainingScopeFormula = "";

@@ -1,7 +1,6 @@
 package edu.utep.cs5374.ltlgenerator.globalscope;
 
 import edu.utep.cs5374.ltlgenerator.and.AndMinusL;
-import edu.utep.cs5374.ltlgenerator.and.AndR;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class QPrecedesPcPlus extends GlobalScopeParent{

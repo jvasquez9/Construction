@@ -1,8 +1,8 @@
-package RemainingScopes;
+package edu.utep.cs5374.ltlgenerator.remainingscopes;
 
-import edu.utep.cs5374.ltlgenerator.beforerscope.BeforeRScopeParent;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 import edu.utep.cs5374.ltlgenerator.and.AndL;
+
 public class AfterLUntilRc extends RemainingScopesParent{
 
 	@Override
