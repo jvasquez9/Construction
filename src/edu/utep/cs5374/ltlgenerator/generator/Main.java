@@ -235,18 +235,18 @@ public class Main {
 		remainingScope = sc.nextInt();
 		if(remainingScope == 1){
 			// After L
-			//String formula = new AfterL().getFormula(P,Q,R,n);
-			//System.out.println("After L : \n" + formula);
+			String formula = new AfterL().getFormula(beforeRFormula,globalFormula,R,L,n);
+			System.out.println("After L : \n" + formula);
 		}
 		else if(remainingScope == 2){
 			// BetweenLandRc
-			//String formula = new BetweenLandRc().getFormula(P,Q,R,n);
-			//System.out.println("BetweenLandRc : \n" + formula);
+			String formula = new BetweenLandRc().getFormula(beforeRFormula,globalFormula,R,L,n);
+			System.out.println("BetweenLandRc : \n" + formula);
 		}
 		else if(remainingScope == 3){
 			// BetweenLandRe
-			//String formula = new BetweenLandRe().getFormula(P,Q,R,n);
-			//System.out.println("Between L and Re : \n" + formula);
+			String formula = new BetweenLandRe().getFormula(beforeRFormula,globalFormula,R,L,n);
+			System.out.println("Between L and Re : \n" + formula);
 		}
 		else if(remainingScope == 4){
 			// AfterLUntilRc
