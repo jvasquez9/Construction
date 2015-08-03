@@ -228,6 +228,8 @@ public class Main {
 				"4 # After L until Rc "+"\n"+
 				"5 # After L until Re "+"\n"				
 				);
+		System.out.println("Select the type of Remaining Scope:");
+		
 		remainingScope = sc.nextInt();
 		if(remainingScope == 1){
 			// After L
