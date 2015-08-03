@@ -72,5 +72,3 @@ Software Construction LTL generator
 	3 # Between L and Re 
 	4 # After L until Rc 
 	5 # After L until Re
-
-10. The program will terminate by showing the selected Remaining Scope output.

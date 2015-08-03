@@ -60,6 +60,7 @@ public class Main {
 			R = cpTable[l - 1].compute(n,'r');
 			System.out.println("\n\nPltl :" + P);
 			System.out.println("Qltl :" + Q);
+			System.out.println("Rltl :" + R);
 		}
 
 				
