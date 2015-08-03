@@ -1,6 +1,6 @@
 package edu.utep.cs5374.ltlgenerator.patterns;
 
-import edu.utep.cs5374.ltlgenerator.utility.SubString;
+import edu.utep.cs5374.ltlgenerator.utility.SubFormula;
 
 public class NotPremisePattern extends PatternRecognizer {
 
@@ -9,7 +9,7 @@ public class NotPremisePattern extends PatternRecognizer {
 	}
 
 	@Override
-	public String replace(SubString stringToReplace, String rightHandSide) {
+	public String replace(SubFormula stringToReplace, String rightHandSide) {
 		String leftHandSide = stringToReplace.toString();
 		leftHandSide = leftHandSide.substring(1, leftHandSide.length());
 		return "(!(" + leftHandSide + "&" + rightHandSide + "))";

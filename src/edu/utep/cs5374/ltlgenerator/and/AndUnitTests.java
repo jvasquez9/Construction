@@ -167,14 +167,14 @@ public class AndUnitTests {
 	public void testAndLMINUSSix()
 	{
 		String andResult = new AndMinusL().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U((a1&!a2&!a3&X(a2&!a3&X(a3)))))", "P");
-		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U((a1&!a2&!a3&P&X(a2&!a3&P&Xa3))))");
+		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U(((a1&!a2&!a3&P)&X((a2&!a3&P)&X(a3)))))");
 	}
 	
 	@Test
 	public void testAndLMINUSSeven()
 	{
 		String andResult = new AndMinusL().and("(!a1&!a2&!a3)&((!a1&!a2&!a3)U(a1&!a2&!a3&((!a2&!a3)U(a2&!a3&(!a3Ua3)))))", "P");
-		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U(a1&!a2&!a3&P&((!a2&!a3&P)U(a2&!a3&P&(!a3&PUa3))))");
+		TestAnd(andResult, "((!a1&!a2&!a3)&P)&(((!a1&!a2&!a3)&P)U(a1&!a2&!a3&P&(((!a2&!a3)&P)U(a2&!a3&P&((!a3&P)Ua3)))))");
 	}
 	
 	/*@Test

@@ -1,10 +1,10 @@
 package edu.utep.cs5374.ltlgenerator.utility;
 
-public class ParenthesisIndexPair {
+public class IndexPair {
 	private int openParenthesisIndex;
 	private int closeParenthesisIndex;
 	
-	public ParenthesisIndexPair(int openParenthesisIndex, int closeParenthesisIndex)
+	public IndexPair(int openParenthesisIndex, int closeParenthesisIndex)
 	{
 		this.openParenthesisIndex = openParenthesisIndex;
 		this.closeParenthesisIndex = closeParenthesisIndex;

@@ -3,7 +3,7 @@ package edu.utep.cs5374.ltlgenerator.patterns;
 import edu.utep.cs5374.ltlgenerator.regexpr.Language;
 import edu.utep.cs5374.ltlgenerator.regexpr.DFAFactory;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
-import edu.utep.cs5374.ltlgenerator.utility.SubString;
+import edu.utep.cs5374.ltlgenerator.utility.SubFormula;
 
 public abstract class PatternRecognizer {
 	
@@ -18,12 +18,12 @@ public abstract class PatternRecognizer {
 		deterministicFiniteAutonoma = DFAFactory.generate(regularExpression);
 	}
 	
-	public boolean recognizes(SubString possiblePattern)
+	public boolean recognizes(SubFormula possiblePattern)
 	{
 		return deterministicFiniteAutonoma.recognizes(possiblePattern.toString().toLowerCase());
 	}
 	
-	public abstract String replace(SubString stringToReplace, String rightHandSide);
+	public abstract String replace(SubFormula stringToReplace, String rightHandSide);
 
 	protected int findSymbolLocation(String processedString, char symbol) {
 		int symbolLocation = 0;

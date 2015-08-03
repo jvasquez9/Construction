@@ -1,6 +1,6 @@
 package edu.utep.cs5374.ltlgenerator.patterns;
 
-import edu.utep.cs5374.ltlgenerator.utility.SubString;
+import edu.utep.cs5374.ltlgenerator.utility.SubFormula;
 
 public class AndPattern extends PatternRecognizer {
 
@@ -10,7 +10,7 @@ public class AndPattern extends PatternRecognizer {
 	}
 
 	@Override
-	public String replace(SubString stringToReplace, String rightHandSide) {
+	public String replace(SubFormula stringToReplace, String rightHandSide) {
 		return "(" + stringToReplace.toString() + ")&" + rightHandSide;
 	}
 

@@ -7,30 +7,30 @@ import java.util.Stack;
 
 import edu.utep.cs5374.ltlgenerator.patterns.*;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
-import edu.utep.cs5374.ltlgenerator.utility.SubString;
+import edu.utep.cs5374.ltlgenerator.utility.SubFormula;
 
 public abstract class AndParent {
 	
-	private static PatternRecognizer singlePremiseChain = new SinglePremisePattern();
-	private static PatternRecognizer uniaryOperatorChain = new UniaryOperatorPattern();
-	private static PatternRecognizer untilChain = new PremiseUntilPattern();
-	private static PatternRecognizer AndChain = new AndPattern();
-	private static PatternRecognizer orChain = new OrPattern();
-	private static PatternRecognizer AndWithTrailingAndChain = new AndWithTrailingAndPattern();
-	private static PatternRecognizer notPremiseChain = new NotPremisePattern();
-	private static PatternRecognizer AndWithTrailingAndNextChain = new AndWithTrailingAndNextPattern();
+	private static PatternRecognizer singlePremisePattern = new SinglePremisePattern();
+	private static PatternRecognizer uniaryOperatorPattern = new UniaryOperatorPattern();
+	private static PatternRecognizer premiseUntilPattern = new PremiseUntilPattern();
+	private static PatternRecognizer andPattern = new AndPattern();
+	private static PatternRecognizer orPattern = new OrPattern();
+	private static PatternRecognizer andWithTrailingAndPattern = new AndWithTrailingAndPattern();
+	private static PatternRecognizer notPremisePattern = new NotPremisePattern();
+	private static PatternRecognizer andWithTrailingAndNextPattern = new AndWithTrailingAndNextPattern();
 	
-	private static PatternRecognizer[] peliminaryTests = {notPremiseChain, AndChain, orChain};
+	private static PatternRecognizer[] basicPatterns = {notPremisePattern, andPattern, orPattern};
 	
-	private static PatternRecognizer[] patternList = {singlePremiseChain, uniaryOperatorChain,
-		untilChain, orChain, AndChain, AndWithTrailingAndChain, AndWithTrailingAndNextChain};
+	private static PatternRecognizer[] temporalPatterns = {singlePremisePattern, uniaryOperatorPattern,
+		premiseUntilPattern, orPattern, andPattern, andWithTrailingAndPattern, andWithTrailingAndNextPattern};
 	
 	public enum TraversalMode{AND_R, AND_L, AND_MINUS_L};
 	
 	public abstract String and(String leftHandSide, String rightHandSide);
 		
 	protected String and(String leftHandSide, String rightHandSide, TraversalMode traversalMode) {
-		//Strip white space from both strings
+		//Strip white space from both strings.
 		leftHandSide = leftHandSide.replaceAll("\\s+","");
 		rightHandSide = rightHandSide.replaceAll("\\s+", "");
 		
@@ -39,69 +39,90 @@ public abstract class AndParent {
 		leftHandSide = leftHandSide.replaceAll("[!]", "~");
 		leftHandSide = leftHandSide.replaceAll("[|]", "/");
 		
-		//Seriously, the only reason this "fix" is here is because an extra
-		//pair of parenthesis will be added to select expressions that will
-		//cause them to fail test cases. Don't like adding such logic but
-		//these checks are required.
-		String dirtyFix = patternMatchHelper(new SubString(0, leftHandSide.length() - 1, 
-				leftHandSide), rightHandSide, peliminaryTests);
+		//Let's see if this is a simple string. These are strings without temporal
+		//operators. If it is, resolve it and return the result.
+		String firstTest = handleBasicFormula(leftHandSide, rightHandSide);
 		
-		if(!dirtyFix.isEmpty())
+		if(!firstTest.isEmpty())
 		{
-			dirtyFix = dirtyFix.replaceAll("[~]", "!");
-			dirtyFix = dirtyFix.replaceAll("[/]", "|");
-			return dirtyFix;
+			return firstTest;
 		}
 		
-		//First, compute our substrings.
-		String workingString = "(" + leftHandSide + ")";
-		Stack<SubString> initialSubStrings = computeSubStrings(workingString);
+		//Otherwise we have a compound formula and must resolve it.
 		
-		//Second, filter out substring that we do not need to process
-		Stack<SubString> filteredSubStrings = filterSubStrings(initialSubStrings, workingString);
+		//First, compute our subformula.
+		String parentFormula = "(" + leftHandSide + ")";
+		Stack<SubFormula> initialSubFormula = findSubFormula(parentFormula);
 		
-		//Third, split the top token if we have to
-		splitTopToken(filteredSubStrings, workingString);
+		//Second, filter out subformula that we do not need to process.
+		Stack<SubFormula> filteredSubFormula = filterSubFormula(initialSubFormula, parentFormula);
+		
+		//Third, split the top token if we have to.
+		splitTopToken(filteredSubFormula, parentFormula);
 		
 		//Next, let's do string replacements using the stack we generated.
-		String outputString = processSubStrings(traversalMode, rightHandSide, workingString,
-				filteredSubStrings);
+		String outputString = processSubFormula(traversalMode, rightHandSide, parentFormula,
+				filteredSubFormula);
 		
 		//Finally, if ~ and / are still left in the string
 		//replace them with their original symbols
 		outputString = outputString.replaceAll("[~]", "!");
 		outputString = outputString.replaceAll("[/]", "|");
 		
-		//Okay just kidding. We need to remove the extra parenthesis we added
+		//Okay just kidding. Last thing we need to do is remove the extra parenthesis we added.
 		outputString = outputString.substring(1, outputString.length() - 1);
 		
 		return outputString;
 	}
 
-	private void splitTopToken(Stack<SubString> filteredSubStrings,
-			String workingString) {
-		SubString topToken = filteredSubStrings.pop();
+	private String handleBasicFormula(String leftHandSide, String rightHandSide) {
 		
-		for(int i = topToken.getLeftIndex() + 1; i < topToken.getRightIndex(); i++)
+		String modifiedLeftHandSide = leftHandSide;
+		
+		//If the string does not have parenthesis, add parenthesis.
+		if(leftHandSide.charAt(0) != Symbols.OPEN_Parenth.charAt(0))
 		{
-			char currentCharacter = workingString.charAt(i);
+			modifiedLeftHandSide = Symbols.OPEN_Parenth + modifiedLeftHandSide + Symbols.CLOSE_Parenth;
+		}
+		
+		//Try to generate a string from the given input.
+		String result = matchPatternAndGenerateResult(new SubFormula(0, modifiedLeftHandSide.length() - 1, 
+				modifiedLeftHandSide), rightHandSide, basicPatterns);
+		
+		//If we generated a result, remove special symbols then return the result.
+		if(!result.isEmpty())
+		{
+			result = result.replaceAll("[~]", "!");
+			result = result.replaceAll("[/]", "|");
+		}
+		
+		return result;
+	}
+
+	private void splitTopToken(Stack<SubFormula> filteredSubFormula,
+			String parentFormula) {
+		SubFormula topFormula = filteredSubFormula.pop();
+		
+		for(int i = topFormula.getLeftIndex() + 1; i < topFormula.getRightIndex(); i++)
+		{
+			char currentCharacter = parentFormula.charAt(i);
 			
 			//If this condition is satisfied, we must split the string
 			if(currentCharacter == Symbols.NEXT.charAt(0) ||
 					currentCharacter == Symbols.UNTIL.charAt(0) ||
 					currentCharacter == Symbols.RIGHT_ARROW.charAt(0))
 			{
-				SubString leftHandSide = new SubString(topToken.getLeftIndex(), i + 1, workingString);
-				SubString rightHandSide = new SubString(i, topToken.getRightIndex(), workingString);
+				SubFormula leftFormula = new SubFormula(topFormula.getLeftIndex(), i + 1, parentFormula);
+				SubFormula rightFormula = new SubFormula(i, topFormula.getRightIndex(), parentFormula);
 				
-				if(!leftHandSide.toString().isEmpty())
+				if(!leftFormula.toString().isEmpty())
 				{
-					filteredSubStrings.push(leftHandSide);
+					filteredSubFormula.push(leftFormula);
 				}
 				
-				if(!rightHandSide.toString().isEmpty())
+				if(!rightFormula.toString().isEmpty())
 				{
-					filteredSubStrings.push(rightHandSide);
+					filteredSubFormula.push(rightFormula);
 				}
 				
 				return;
@@ -109,76 +130,82 @@ public abstract class AndParent {
 		}
 		
 		//Else we leave the token alone and put it back on the stack
-		filteredSubStrings.push(topToken);
+		filteredSubFormula.push(topFormula);
 	}
 
-	private String processSubStrings(TraversalMode traversalMode, String rightHandSide,
-			String workingString, Stack<SubString> filteredSubStrings) {
-		int characterIterator = workingString.length() - 1;
+	private String processSubFormula(TraversalMode traversalMode, String rightHandSide,
+			String parentFormula, Stack<SubFormula> filteredSubFormula) {
+		
+		int currentCharacter = parentFormula.length() - 1;
 		String outputString = "";
 		boolean lastTimeBasedExpression = true;
-		while(!filteredSubStrings.isEmpty())
+		
+		while(!filteredSubFormula.isEmpty())
 		{
-			SubString currentPair = filteredSubStrings.pop();
+			SubFormula currentFormula = filteredSubFormula.pop();
 			
-			//First, get any characters that are not in page specified
-			//in the above pair.
-			while(characterIterator >= currentPair.getRightIndex())
+			//First, grab any characters that behind the specified
+			//subformula in the parent formula.
+			while(currentCharacter >= currentFormula.getRightIndex())
 			{
-				outputString = workingString.charAt(characterIterator--) + outputString;
+				outputString = parentFormula.charAt(currentCharacter--) + outputString;
 			}
 			
-			//Next, and the expression if it satisfies our criteria else
-			//do not modify the string.
+			//Next, determine if we need to and the formula. If we do
+			//and the expression else do not mutate the formula.
 			if(useAnd(traversalMode, lastTimeBasedExpression))
 			{
-				outputString = patternMatch(currentPair, rightHandSide) + outputString;
+				outputString = matchPatternAndGenerateResultElseLogError(currentFormula, rightHandSide) + outputString;
 			}
 			else
 			{
-				outputString = currentPair.toString() + outputString;
+				outputString = currentFormula.toString() + outputString;
 			}
 			
 			
-			//Finally, set the characterIterator equal to the front of the range
-			characterIterator = currentPair.getLeftIndex();
+			//Finally, set the current character equal to the front index
+			//of the current sub formula.
+			currentCharacter = currentFormula.getLeftIndex();
 			lastTimeBasedExpression = false;
 		}
 		
-		//Now let's be sure to grab the leading characters.
-		while(characterIterator >= 0)
+		//Now let's be sure to grab the leading characters of the parent formula.
+		while(currentCharacter >= 0)
 		{
-			outputString = workingString.charAt(characterIterator--) + outputString;
+			outputString = parentFormula.charAt(currentCharacter--) + outputString;
 		}
+		
 		return outputString;
 	}
 	
-	private Stack<SubString> computeSubStrings(String processedString)
+	private Stack<SubFormula> findSubFormula(String parentFormula)
 	{
-		Stack<SubString> parenthesisPairs = new Stack<SubString>();
+		Stack<SubFormula> subFormulaStack = new Stack<SubFormula>();
 		
-		for(int currentCharacter = 0; currentCharacter < processedString.length(); currentCharacter++)
+		for(int currentCharacter = 0; currentCharacter < parentFormula.length(); currentCharacter++)
 		{
 			//First, check if current character is an open parenthesis.
 			int openParenthesisIndex = currentCharacter;
-			if(processedString.charAt(openParenthesisIndex) != Symbols.OPEN_Parenth.charAt(0))
+			
+			if(parentFormula.charAt(openParenthesisIndex) != Symbols.OPEN_Parenth.charAt(0))
 			{
 				//This is not an open parenthesis. Continue.
 				continue;
 			}
 			
-			//Second, find the matching closing parenthesis
+			//Second, find the matching closing parenthesis.
 			int innerPairCount = 0;
 			int closeParenthesisIndex = openParenthesisIndex + 1;
-			while(closeParenthesisIndex < processedString.length())
+			
+			while(closeParenthesisIndex < parentFormula.length())
 			{
-				if(processedString.charAt(closeParenthesisIndex) == Symbols.CLOSE_Parenth.charAt(0))
+				if(parentFormula.charAt(closeParenthesisIndex) == Symbols.CLOSE_Parenth.charAt(0))
 				{
 					if(innerPairCount == 0) break;
 					
 					innerPairCount--;
 				}
-				else if(processedString.charAt(closeParenthesisIndex) == Symbols.OPEN_Parenth.charAt(0))
+				else if(parentFormula.charAt(closeParenthesisIndex) == Symbols.OPEN_Parenth.charAt(0))
 				{
 					innerPairCount++;
 				}
@@ -186,47 +213,48 @@ public abstract class AndParent {
 				closeParenthesisIndex++;
 			}
 			
-			//Finally, push the pair to the stack
-			parenthesisPairs.push(new SubString(openParenthesisIndex, closeParenthesisIndex, processedString));
+			//Finally, push the discovered sub formula to the stack.
+			subFormulaStack.push(new SubFormula(openParenthesisIndex, closeParenthesisIndex, parentFormula));
 		}
 		
-		return parenthesisPairs;
+		return subFormulaStack;
 	}
 	
 	
 
-	private Stack<SubString> filterSubStrings(Stack<SubString> inputStack, String workingString)
+	private Stack<SubFormula> filterSubFormula(Stack<SubFormula> inputStack, String parentFormula)
 	{
-		Stack<SubString> processedElements = new Stack<SubString>();
+		Stack<SubFormula> processedFormula = new Stack<SubFormula>();
 		
 		while(!inputStack.isEmpty())
 		{
-			SubString currentPair = inputStack.pop();
+			SubFormula currentFormula = inputStack.pop();
 			
-			//If we have a leading parenthesis, we want to omit it from the stack
-			if(currentPair.charAt(0) == Symbols.OPEN_Parenth.charAt(0))
+			//If we have a leading parenthesis, then it is a redundant
+			//formula and we want to omit it.
+			if(currentFormula.charAt(0) == Symbols.OPEN_Parenth.charAt(0))
 			{
 				continue;
 			}
 			
-			//Else if we have a sub formula push the pair as-is.
-			if(currentPair.isSubFormula())
+			//Else if we have a simple formula and we can push it as-is.
+			if(currentFormula.isSimpleFormula())
 			{
-				processedElements.push(currentPair);
+				processedFormula.push(currentFormula);
 				continue;
 			}
 			
-			//Else we have a compound expression. Recompute the pair then push that to the stack.
-			//To-do: stuff
-			processedElements.push(currentPair.findSubformula());
+			//Else we have a compound formula. Grab the leading
+			//portion of the formula then push that to the stack.
+			processedFormula.push(currentFormula.extractLeadingFormula());
 		}
 		
-		//We now must flip the stack in order to correct the order
-		Stack<SubString> returnedStack = new Stack<SubString>();
+		//We now must flip the stack in order to correct the order.
+		Stack<SubFormula> returnedStack = new Stack<SubFormula>();
 		
-		while(!processedElements.isEmpty())
+		while(!processedFormula.isEmpty())
 		{
-			returnedStack.push(processedElements.pop());
+			returnedStack.push(processedFormula.pop());
 		}
 		
 		return returnedStack;
@@ -241,13 +269,12 @@ public abstract class AndParent {
 		return true;
 	}
 	
-	private String patternMatch(SubString possiblePattern, String rightHandSide)
+	private String matchPatternAndGenerateResultElseLogError(SubFormula possiblePattern, String rightHandSide)
 	{
-		//This is a chain of responsibility. We try to find a regular expression to find a
-		//replacement. If we do not find a pattern we return identity then log the pattern.
+		//Try to match
+		String result = matchPatternAndGenerateResult(possiblePattern, rightHandSide, temporalPatterns);
 		
-		String result = patternMatchHelper(possiblePattern, rightHandSide, patternList);
-		
+		//If a result was generated, return the result.
 		if(!result.isEmpty())
 		{
 			return result;
@@ -270,7 +297,7 @@ public abstract class AndParent {
 		return possiblePattern.toString();
 	}
 	
-	private String patternMatchHelper(SubString possiblePattern, String rightHandSide,
+	private String matchPatternAndGenerateResult(SubFormula possiblePattern, String rightHandSide,
 			PatternRecognizer[] patternList)
 	{
 		for(PatternRecognizer p : patternList)

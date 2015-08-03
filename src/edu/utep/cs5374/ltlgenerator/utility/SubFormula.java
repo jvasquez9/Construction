@@ -2,19 +2,19 @@ package edu.utep.cs5374.ltlgenerator.utility;
 
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
-public class SubString {
-	ParenthesisIndexPair indexPair;
-	String parentString;
+public class SubFormula {
+	IndexPair indexPair;
+	String parentFormula;
 	
-	public SubString(ParenthesisIndexPair indexPair, String parentString)
+	public SubFormula(IndexPair indexPair, String parentString)
 	{
 		this.indexPair = indexPair;
-		this.parentString = parentString;
+		this.parentFormula = parentString;
 	}
 	
-	public SubString(int leftIndex, int rightIndex, String parentString)
+	public SubFormula(int leftIndex, int rightIndex, String parentString)
 	{
-		this(new ParenthesisIndexPair(leftIndex, rightIndex), parentString);
+		this(new IndexPair(leftIndex, rightIndex), parentString);
 	}
 	
 	public int getLeftIndex()
@@ -27,23 +27,35 @@ public class SubString {
 		return indexPair.getRightIndex();
 	}
 	
-	public boolean isSubFormula()
+	public boolean isSimpleFormula()
 	{
 		for(int i = getLeftIndex() + 1; i < getRightIndex(); i++)
 		{
-			if(parentString.charAt(i) == Symbols.OPEN_Parenth.charAt(0)
-					|| parentString.charAt(i) == Symbols.CLOSE_Parenth.charAt(0))
+			if(parentFormula.charAt(i) == Symbols.OPEN_Parenth.charAt(0)
+					|| parentFormula.charAt(i) == Symbols.CLOSE_Parenth.charAt(0))
 				return false;
 		}
 		return true;
 	}
 	
-	public String toString()
+	public boolean isCompoundFormula()
 	{
-		return parentString.substring(getLeftIndex() + 1, getRightIndex());
+		return !isSimpleFormula();
 	}
 	
-	public SubString findSubformula()
+	public String toString()
+	{
+		try
+		{
+			return parentFormula.substring(getLeftIndex() + 1, getRightIndex());
+		}
+		catch(Exception e)
+		{
+			return "";
+		}
+	}
+	
+	public SubFormula extractLeadingFormula()
 	{
 		//We need to compute new ending position. So starting at leftHandLimit + 1, find an open parenthesis
 		int newRight = getLeftIndex() + 1;
@@ -51,10 +63,10 @@ public class SubString {
 		while(newRight < getRightIndex())
 		{
 			//If we found a parenthesis, return the new substring pair
-			if(parentString.charAt(newRight) == Symbols.OPEN_Parenth.charAt(0) 
-					|| parentString.charAt(newRight) == Symbols.CLOSE_Parenth.charAt(0))
+			if(parentFormula.charAt(newRight) == Symbols.OPEN_Parenth.charAt(0) 
+					|| parentFormula.charAt(newRight) == Symbols.CLOSE_Parenth.charAt(0))
 			{
-				return new SubString(getLeftIndex(), newRight, parentString);
+				return new SubFormula(getLeftIndex(), newRight, parentFormula);
 			}
 			
 			//else keep trying

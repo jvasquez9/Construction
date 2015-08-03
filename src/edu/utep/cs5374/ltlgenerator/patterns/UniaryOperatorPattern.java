@@ -1,6 +1,6 @@
 package edu.utep.cs5374.ltlgenerator.patterns;
 
-import edu.utep.cs5374.ltlgenerator.utility.SubString;
+import edu.utep.cs5374.ltlgenerator.utility.SubFormula;
 
 public class UniaryOperatorPattern extends PatternRecognizer {
 	
@@ -9,7 +9,7 @@ public class UniaryOperatorPattern extends PatternRecognizer {
 	}
 
 	@Override
-	public String replace(SubString stringToReplace, String rightHandSide) {
+	public String replace(SubFormula stringToReplace, String rightHandSide) {
 		char leadSymbol = stringToReplace.charAt(0);
 		String trailingString = stringToReplace.toString().substring(1);
 		return leadSymbol + "(" + trailingString + "&" + rightHandSide + ")";
