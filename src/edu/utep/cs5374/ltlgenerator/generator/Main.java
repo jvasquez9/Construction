@@ -58,9 +58,11 @@ public class Main {
 			P = cpTable[l - 1].compute(n,'p');
 			Q = cpTable[l - 1].compute(n,'q');
 			R = cpTable[l - 1].compute(n,'r');
+			L = cpTable[l - 1].compute(n,'l');
 			System.out.println("\n\nPltl :" + P);
 			System.out.println("Qltl :" + Q);
 			System.out.println("Rltl :" + R);
+			System.out.println("Lltl :" + L);
 		}
 
 				
