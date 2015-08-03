@@ -79,12 +79,12 @@ public class Main {
 		globalScope = sc.nextInt();
 		if(globalScope == 1){
 			// Abscence of P
-			globalFormula = new AbsenseOfP().getFormula(Q, n);
+			globalFormula = new AbsenseOfP().getFormula(P, Q, n);
 			System.out.println("Abscence of P : \n" + globalFormula);
 		}
 		else if(globalScope == 2){
 			// Existance of P
-			globalFormula = new ExistenceOfP().getFormula(Q, n);
+			globalFormula = new ExistenceOfP().getFormula(P, Q, n);
 			System.out.println("Existance of P : \n" + globalFormula);
 		}
 		else if(globalScope == 3){
@@ -94,32 +94,32 @@ public class Main {
 		}
 		else if(globalScope == 4){
 			// Q Strictly Precedes Pc
-			globalFormula = new QStrictlyPrecedesPc().formulaOfScope(Q, P);
+			globalFormula = new QStrictlyPrecedesPc().getFormula(P, Q, n);
 			System.out.println("Q Strictly Precedes Pc : \n" + globalFormula);
 		}
 		else if(globalScope == 5){
 			// Q Strictly Precedes Pc
-			globalFormula = new QStrictlyPrecedesPe().getFormula(Q, n);
+			globalFormula = new QStrictlyPrecedesPe().getFormula(P, Q, n);
 			System.out.println("Q Strictly Precedes Pe : \n" + globalFormula);
 		}
 		else if(globalScope == 6){
 			// Q precedes Pc star
-			globalFormula = new QPrecedesPcStar().formulaOfScope(P, Q);
+			globalFormula = new QPrecedesPcStar().getFormula(P, Q, n);
 			System.out.println("Q Precedes Pc* : \n" + globalFormula);
 		}
 		else if(globalScope == 7){
 			// Q precedes Pc Plus
-			globalFormula = new QPrecedesPcPlus().formulaOfScope(Q, P);
+			globalFormula = new QPrecedesPcPlus().getFormula(P, Q, n);
 			System.out.println("Q Precedes Pc+ : \n" + globalFormula);
 		}
 		else if(globalScope == 8){
 			// Q Precedes Pe Star
-			globalFormula = new QPrecedesPeStar().getFormula(Q, n);
+			globalFormula = new QPrecedesPeStar().getFormula(P, Q, n);
 			System.out.println("Q Precedes Pe* : \n" + globalFormula);
 		}
 		else if(globalScope == 9){
 			// Q Precedes Pe Plus
-			globalFormula = new QPrecedesPePlus().getFormula(Q, n);
+			globalFormula = new QPrecedesPePlus().getFormula(P, Q, n);
 			System.out.println("Q Precedes Pe+ : \n" + globalFormula);
 		}
 		else{

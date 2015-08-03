@@ -5,7 +5,7 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 public class AbsenseOfP extends GlobalScopeParent{
 
 	@Override
-	public String getFormula(String Q, int numProposition) {
+	public String getFormula(String P_ltl, String Q, int numProposition) {
 		return Symbols.G + " " + Symbols.NOT + " " + Q;
 	}
 

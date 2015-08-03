@@ -7,7 +7,7 @@ import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 public class QStrictlyPrecedesPe extends GlobalScopeParent {
 	
 	@Override
-	public String getFormula(String Q_ltl, int numProposition){
+	public String getFormula(String P_ltl, String Q_ltl, int numProposition){
 		
 		String Ph_ltl = new ParallelH().compute(numProposition, 'p');
 		
