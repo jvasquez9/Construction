@@ -128,11 +128,18 @@ public class Main {
 
 		System.out.println(
 				"\n\nBefore R Scope\n" +
-				"1 # QPrecedesPcBeforeRe"+"\n"+ 
-				"2 # QStrictlyPrecedesPcBeforeRe "+"\n"+ 
-				"3 # QPrecedesPeBeforeRe "+"\n" +
-				"4 # QStrictlyPrecedesPeBeforeRe "+"\n"+
-				"5 # Existance of P before Re "+"\n"+
+				"1 # AbsenceofPBeforeRc"+"\n"+
+				"2 # AbsenceofPBeforeRe"+"\n"+
+				"3 # ExistenceofPBeforeRc"+"\n"+
+				"4 # ExistanceOfPBeforeRe"+"\n"+
+				"5 # QPrecedesPcBeforeRc"+"\n"+
+				"6 # QPrecedesPeBeforeRc"+"\n"+
+				"7 # QPrecedesPcBeforeRe"+"\n"+
+				"8 # QPrecedesPeBeforeRe"+"\n"+
+				"9 # QStrictlyPrecedesPcBeforeRc"+"\n"+
+				"10 # QStrictlyPrecedesPeBeforeRc"+"\n"+
+				"11 # QStrictlyPrecedesPcBeforeRe"+"\n"+
+				"12 # QStrictlyPrecedesPeBeforeRe"+"\n"+				
 				"13 # QRespondstoPBeforeRc "+"\n"+
 				"14 # QRespondstoPBeforeRe "+"\n"
 				);
@@ -140,31 +147,67 @@ public class Main {
 		System.out.println("Enter the type of Before R Scope:");
 		beforeRScope = sc.nextInt();
 		if(beforeRScope == 1){
+			// AbsenceofPBeforeRc
+			beforeRFormula = new AbsenceofPBeforeRc().getFormula(P,Q,R,n);
+			System.out.println("AbsenceofPBeforeRc : \n" + beforeRFormula);
+		}
+		else if(beforeRScope == 2){
+			// AbsenceofPBeforeRe
+			beforeRFormula = new AbsenceofPBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("AbsenceofPBeforeRe : \n" + beforeRFormula);
+		}
+		else if(beforeRScope == 3){
+			// ExistenceofPBeforeRc
+			beforeRFormula = new ExistenceofPBeforeRc().getFormula(P,Q,R,n);
+			System.out.println("Existance of P Before Rc : \n" + beforeRFormula);
+		}
+		else if(beforeRScope == 4){
+			// ExistanceOfPBeforeRe
+			beforeRFormula = new ExistanceOfPBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("Existance of P Before Re : \n" + beforeRFormula);
+		}
+		else if(beforeRScope == 5){
+			// QPrecedesPcBeforeRc
+			beforeRFormula = new QPrecedesPcBeforeRc().getFormula(P,Q,R,n);
+			System.out.println("QPrecedesPcBeforeRc : \n" + beforeRFormula);
+		}
+		else if(beforeRScope == 6){
+			// QPrecedesPeBeforeRc
+			beforeRFormula = new QPrecedesPeBeforeRc().getFormula(P,Q,R,n);
+			System.out.println("QPrecedesPeBeforeRc : \n" + beforeRFormula);
+		}
+		else if(beforeRScope == 7){
 			// QPrecedesPcBeforeRe
 			beforeRFormula = new QPrecedesPcBeforeRe().getFormula(P,Q,R,n);
 			System.out.println("QPrecedesPcBeforeRe : \n" + beforeRFormula);
 		}
-		else if(beforeRScope == 2){
+		else if(beforeRScope == 8){
+			// QPrecedesPeBeforeRe
+			beforeRFormula = new QPrecedesPeBeforeRe().getFormula(P,Q,R,n);
+			System.out.println("QPrecedesPeBeforeRe : \n" + beforeRFormula);
+		}
+		else if(beforeRScope == 9){
+			//  QStrictlyPrecedesPcBeforeRc
+			beforeRFormula = new QStrictlyPrecedesPcBeforeRc().getFormula(P,Q,R,n);
+			System.out.println("QStrictlyPrecedesPcBeforeRc : \n" + beforeRFormula);
+		}
+		else if(beforeRScope == 10){
+			//  QStrictlyPrecedesPeBeforeRc
+			beforeRFormula = new QStrictlyPrecedesPeBeforeRc().getFormula(P,Q,R,n);
+			System.out.println("QStrictlyPrecedesPeBeforeRc : \n" + beforeRFormula);
+		}
+		
+		else if(beforeRScope == 11){
 			// QStrictlyPrecedesPcBeforeRe
 			beforeRFormula = new QStrictlyPrecedesPcBeforeRe().getFormula(P,Q,R,n);
 			System.out.println("QStrictlyPrecedesPcBeforeRe : \n" + beforeRFormula);
 		}
-		else if(beforeRScope == 3){
-			// QStrictlyPrecedesPcBeforeRe
-			beforeRFormula = new QPrecedesPeBeforeRe().getFormula(P,Q,R,n);
-			System.out.println("QPrecedesPeBeforeRe : \n" + beforeRFormula);
-		}
-		else if(beforeRScope == 4){
+		
+		else if(beforeRScope == 12){
 			// QStrictlyPrecedesPcBeforeRe
 			beforeRFormula = new QStrictlyPrecedesPeBeforeRe().getFormula(P,Q,R,n);
 			System.out.println("QStrictlyPrecedesPeBeforeRe : \n" + beforeRFormula);
 		}
-		else if(beforeRScope == 5){
-			// QStrictlyPrecedesPcBeforeRe
-			beforeRFormula = new ExistanceOfPBeforeRe().getFormula(P,Q,R,n);
-			System.out.println("Existance of P Before Re : \n" + beforeRFormula);
-		}
-		
 		else if(beforeRScope == 13){
 			// QStrictlyPrecedesPcBeforeRe
 			beforeRFormula = new QRespondstoPBeforeRc().getFormula(P,Q,R,n);
