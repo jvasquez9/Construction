@@ -1,8 +1,6 @@
 package edu.utep.cs5374.ltlgenerator.beforerscope;
 
 import edu.utep.cs5374.ltlgenerator.and.AndMinusL;
-import edu.utep.cs5374.ltlgenerator.and.AndR;
-import edu.utep.cs5374.ltlgenerator.cp.ParallelH;
 import edu.utep.cs5374.ltlgenerator.symbols.Symbols;
 
 public class QPrecedesPcBeforeRe extends QPrecedesPcBeforeReParent{
