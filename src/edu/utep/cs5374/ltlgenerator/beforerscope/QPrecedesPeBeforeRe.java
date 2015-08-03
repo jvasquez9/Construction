@@ -9,7 +9,7 @@ public class QPrecedesPeBeforeRe extends BeforeRScopeParent{
 
 	@Override
 	public String getFormula(String P_ltl, String Q_ltl, String R_ltl, int numProposition) {
-		String firstSyllable = Symbols.OPEN_Parenth + Symbols.F + R_ltl + Symbols.CLOSE_Parenth;
+		String firstSyllable = generateFirstSyllable(R_ltl);
 		String Ph_ltl = new ParallelH().compute(numProposition, 'p');
 		String Rh_ltl = new ParallelH().compute(numProposition, 'r');
 		
