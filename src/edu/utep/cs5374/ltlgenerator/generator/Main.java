@@ -238,17 +238,17 @@ public class Main {
 		remainingScope = sc.nextInt();
 		if(remainingScope == 1){
 			// After L
-			remainingScopeFormula = new AfterL().getFormula(globalFormula,L);
+			remainingScopeFormula = new AfterL().getFormula(beforeRFormula,globalFormula,R,L,n);
 			System.out.println("After L : \n" + remainingScopeFormula);
 		}
 		else if(remainingScope == 2){
 			// BetweenLandRc
-			remainingScopeFormula = new BetweenLandRc().getFormula(beforeRFormula,R,L);
+			remainingScopeFormula = new BetweenLandRc().getFormula(beforeRFormula,globalFormula,R,L,n);
 			System.out.println("BetweenLandRc : \n" + remainingScopeFormula);
 		}
 		else if(remainingScope == 3){
 			// BetweenLandRe
-			remainingScopeFormula = new BetweenLandRe().getFormula(beforeRFormula,L);
+			remainingScopeFormula = new BetweenLandRe().getFormula(beforeRFormula,globalFormula,R,L,n);
 			System.out.println("Between L and Re : \n" + remainingScopeFormula);
 		}
 
