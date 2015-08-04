@@ -35,6 +35,11 @@ public class Main {
 		
 		String[] LPQAndR = {"L", "P", "Q", "R"};
 		
+		System.out.println("Enter the number of propositions:");
+		n=sc.nextInt();
+		
+		System.out.println("\n");
+		
 		for(int i = 0; i < LPQAndR.length; i++)
 		{
 			System.out.println(
@@ -53,9 +58,6 @@ public class Main {
 	
 			System.out.println("Select the type of CP:");
 			int selection = sc.nextInt();
-			
-			System.out.println("Enter the number of propositions:");
-			n=sc.nextInt();
 			
 			CompositePropositionParent[] cpTable = {
 					new AtleastOneC(), new AtleastOneH(), new AtleastOneE(),
@@ -101,9 +103,6 @@ public class Main {
 				"8 # Q Precedes Pe*" +"\n"+
 				"9 # Q Precedes Pe+" +"\n");
 
-		System.out.println("Enter the number of propositions:");
-		n=sc.nextInt();
-		
 		System.out.println("Enter the type of Global Scope:");
 		
 		globalScope = sc.nextInt();
@@ -173,9 +172,6 @@ public class Main {
 				"13 # QRespondstoPBeforeRc "+"\n"+
 				"14 # QRespondstoPBeforeRe "+"\n"
 				);
-
-		System.out.println("Enter the number of propositions:");
-		n=sc.nextInt();
 		
 		System.out.println("Enter the type of Before R Scope:");
 		beforeRScope = sc.nextInt();
@@ -282,15 +278,11 @@ public class Main {
 
 		else if(remainingScope == 4){
 			// AfterLUntilRc
-			System.out.println("Enter the number of propositions:");
-			n=sc.nextInt();
 			remainingScopeFormula = new AfterLUntilRc().getFormula(beforeRFormula,globalFormula,R,L,n);
 			System.out.println("After L until Rc : \n" + remainingScopeFormula);
 		}
 		else if(remainingScope == 5){
 			// AfterLUntilRe
-			System.out.println("Enter the number of propositions:");
-			n=sc.nextInt();
 			remainingScopeFormula = new AfterLUntilRe().getFormula(beforeRFormula,globalFormula,R,L,n);
 			System.out.println("After L until Re : \n" + remainingScopeFormula);
 		}
