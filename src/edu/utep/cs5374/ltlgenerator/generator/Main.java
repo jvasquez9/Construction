@@ -252,6 +252,11 @@ public class Main {
 			System.out.println("Between L and Re : \n" + remainingScopeFormula);
 		}
 
+		else if(remainingScope == 4){
+			// AfterLUntilRc
+			remainingScopeFormula = new AfterLUntilRc().getFormula(beforeRFormula,globalFormula,R,L,n);
+			System.out.println("After L until Rc : \n" + remainingScopeFormula);
+		}
 		else if(remainingScope == 5){
 			// AfterLUntilRe
 			remainingScopeFormula = new AfterLUntilRe().getFormula(beforeRFormula,globalFormula,R,L,n);
