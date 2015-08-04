@@ -33,7 +33,7 @@ public class Main {
 
 		Map<String, String> LPQAndRMap = new HashMap<String, String>();
 		
-		String[] LPQAndR = {"L", "P", "Q", "R"};
+		String[] LPQAndR = {"l", "p", "q", "r"};
 		
 		System.out.println("Enter the number of propositions:");
 		n=sc.nextInt();
@@ -86,10 +86,10 @@ public class Main {
 			}
 		}
 		
-		L = LPQAndRMap.get("L");
-		P = LPQAndRMap.get("P");
-		Q = LPQAndRMap.get("Q");
-		R = LPQAndRMap.get("R");
+		L = LPQAndRMap.get("l");
+		P = LPQAndRMap.get("p");
+		Q = LPQAndRMap.get("q");
+		R = LPQAndRMap.get("r");
 		
 		System.out.println(
 				"\n\nGlobal Scope\n" +
