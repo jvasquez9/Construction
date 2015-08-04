@@ -106,6 +106,51 @@ public class Main {
 		System.out.println("Enter the type of Global Scope:");
 		
 		globalScope = sc.nextInt();
+		
+		globalFormula = getGlobalScopeFormula(globalScope, P, Q, n);
+		
+		System.out.println(
+				"\n\nBefore R Scope\n" +
+				"1 # AbsenceofPBeforeRc"+"\n"+
+				"2 # AbsenceofPBeforeRe"+"\n"+
+				"3 # ExistenceofPBeforeRc"+"\n"+
+				"4 # ExistanceOfPBeforeRe"+"\n"+
+				"5 # QPrecedesPcBeforeRc"+"\n"+
+				"6 # QPrecedesPeBeforeRc"+"\n"+
+				"7 # QPrecedesPcBeforeRe"+"\n"+
+				"8 # QPrecedesPeBeforeRe"+"\n"+
+				"9 # QStrictlyPrecedesPcBeforeRc"+"\n"+
+				"10 # QStrictlyPrecedesPeBeforeRc"+"\n"+
+				"11 # QStrictlyPrecedesPcBeforeRe"+"\n"+
+				"12 # QStrictlyPrecedesPeBeforeRe"+"\n"+				
+				"13 # QRespondstoPBeforeRc "+"\n"+
+				"14 # QRespondstoPBeforeRe "+"\n"
+				);
+		
+		System.out.println("Enter the type of Before R Scope:");
+		beforeRScope = sc.nextInt();
+		
+		beforeRFormula = getBeforeRScopeFormula(beforeRScope, P, Q, R, n);
+		
+		System.out.println(
+				"\n\nRemaining Scope\n" +
+				"1 # After L"+"\n"+ 
+				"2 # Between L and Rc "+"\n"+ 
+				"3 # Between L and Re "+"\n" +
+				"4 # After L until Rc "+"\n"+
+				"5 # After L until Re "+"\n"				
+				);
+		System.out.println("Select the type of Remaining Scope:");
+		
+		remainingScope = sc.nextInt();
+
+		remainingScopeFormula = getRemainingScopeFormula(remainingScope, beforeRFormula, globalFormula, R, L, n);
+		
+		sc.close();
+	}
+	
+	public static String getGlobalScopeFormula(int globalScope, String P, String Q, int n){
+		String globalFormula = "";
 		if(globalScope == 1){
 			// Abscence of P
 			globalFormula = new AbsenseOfP().getFormula(P, Q, n);
@@ -154,28 +199,13 @@ public class Main {
 		else{
 			System.out.println("Global scope doesn't match!");
 		}
+		return globalFormula;
 
-		System.out.println(
-				"\n\nBefore R Scope\n" +
-				"1 # AbsenceofPBeforeRc"+"\n"+
-				"2 # AbsenceofPBeforeRe"+"\n"+
-				"3 # ExistenceofPBeforeRc"+"\n"+
-				"4 # ExistanceOfPBeforeRe"+"\n"+
-				"5 # QPrecedesPcBeforeRc"+"\n"+
-				"6 # QPrecedesPeBeforeRc"+"\n"+
-				"7 # QPrecedesPcBeforeRe"+"\n"+
-				"8 # QPrecedesPeBeforeRe"+"\n"+
-				"9 # QStrictlyPrecedesPcBeforeRc"+"\n"+
-				"10 # QStrictlyPrecedesPeBeforeRc"+"\n"+
-				"11 # QStrictlyPrecedesPcBeforeRe"+"\n"+
-				"12 # QStrictlyPrecedesPeBeforeRe"+"\n"+				
-				"13 # QRespondstoPBeforeRc "+"\n"+
-				"14 # QRespondstoPBeforeRe "+"\n"
-				);
-		
-		System.out.println("Enter the type of Before R Scope:");
-		beforeRScope = sc.nextInt();
-		
+	}
+	
+	public static String getBeforeRScopeFormula(int beforeRScope, String P, String Q, String R, int n){
+		String beforeRFormula = "";
+	
 		if(beforeRScope == 1){
 			// AbsenceofPBeforeRc
 			beforeRFormula = new AbsenceofPBeforeRc().getFormula(P,Q,R,n);
@@ -248,18 +278,12 @@ public class Main {
 			beforeRFormula = new QRespondstoPBeforeRe().getFormula(P,Q,R,n);
 			System.out.println("QRespondstoPBeforeRe : \n" + beforeRFormula);
 		}
-		
-		System.out.println(
-				"\n\nRemaining Scope\n" +
-				"1 # After L"+"\n"+ 
-				"2 # Between L and Rc "+"\n"+ 
-				"3 # Between L and Re "+"\n" +
-				"4 # After L until Rc "+"\n"+
-				"5 # After L until Re "+"\n"				
-				);
-		System.out.println("Select the type of Remaining Scope:");
-		
-		remainingScope = sc.nextInt();
+		return beforeRFormula;
+	}
+
+	public static String getRemainingScopeFormula(int remainingScope, String beforeRFormula, String globalFormula, String R, String L, int n){
+		String remainingScopeFormula = "";
+	
 		if(remainingScope == 1){
 			// After L
 			remainingScopeFormula = new AfterL().getFormula(beforeRFormula,globalFormula,R,L,n);
@@ -275,7 +299,7 @@ public class Main {
 			remainingScopeFormula = new BetweenLandRe().getFormula(beforeRFormula,globalFormula,R,L,n);
 			System.out.println("Between L and Re : \n" + remainingScopeFormula);
 		}
-
+	
 		else if(remainingScope == 4){
 			// AfterLUntilRc
 			remainingScopeFormula = new AfterLUntilRc().getFormula(beforeRFormula,globalFormula,R,L,n);
@@ -286,8 +310,8 @@ public class Main {
 			remainingScopeFormula = new AfterLUntilRe().getFormula(beforeRFormula,globalFormula,R,L,n);
 			System.out.println("After L until Re : \n" + remainingScopeFormula);
 		}
-		
-		sc.close();
+		return remainingScopeFormula;
 	}
+
 }
 
