@@ -1,5 +1,8 @@
 package edu.utep.cs5374.ltlgenerator.generator;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import edu.utep.cs5374.ltlgenerator.beforerscope.*;
@@ -22,53 +25,65 @@ import edu.utep.cs5374.ltlgenerator.remainingscopes.BetweenLandRe;
 public class Main {
 	public static void main(String[] args) {
 
-		@SuppressWarnings("unused")
-		int l, p, q, r, n, andType, globalScope, beforeRScope, remainingScope; // to store user input type of proposition
+		int n, globalScope, beforeRScope, remainingScope; // to store user input type of proposition
 		String L="", P="", Q="", R=""; //to keep pattern before ANDL, ANDR
 		String globalFormula = "", beforeRFormula = "", remainingScopeFormula = "";
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println(
-				"1 # AtleastOneC "+"\n"+ 
-				"2 # AtleastOneH "+"\n"+ 
-				"3 # AtleastOneE "+"\n"+ 
-				"4 # ParallelC"+"\n"+
-				"5 # ParallelH"+"\n"+
-				"6 # ParallelE"+"\n"+		
-				"7 # ConsecutiveC" +"\n"+
-				"8 # ConsecutiveH" +"\n"+
-				"9 # ConsecutiveE" +"\n"+		
-				"10 # EventualC"+"\n"+
-				"11 # EventualH"+"\n"+
-				"12 # EventualE");
-
-		System.out.println("Select the type of CP:");
-		l=sc.nextInt();
+		Map<String, String> LPQAndRMap = new HashMap<String, String>();
 		
-		System.out.println("Enter the number of propositions:");
-		n=sc.nextInt();
+		String[] LPQAndR = {"L", "P", "Q", "R"};
 		
-		CompositePropositionParent[] cpTable = {
-				new AtleastOneC(), new AtleastOneH(), new AtleastOneE(),
-				new ParallelC(), new ParallelH(), new ParallelE(),
-				new ConsecutiveC(), new ConsecutiveH(), new ConsecutiveE(),
-				new EventualC(), new EventualH(), new EventualE()
-		};
-
-		if(l >= 1 && l <= cpTable.length)
+		for(int i = 0; i < LPQAndR.length; i++)
 		{
-			P = cpTable[l - 1].compute(n,'p');
-			Q = cpTable[l - 1].compute(n,'q');
-			R = cpTable[l - 1].compute(n,'r');
-			L = cpTable[l - 1].compute(n,'l');
-			System.out.println("\n\nPltl :" + P);
-			System.out.println("Qltl :" + Q);
-			System.out.println("Rltl :" + R);
-			System.out.println("Lltl :" + L);
+			System.out.println(
+					"1 # AtleastOneC "+"\n"+ 
+					"2 # AtleastOneH "+"\n"+ 
+					"3 # AtleastOneE "+"\n"+ 
+					"4 # ParallelC"+"\n"+
+					"5 # ParallelH"+"\n"+
+					"6 # ParallelE"+"\n"+		
+					"7 # ConsecutiveC" +"\n"+
+					"8 # ConsecutiveH" +"\n"+
+					"9 # ConsecutiveE" +"\n"+		
+					"10 # EventualC"+"\n"+
+					"11 # EventualH"+"\n"+
+					"12 # EventualE");
+	
+			System.out.println("Select the type of CP:");
+			int selection = sc.nextInt();
+			
+			System.out.println("Enter the number of propositions:");
+			n=sc.nextInt();
+			
+			CompositePropositionParent[] cpTable = {
+					new AtleastOneC(), new AtleastOneH(), new AtleastOneE(),
+					new ParallelC(), new ParallelH(), new ParallelE(),
+					new ConsecutiveC(), new ConsecutiveH(), new ConsecutiveE(),
+					new EventualC(), new EventualH(), new EventualE()
+			};
+	
+			if(selection >= 1 && selection <= cpTable.length)
+			{
+				String result = cpTable[selection - 1].compute(n,'p');
+				LPQAndRMap.put(LPQAndR[i], result);
+				System.out.println("\n" + LPQAndR[i] + "ltl: " + LPQAndRMap.get(LPQAndR[i]));
+				System.out.println();
+				try {
+					System.in.read();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
-
-				
+		
+		L = LPQAndRMap.get("L");
+		P = LPQAndRMap.get("P");
+		Q = LPQAndRMap.get("Q");
+		R = LPQAndRMap.get("R");
+		
 		System.out.println(
 				"\n\nGlobal Scope\n" +
 				"1 # Absence of P "+"\n"+ 
@@ -81,7 +96,11 @@ public class Main {
 				"8 # Q Precedes Pe*" +"\n"+
 				"9 # Q Precedes Pe+" +"\n");
 
+		System.out.println("Enter the number of propositions:");
+		n=sc.nextInt();
+		
 		System.out.println("Enter the type of Global Scope:");
+		
 		globalScope = sc.nextInt();
 		if(globalScope == 1){
 			// Abscence of P
@@ -150,8 +169,12 @@ public class Main {
 				"14 # QRespondstoPBeforeRe "+"\n"
 				);
 
+		System.out.println("Enter the number of propositions:");
+		n=sc.nextInt();
+		
 		System.out.println("Enter the type of Before R Scope:");
 		beforeRScope = sc.nextInt();
+		
 		if(beforeRScope == 1){
 			// AbsenceofPBeforeRc
 			beforeRFormula = new AbsenceofPBeforeRc().getFormula(P,Q,R,n);
@@ -254,16 +277,18 @@ public class Main {
 
 		else if(remainingScope == 4){
 			// AfterLUntilRc
+			System.out.println("Enter the number of propositions:");
+			n=sc.nextInt();
 			remainingScopeFormula = new AfterLUntilRc().getFormula(beforeRFormula,globalFormula,R,L,n);
 			System.out.println("After L until Rc : \n" + remainingScopeFormula);
 		}
 		else if(remainingScope == 5){
 			// AfterLUntilRe
+			System.out.println("Enter the number of propositions:");
+			n=sc.nextInt();
 			remainingScopeFormula = new AfterLUntilRe().getFormula(beforeRFormula,globalFormula,R,L,n);
 			System.out.println("After L until Re : \n" + remainingScopeFormula);
 		}
-		
-
 		
 		sc.close();
 	}
