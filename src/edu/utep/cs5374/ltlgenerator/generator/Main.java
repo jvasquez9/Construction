@@ -25,23 +25,22 @@ import edu.utep.cs5374.ltlgenerator.remainingscopes.BetweenLandRe;
 public class Main {
 	public static void main(String[] args) {
 
-		int n, globalScope, beforeRScope, remainingScope; // to store user input type of proposition
+		int globalScope, beforeRScope, remainingScope; // to store user input type of proposition
 		String L="", P="", Q="", R=""; //to keep pattern before ANDL, ANDR
 		String globalFormula = "", beforeRFormula = "", remainingScopeFormula = "";
-
+		int n = 0;
 		Scanner sc = new Scanner(System.in);
 
 		Map<String, String> LPQAndRMap = new HashMap<String, String>();
 		
 		String[] LPQAndR = {"l", "p", "q", "r"};
-		
-		System.out.println("Enter the number of propositions:");
-		n=sc.nextInt();
-		
-		System.out.println("\n");
+		 
 		
 		for(int i = 0; i < LPQAndR.length; i++)
 		{
+			System.out.println("Enter the number of propositions for " + LPQAndR[i] + " : ");
+			n=sc.nextInt();			
+			
 			System.out.println(
 					"1 # AtleastOneC "+"\n"+ 
 					"2 # AtleastOneH "+"\n"+ 
@@ -72,13 +71,6 @@ public class Main {
 				LPQAndRMap.put(LPQAndR[i], result);
 				System.out.println("\n" + LPQAndR[i] + "ltl: " + LPQAndRMap.get(LPQAndR[i]));
 				System.out.println();
-				System.out.println("Hit enter to continue");
-				try {
-					System.in.read();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 			else
 			{
