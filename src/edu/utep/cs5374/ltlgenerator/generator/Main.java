@@ -70,6 +70,7 @@ public class Main {
 				LPQAndRMap.put(LPQAndR[i], result);
 				System.out.println("\n" + LPQAndR[i] + "ltl: " + LPQAndRMap.get(LPQAndR[i]));
 				System.out.println();
+				System.out.println("Hit enter to continue");
 				try {
 					System.in.read();
 				} catch (IOException e) {
