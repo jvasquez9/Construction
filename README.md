@@ -3,7 +3,11 @@ Software Construction LTL generator
 
 1. Run the main.java file.
 
-2. The program will ask the user to select the type of CP like below.
+2. Next, select the CP type, program will ask for number of propositions.
+
+	Enter the number of propositions for l : 
+	
+3. Then the program will ask for the type of CP you want for that Proposition
 
 	1 # AtleastOneC 
 	2 # AtleastOneH 
@@ -19,11 +23,7 @@ Software Construction LTL generator
 	12 # EventualE
 	Select the type of CP:
 
-3. After seleting the CP type, program will ask for number of propositions.
-
-	Enter the number of propositions:
-
-4. After inputing number of prositions, program will generate the corresponding Pltl, Qltl, Rltl.
+4. After inputing number of prositions, the program will ask the same questions for Pltl, Qltl, Rltl.
 
 5. Then program will ask the user to select the type of Global Scope.
 
