@@ -68,7 +68,7 @@ public class Main {
 	
 			if(selection >= 1 && selection <= cpTable.length)
 			{
-				String result = cpTable[selection - 1].compute(n,'p');
+				String result = cpTable[selection - 1].compute(n, LPQAndR[i].charAt(0));
 				LPQAndRMap.put(LPQAndR[i], result);
 				System.out.println("\n" + LPQAndR[i] + "ltl: " + LPQAndRMap.get(LPQAndR[i]));
 				System.out.println();
