@@ -13,8 +13,11 @@ import edu.utep.cs5374.ltlgenerator.globalscope.QPrecedesPeStar;
 import edu.utep.cs5374.ltlgenerator.globalscope.QRespondsP;
 import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPc;
 import edu.utep.cs5374.ltlgenerator.globalscope.QStrictlyPrecedesPe;
+import edu.utep.cs5374.ltlgenerator.remainingscopes.AfterL;
 import edu.utep.cs5374.ltlgenerator.remainingscopes.AfterLUntilRc;
 import edu.utep.cs5374.ltlgenerator.remainingscopes.AfterLUntilRe;
+import edu.utep.cs5374.ltlgenerator.remainingscopes.BetweenLandRc;
+import edu.utep.cs5374.ltlgenerator.remainingscopes.BetweenLandRe;
 
 public class Main {
 	public static void main(String[] args) {
@@ -235,24 +238,20 @@ public class Main {
 		remainingScope = sc.nextInt();
 		if(remainingScope == 1){
 			// After L
-			//String formula = new AfterL().getFormula(beforeRFormula,globalFormula,R,L,n);
-			//System.out.println("After L : \n" + formula);
+			remainingScopeFormula = new AfterL().getFormula(globalFormula,L);
+			System.out.println("After L : \n" + remainingScopeFormula);
 		}
 		else if(remainingScope == 2){
 			// BetweenLandRc
-			//String formula = new BetweenLandRc().getFormula(beforeRFormula,globalFormula,R,L,n);
-			//System.out.println("BetweenLandRc : \n" + formula);
+			remainingScopeFormula = new BetweenLandRc().getFormula(beforeRFormula,R,L);
+			System.out.println("BetweenLandRc : \n" + remainingScopeFormula);
 		}
 		else if(remainingScope == 3){
 			// BetweenLandRe
-			//String formula = new BetweenLandRe().getFormula(beforeRFormula,globalFormula,R,L,n);
-			//System.out.println("Between L and Re : \n" + formula);
+			remainingScopeFormula = new BetweenLandRe().getFormula(beforeRFormula,L);
+			System.out.println("Between L and Re : \n" + remainingScopeFormula);
 		}
-		else if(remainingScope == 4){
-			// AfterLUntilRc
-			remainingScopeFormula = new AfterLUntilRc().getFormula(beforeRFormula,globalFormula,R,L,n);
-			System.out.println("After L until Rc : \n" + remainingScopeFormula);
-		}
+
 		else if(remainingScope == 5){
 			// AfterLUntilRe
 			remainingScopeFormula = new AfterLUntilRe().getFormula(beforeRFormula,globalFormula,R,L,n);
